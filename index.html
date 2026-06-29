@@ -308,13 +308,34 @@ section{padding:96px 0}
 .card-name{font-family:var(--serif);font-size:1.3rem;color:var(--noir);line-height:1.2}
 .card-mat{font-size:.74rem;color:var(--ink-soft);flex:1}
 .card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.card-prices{display:flex;flex-direction:column;line-height:1.1}
+.card-price-old{font-size:.78rem;color:var(--ink-soft);text-decoration:line-through;opacity:.8}
 .card-price{font-family:var(--serif);font-size:1.25rem;color:var(--ink)}
+.card-badge{
+  position:absolute;top:14px;right:14px;z-index:2;
+  background:var(--cartier);color:#fff;font-size:.64rem;font-weight:600;letter-spacing:.08em;
+  padding:5px 9px;border-radius:30px;font-family:var(--sans);box-shadow:0 4px 12px -4px rgba(126,14,32,.5);
+}
 .add-mini{
   width:42px;height:42px;border-radius:50%;background:var(--ivory);
-  display:grid;place-items:center;color:var(--noir);transition:.3s;border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--noir);transition:.3s;border:1px solid var(--line);flex-shrink:0;
 }
 .add-mini:hover{background:var(--tiffany);color:#fff;border-color:var(--tiffany);transform:rotate(90deg)}
 .empty-state{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--ink-soft)}
+
+/* Precio en modal */
+.price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.price-old{font-size:1.05rem;color:var(--ink-soft);text-decoration:line-through;opacity:.75}
+.price-badge{background:var(--cartier);color:#fff;font-size:.7rem;font-weight:600;padding:4px 10px;border-radius:30px;font-family:var(--sans)}
+.opt-size{min-width:42px;text-align:center}
+
+/* Galería modal */
+.modal-media{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px}
+.modal-main-img{width:100%;height:auto;object-fit:cover;border-radius:var(--radius);max-height:420px}
+.modal-thumbs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.modal-thumb{width:54px;height:54px;border-radius:6px;overflow:hidden;border:2px solid transparent;transition:.25s;padding:0}
+.modal-thumb.active{border-color:var(--gold)}
+.modal-thumb img{width:100%;height:100%;object-fit:cover}
 
 /* ============================================================
    NOSOTROS
@@ -583,9 +604,9 @@ section{padding:96px 0}
 <section class="catalogo" id="catalogo">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="eyebrow">La colección</span>
-      <h2>Piezas que enamoran</h2>
-      <p>Explora nuestra selección de anillos, collares, aretes y pulseras. Filtra y encuentra la joya perfecta.</p>
+      <span class="eyebrow">La colección de anillos</span>
+      <h2>Anillos hechos a mano</h2>
+      <p>Filigrana colombiana y piedras naturales. Cada anillo se elabora bajo pedido y es personalizable en piedra y acabado. Encuentra el tuyo.</p>
     </div>
 
     <div class="filters reveal" id="catFilters"></div>
@@ -593,7 +614,7 @@ section{padding:96px 0}
     <div class="filters-row2 reveal">
       <div class="search-box">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" id="search" placeholder="Buscar joya...">
+        <input type="text" id="search" placeholder="Buscar anillo...">
       </div>
       <div class="select-wrap">
         <select id="sortBy">
@@ -606,10 +627,10 @@ section{padding:96px 0}
       <div class="select-wrap">
         <select id="priceRange">
           <option value="all">Todos los precios</option>
-          <option value="0-1500000">Hasta $1.500.000</option>
-          <option value="1500000-3500000">$1.500.000 – $3.500.000</option>
-          <option value="3500000-6000000">$3.500.000 – $6.000.000</option>
-          <option value="6000000-999999999">Más de $6.000.000</option>
+          <option value="0-250000">Hasta $250.000</option>
+          <option value="250000-400000">$250.000 – $400.000</option>
+          <option value="400000-600000">$400.000 – $600.000</option>
+          <option value="600000-999999999">Más de $600.000</option>
         </select>
       </div>
     </div>
@@ -718,7 +739,7 @@ section{padding:96px 0}
     <div class="footer-grid">
       <div>
         <div class="brand"><span class="name" style="font-size:1.7rem;font-family:var(--serif)">Alejandra Vergel</span><span class="tag" style="font-size:.56rem;letter-spacing:.42em;text-transform:uppercase">Alta Joyería</span></div>
-        <p style="margin-top:18px;max-width:300px;font-weight:300;font-size:.9rem">Joyas hechas a mano en oro de 18k y diamantes certificados. Lujo atemporal desde Colombia para el mundo.</p>
+        <p style="margin-top:18px;max-width:300px;font-weight:300;font-size:.9rem">Anillos hechos a mano en filigrana de plata ley 925 y piedras naturales. Artesanía colombiana, piezas únicas bajo pedido.</p>
       </div>
       <div class="footer-col">
         <h4>Explora</h4>
@@ -782,12 +803,13 @@ const CONFIG = {
 const $ = (s, c=document) => c.querySelector(s);
 const $$ = (s, c=document) => [...c.querySelectorAll(s)];
 const money = n => "$ " + n.toLocaleString("es-CO");
+const discountPct = p => p.originalPrice && p.originalPrice>p.price ? Math.round((1 - p.price/p.originalPrice)*100) : 0;
 
 const CATS = {
-  anillos:  {label:"Anillos"},
-  collares: {label:"Collares"},
-  aretes:   {label:"Aretes"},
-  pulseras: {label:"Pulseras"}
+  filigrana:  {label:"Filigrana"},
+  color:      {label:"Piedras de Color"},
+  compromiso: {label:"Compromiso"},
+  sets:       {label:"Sets"}
 };
 
 /* ---- Ilustración SVG de joya (placeholder, reemplazable por foto) ---- */
@@ -886,6 +908,7 @@ function renderGrid(){
     <article class="card" data-id="${p.id}">
       <div class="card-media">
         <span class="card-cat">${CATS[p.cat].label}</span>
+        ${discountPct(p) ? `<span class="card-badge">−${discountPct(p)}%</span>` : ""}
         ${productMedia(p)}
         <div class="card-quick">Ver detalle</div>
       </div>
@@ -893,7 +916,10 @@ function renderGrid(){
         <h3 class="card-name">${p.name}</h3>
         <p class="card-mat">${p.materials}</p>
         <div class="card-foot">
-          <span class="card-price">${money(p.price)}</span>
+          <span class="card-prices">
+            ${p.originalPrice ? `<span class="card-price-old">${money(p.originalPrice)}</span>` : ""}
+            <span class="card-price">${money(p.price)}</span>
+          </span>
           <button class="add-mini" data-add="${p.id}" aria-label="Agregar al carrito">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
           </button>
@@ -1007,11 +1033,11 @@ function checkout(){
 /* ============================================================
    MODAL DE PRODUCTO
    ============================================================ */
-let modalState = { id:null, color:null, qty:1 };
+let modalState = { id:null, color:null, size:null, qty:1, img:0 };
 function openModal(id){
   const p = PRODUCTS.find(x=>x.id===id);
   if(!p) return;
-  modalState = { id, color:p.colors[0], qty:1 };
+  modalState = { id, color:p.colors[0], size:(p.sizes&&p.sizes.length?p.sizes[0]:null), qty:1, img:0 };
   renderModal();
   $("#modal").classList.add("open");
   document.body.style.overflow="hidden";
@@ -1020,17 +1046,30 @@ function renderModal(){
   const p = PRODUCTS.find(x=>x.id===modalState.id);
   $("#modalCard").innerHTML = `
     <button class="modal-close" id="modalClose" aria-label="Cerrar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-    <div class="modal-media">${productMedia(p)}</div>
+    <div class="modal-media">
+      ${(p.images&&p.images.length)
+        ? `<img src="${p.images[modalState.img]||p.images[0]}" alt="${p.name}" class="modal-main-img">
+           ${p.images.length>1 ? `<div class="modal-thumbs">${p.images.map((im,i)=>`<button class="modal-thumb ${i===modalState.img?"active":""}" data-img="${i}"><img src="${im}" alt="${p.name} ${i+1}" loading="lazy"></button>`).join("")}</div>` : ""}`
+        : jewelSVG(p)}
+    </div>
     <div class="modal-info">
       <span class="cat">${CATS[p.cat].label}</span>
       <h3>${p.name}</h3>
       <div class="mat">${p.materials}</div>
       <p class="desc">${p.desc}</p>
-      <div class="price">${money(p.price)}</div>
+      <div class="price-row">
+        ${p.originalPrice ? `<span class="price-old">${money(p.originalPrice)}</span>` : ""}
+        <span class="price">${money(p.price)}</span>
+        ${discountPct(p) ? `<span class="price-badge">−${discountPct(p)}%</span>` : ""}
+      </div>
       <div class="opt-label">Acabado</div>
       <div class="opts">
         ${p.colors.map(c=>`<button class="opt ${c===modalState.color?"active":""}" data-color="${c}">${c}</button>`).join("")}
       </div>
+      ${p.sizes && p.sizes.length ? `<div class="opt-label">Talla</div>
+      <div class="opts">
+        ${p.sizes.map(s=>`<button class="opt opt-size ${String(s)===String(modalState.size)?"active":""}" data-size="${s}">${s}</button>`).join("")}
+      </div>` : ""}
       <div class="modal-actions">
         <div class="modal-qty">
           <button id="mDec" aria-label="Restar">−</button>
@@ -1042,9 +1081,14 @@ function renderModal(){
     </div>`;
   $("#modalClose").onclick = closeModal;
   $$("[data-color]").forEach(b=>b.onclick=()=>{ modalState.color=b.dataset.color; renderModal(); });
+  $$("[data-size]").forEach(b=>b.onclick=()=>{ modalState.size=b.dataset.size; renderModal(); });
+  $$("[data-img]").forEach(b=>b.onclick=()=>{ modalState.img=+b.dataset.img; renderModal(); });
   $("#mDec").onclick=()=>{ modalState.qty=Math.max(1,modalState.qty-1); $("#mQty").textContent=modalState.qty; };
   $("#mInc").onclick=()=>{ modalState.qty++; $("#mQty").textContent=modalState.qty; };
-  $("#mAdd").onclick=()=>{ addToCart(p, modalState.color, modalState.qty); closeModal(); openDrawer(); };
+  $("#mAdd").onclick=()=>{
+    const variant = modalState.size ? `${modalState.color} · Talla ${modalState.size}` : modalState.color;
+    addToCart(p, variant, modalState.qty); closeModal(); openDrawer();
+  };
 }
 function closeModal(){ $("#modal").classList.remove("open"); document.body.style.overflow=""; }
 
