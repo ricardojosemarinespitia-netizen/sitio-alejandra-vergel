@@ -159,14 +159,12 @@ function closeDrawer(){
   document.body.style.overflow="";
 }
 
-/* ---- checkout por WhatsApp ---- */
+/* ---- checkout por Wompi ---- */
 function checkout(){
   const cart = getCart();
   if(!cart.length) return;
-  let msg = `¡Hola ${CONFIG.brand}! Quiero realizar este pedido:%0A%0A`;
-  cart.forEach(i=>{ msg += `• ${i.qty}× ${i.name} (${i.color}) — ${money(i.price*i.qty)}%0A`; });
-  msg += `%0ATotal: ${money(cartTotal())}%0A%0A¿Me confirman disponibilidad y forma de pago?`;
-  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${msg}`, "_blank");
+  // Ir a la página de checkout con el carrito listo
+  window.location.href = '/checkout.html';
 }
 
 /* ============================================================

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compra Confirmada · Alejandra Vergel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#F7F4EF;
+  --white:#FFFFFF;
+  --noir:#14110F;
+  --ink:#2A2622;
+  --tiffany:#0ABAB5;
+  --gold:#C9A24B;
+  --line:#E6DFD4;
+  --serif:"Cormorant Garamond", serif;
+  --sans:"Jost", sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--sans);
+  background:var(--ivory);
+  color:var(--ink);
+  display:grid;place-items:center;min-height:100vh;padding:20px;
+}
+
+.success-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:60px 40px;
+  text-align:center;
+  max-width:500px;
+  box-shadow:0 10px 30px -16px rgba(20,17,15,.30);
+}
+
+.success-icon{
+  width:80px;height:80px;margin:0 auto 30px;
+  background:var(--tiffany);border-radius:50%;
+  display:grid;place-items:center;color:#fff;
+  font-size:48px;
+}
+
+h1{
+  font-family:var(--serif);
+  font-size:2.2rem;
+  margin-bottom:16px;
+  color:var(--noir);
+}
+
+.ref-number{
+  font-size:.9rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin-bottom:30px;
+  font-weight:600;
+}
+
+p{
+  font-size:1rem;
+  line-height:1.7;
+  color:var(--ink-soft);
+  margin-bottom:30px;
+}
+
+.btn{
+  display:inline-block;
+  padding:14px 32px;
+  background:var(--noir);
+  color:#fff;
+  text-decoration:none;
+  font-size:.85rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  font-weight:600;
+  border-radius:4px;
+  transition:.3s;
+  margin-top:20px;
+}
+
+.btn:hover{background:var(--tiffany)}
+
+.details{
+  margin-top:40px;
+  padding-top:30px;
+  border-top:1px solid var(--line);
+  text-align:left;
+}
+
+.detail-row{
+  display:flex;justify-content:space-between;
+  padding:10px 0;
+  font-size:.9rem;
+}
+
+.label{color:var(--ink-soft)}
+.value{font-weight:600;color:var(--noir)}
+</style>
+</head>
+<body>
+
+<div class="success-card">
+  <div class="success-icon">✓</div>
+
+  <h1>¡Compra Confirmada!</h1>
+
+  <div class="ref-number" id="refNumber">Referencia: —</div>
+
+  <p>Tu pago ha sido procesado exitosamente. En breve recibirás un correo de confirmación con los detalles de tu orden.</p>
+
+  <div class="details">
+    <div class="detail-row">
+      <span class="label">Total pagado:</span>
+      <span class="value" id="totalPaid">$ 0</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">Email:</span>
+      <span class="value" id="emailInfo">—</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">Estado:</span>
+      <span class="value" id="statusInfo">Confirmada</span>
+    </div>
+  </div>
+
+  <a href="index.html" class="btn">Volver al catálogo</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Leer referencia de URL
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref');
+
+  if (ref) {
+    document.getElementById('refNumber').textContent = `Referencia: ${ref}`;
+  }
+
+  // Leer datos de sessionStorage (guardados en checkout.js)
+  const email = sessionStorage.getItem('av_email');
+  const total = sessionStorage.getItem('av_total');
+
+  if (email) document.getElementById('emailInfo').textContent = email;
+  if (total) document.getElementById('totalPaid').textContent = total;
+
+  // Limpiar sessionStorage
+  sessionStorage.removeItem('av_email');
+  sessionStorage.removeItem('av_total');
+  sessionStorage.removeItem('av_reference');
+});
+</script>
+</body>
+</html>

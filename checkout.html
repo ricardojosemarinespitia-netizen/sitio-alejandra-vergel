@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#14110F">
+<meta name="description" content="Checkout - Alejandra Vergel · Alta Joyería">
+<title>Checkout · Alejandra Vergel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#F7F4EF;
+  --white:#FFFFFF;
+  --noir:#14110F;
+  --ink:#2A2622;
+  --ink-soft:#6E665E;
+  --tiffany:#0ABAB5;
+  --cartier:#A6192E;
+  --gold:#C9A24B;
+  --gold-soft:#E7D3A1;
+  --line:#E6DFD4;
+  --shadow:0 24px 60px -28px rgba(20,17,15,.30);
+  --shadow-sm:0 10px 30px -16px rgba(20,17,15,.30);
+  --radius:4px;
+  --serif:"Cormorant Garamond", Georgia, serif;
+  --sans:"Jost", -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--ivory);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent}
+
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
+.container{width:min(1240px,92%);margin-inline:auto}
+section{padding:60px 0}
+
+/* Header */
+.nav{
+  position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--line);
+  height:96px;display:flex;align-items:center;
+  padding:0 20px;
+}
+.nav-logo{font-family:var(--serif);font-size:1.8rem;font-weight:500;color:var(--noir)}
+.nav-logo span{font-size:.6rem;letter-spacing:.2em;color:var(--ink-soft);display:block}
+.nav-spacer{flex:1}
+.nav-actions{display:flex;align-items:center;gap:20px}
+.icon-btn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);transition:.3s;color:var(--ink)}
+.icon-btn:hover{background:var(--ivory);border-color:var(--gold)}
+#cartCount{
+  position:absolute;width:18px;height:18px;background:var(--cartier);color:#fff;
+  border-radius:50%;display:grid;place-items:center;font-size:.65rem;font-weight:700;
+  top:14px;right:14px;opacity:0;transition:.3s;
+}
+#cartCount.show{opacity:1}
+
+/* Checkout Grid */
+.checkout-grid{display:grid;grid-template-columns:2fr 1fr;gap:60px;align-items:start}
+.checkout-form{background:var(--white);padding:40px;border:1px solid var(--line);border-radius:var(--radius)}
+.checkout-form h2{font-size:2rem;margin-bottom:30px;color:var(--noir)}
+.form-group{margin-bottom:24px}
+.form-group label{display:block;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+.form-group input{
+  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);
+  font-family:inherit;font-size:1rem;color:var(--ink);transition:.3s;
+}
+.form-group input:focus{outline:none;border-color:var(--gold);background:rgba(201,162,75,.05)}
+.btn-submit{
+  width:100%;padding:16px;background:var(--noir);color:#fff;font-size:.9rem;
+  letter-spacing:.15em;text-transform:uppercase;font-weight:600;border-radius:var(--radius);
+  cursor:pointer;transition:.35s;margin-top:10px;
+}
+.btn-submit:hover{background:var(--cartier)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+
+/* Resumen */
+.checkout-summary{position:sticky;top:120px}
+.summary-box{background:var(--white);padding:30px;border:1px solid var(--line);border-radius:var(--radius)}
+.summary-box h3{font-size:1.3rem;margin-bottom:20px;color:var(--noir)}
+.summary-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--line);font-size:.95rem;
+}
+.summary-item:last-child{border-bottom:none}
+.summary-total{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 0;border-top:2px solid var(--noir);font-family:var(--serif);
+  font-size:1.8rem;font-weight:600;color:var(--noir);margin-top:14px;
+}
+
+/* Toast */
+#toast{
+  position:fixed;bottom:20px;left:20px;right:20px;background:var(--ink);color:#fff;
+  padding:16px 20px;border-radius:var(--radius);font-size:.9rem;
+  opacity:0;transition:.3s;pointer-events:none;z-index:1000;
+}
+#toast.show{opacity:1;pointer-events:auto}
+
+/* Mobile */
+@media(max-width:768px){
+  .checkout-grid{grid-template-columns:1fr;gap:30px}
+  .checkout-summary{position:static}
+  .checkout-form{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="nav">
+  <div class="nav-logo">Alejandra Vergel<span>Alta Joyería</span></div>
+  <div class="nav-spacer"></div>
+  <div class="nav-actions">
+    <button class="icon-btn" id="openCart" title="Carrito">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <span id="cartCount" class="show">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Main -->
+<section>
+  <div class="container">
+    <h1 style="font-size:2.5rem;margin-bottom:40px;color:var(--noir)">Finaliza tu compra</h1>
+
+    <div class="checkout-grid">
+      <!-- Formulario -->
+      <form id="checkoutForm" class="checkout-form">
+        <h2>Tus datos</h2>
+
+        <div class="form-group">
+          <label for="name">Nombre completo *</label>
+          <input type="text" id="name" name="name" placeholder="Juan Pérez" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="juan@ejemplo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Teléfono *</label>
+          <input type="tel" id="phone" name="phone" placeholder="+57 300 123 4567" required>
+        </div>
+
+        <div class="form-group">
+          <label for="couponCode">Código de descuento (opcional)</label>
+          <input type="text" id="couponCode" name="couponCode" placeholder="AV15-XXXXXXX">
+        </div>
+
+        <button type="submit" class="btn-submit">Ir a pagar con Wompi</button>
+      </form>
+
+      <!-- Resumen -->
+      <div class="checkout-summary">
+        <div class="summary-box">
+          <h3>Resumen</h3>
+          <div id="summaryItems"></div>
+          <div class="summary-total">
+            <span>Total</span>
+            <span id="summaryTotal">$ 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Toast -->
+<div id="toast"><span id="toastMsg"></span></div>
+
+<script src="products.js"></script>
+<script src="store.js"></script>
+<script src="checkout.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  initStore();
+  initCheckout();
+
+  // Renderizar resumen
+  const cart = getCart();
+  if (!cart.length) {
+    document.body.innerHTML += '<p style="text-align:center;margin-top:40px;color:var(--ink-soft)">Tu carrito está vacío. <a href="index.html">Volver al catálogo</a></p>';
+    return;
+  }
+
+  const summaryItems = document.getElementById("summaryItems");
+  summaryItems.innerHTML = cart.map(i => `
+    <div class="summary-item">
+      <span>${i.qty}× ${i.name}</span>
+      <span>${money(i.price * i.qty)}</span>
+    </div>
+  `).join("");
+
+  document.getElementById("summaryTotal").textContent = money(cartTotal());
+});
+</script>
+</body>
+</html>
