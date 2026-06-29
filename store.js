@@ -64,7 +64,8 @@ function jewelSVG(p){
 }
 function productMedia(p){
   if(p.images && p.images.length){
-    return `<img src="${p.images[0]}" alt="${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`;
+    const pos = p.imgPos || "center 50%";
+    return `<img src="${p.images[0]}" alt="${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:${pos}">`;
   }
   return jewelSVG(p);
 }
