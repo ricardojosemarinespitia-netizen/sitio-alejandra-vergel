@@ -94,12 +94,14 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 /* Galería */
 .gallery{position:sticky;top:96px}
 .gallery-main{
-  position:relative;aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden;
-  background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;box-shadow:var(--shadow-sm);
-  padding:18px;
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(155deg,#FBFAF7,#EFEAE1);box-shadow:var(--shadow-sm);
 }
-.gallery-main img{width:100%;height:100%;object-fit:contain}
+/* Placeholder SVG: marco cuadrado centrado */
+.gallery-main:not(.has-img){aspect-ratio:1/1;display:grid;place-items:center}
 .gallery-main svg{width:62%}
+/* Foto real: proporción natural, sin recorte ni franjas */
+.gallery-main.has-img img{display:block;width:100%;height:auto}
 .gallery-badge{
   position:absolute;top:18px;right:18px;z-index:2;background:var(--cartier);color:#fff;
   font-size:.7rem;font-weight:600;letter-spacing:.06em;padding:6px 12px;border-radius:30px;font-family:var(--sans);
@@ -328,7 +330,7 @@ function renderDetail(){
     <div class="detail-grid">
       <!-- Galería -->
       <div class="gallery">
-        <div class="gallery-main">
+        <div class="gallery-main ${hasImgs ? "has-img" : ""}">
           ${discountPct(p) ? `<span class="gallery-badge">−${discountPct(p)}%</span>` : ""}
           ${hasImgs ? `<img src="${mainImg}" alt="${p.name}" id="mainImg">` : jewelSVG(p)}
         </div>
