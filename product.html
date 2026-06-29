@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#14110F">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="Anillo artesanal de Alejandra Vergel · filigrana colombiana y piedras naturales. Pieza hecha a mano bajo pedido.">
+<title>Anillo · Alejandra Vergel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#F7F4EF;--white:#FFFFFF;--noir:#14110F;--ink:#2A2622;--ink-soft:#6E665E;
+  --tiffany:#0ABAB5;--tiffany-soft:#7FD9D4;--cartier:#A6192E;--cartier-deep:#7E0E20;
+  --gold:#C9A24B;--gold-soft:#E7D3A1;--line:#E6DFD4;
+  --shadow:0 24px 60px -28px rgba(20,17,15,.30);
+  --shadow-sm:0 10px 30px -16px rgba(20,17,15,.30);
+  --radius:4px;
+  --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans:"Jost", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{overflow-x:hidden}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--ivory);line-height:1.6;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;min-height:100vh;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent}
+ul{list-style:none}
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
+.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.container{width:min(1240px,92%);margin-inline:auto}
+
+/* ---------- Botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  font-family:var(--sans);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  padding:15px 34px;border-radius:var(--radius);transition:.35s cubic-bezier(.2,.7,.3,1);
+  position:relative;overflow:hidden;min-height:50px;
+}
+.btn-dark{background:var(--noir);color:var(--white)}
+.btn-dark:hover{background:var(--cartier)}
+.btn-gold{background:linear-gradient(120deg,var(--gold) 0%,var(--gold-soft) 50%,var(--gold) 100%);background-size:200% 100%;color:var(--noir)}
+.btn-gold:hover{background-position:100% 0}
+.btn-outline{border:1px solid var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:var(--white)}
+.btn-wa{background:#25D366;color:#fff}
+.btn-wa:hover{background:#1da851}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.nav{
+  position:sticky;top:0;left:0;width:100%;z-index:90;
+  background:rgba(247,244,239,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;height:72px}
+.brand{display:flex;flex-direction:column;line-height:1;align-items:flex-start;flex-shrink:0}
+.brand .name{font-family:var(--serif);font-size:1.45rem;letter-spacing:.06em;color:var(--noir)}
+.brand .tag{font-size:.54rem;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.back-link{
+  display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);padding:11px 16px;border-radius:40px;border:1px solid transparent;transition:.3s;min-height:44px;
+}
+.back-link:hover{background:var(--white);color:var(--ink);border-color:var(--line)}
+.cart-btn{position:relative;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;transition:.3s;color:var(--ink)}
+.cart-btn:hover{background:var(--white);color:var(--cartier)}
+.cart-count{
+  position:absolute;top:2px;right:2px;min-width:18px;height:18px;padding:0 4px;
+  background:var(--cartier);color:#fff;font-size:.62rem;font-weight:600;border-radius:10px;
+  display:grid;place-items:center;font-family:var(--sans);transform:scale(0);transition:.3s;
+}
+.cart-count.show{transform:scale(1)}
+
+/* ============================================================
+   DETALLE DEL PRODUCTO
+   ============================================================ */
+.crumbs{font-size:.74rem;color:var(--ink-soft);letter-spacing:.06em;margin:26px 0 0}
+.crumbs a:hover{color:var(--gold)}
+.crumbs span{color:var(--ink)}
+
+.detail{padding:30px 0 70px}
+.detail-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start}
+
+/* Galería */
+.gallery{position:sticky;top:96px}
+.gallery-main{
+  position:relative;aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;box-shadow:var(--shadow-sm);
+}
+.gallery-main img{width:100%;height:100%;object-fit:cover}
+.gallery-main svg{width:62%}
+.gallery-badge{
+  position:absolute;top:18px;right:18px;z-index:2;background:var(--cartier);color:#fff;
+  font-size:.7rem;font-weight:600;letter-spacing:.06em;padding:6px 12px;border-radius:30px;font-family:var(--sans);
+  box-shadow:0 4px 12px -4px rgba(126,14,32,.5);
+}
+.gallery-thumbs{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.gallery-thumb{
+  width:70px;height:70px;border-radius:var(--radius);overflow:hidden;border:2px solid transparent;
+  transition:.25s;padding:0;background:linear-gradient(155deg,#FBFAF7,#EFEAE1);flex-shrink:0;
+}
+.gallery-thumb.active{border-color:var(--gold)}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover}
+
+/* Info */
+.pd-cat{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.pd-name{font-size:clamp(2.1rem,5vw,3rem);color:var(--noir);margin:8px 0 6px;line-height:1.05}
+.pd-mat{color:var(--ink-soft);font-size:.95rem;margin-bottom:18px}
+.pd-price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.pd-price{font-family:var(--serif);font-size:2.3rem;color:var(--noir)}
+.pd-price-old{font-size:1.15rem;color:var(--ink-soft);text-decoration:line-through;opacity:.75}
+.pd-badge{background:var(--cartier);color:#fff;font-size:.72rem;font-weight:600;padding:5px 11px;border-radius:30px;font-family:var(--sans)}
+.pd-desc{color:var(--ink);font-weight:300;margin-bottom:26px;font-size:1.02rem;line-height:1.75}
+.pd-divider{height:1px;background:var(--line);margin:26px 0}
+
+.opt-label{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:11px}
+.opts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:24px}
+.opt{padding:10px 18px;border:1px solid var(--line);border-radius:30px;font-size:.8rem;color:var(--ink-soft);transition:.3s;min-height:42px;display:inline-flex;align-items:center}
+.opt:hover{border-color:var(--gold)}
+.opt.active{background:var(--noir);color:#fff;border-color:var(--noir)}
+.opt-size{min-width:46px;justify-content:center}
+
+.pd-actions{display:flex;gap:12px;align-items:center;margin:8px 0 14px;flex-wrap:wrap}
+.pd-qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:30px;background:#fff;flex-shrink:0}
+.pd-qty button{width:46px;height:52px;display:grid;place-items:center;font-size:1.2rem;color:var(--ink)}
+.pd-qty button:hover{color:var(--cartier)}
+.pd-qty span{min-width:34px;text-align:center;font-size:.95rem}
+.pd-actions .btn{flex:1;min-width:180px}
+.pd-wa{width:100%;margin-top:4px}
+
+.pd-perks{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.pd-perk{display:flex;gap:12px;align-items:center;font-size:.86rem;color:var(--ink-soft)}
+.pd-perk svg{color:var(--gold);flex-shrink:0}
+
+.notfound{text-align:center;padding:90px 20px}
+.notfound h2{font-size:2rem;color:var(--noir);margin-bottom:12px}
+.notfound p{color:var(--ink-soft);margin-bottom:26px}
+
+/* ============================================================
+   RELACIONADOS
+   ============================================================ */
+.related{background:var(--white);padding:70px 0;border-top:1px solid var(--line)}
+.related .sec-head{text-align:center;margin-bottom:40px}
+.related .sec-head h2{font-size:clamp(1.8rem,4vw,2.5rem);color:var(--noir);margin-top:8px}
+.rel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.card{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  transition:.45s cubic-bezier(.2,.7,.3,1);position:relative;display:flex;flex-direction:column;cursor:pointer;
+}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
+.card-media{position:relative;aspect-ratio:1/1;background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;overflow:hidden}
+.card-media svg{width:62%;height:62%}
+.card-badge{position:absolute;top:12px;right:12px;z-index:2;background:var(--cartier);color:#fff;font-size:.62rem;font-weight:600;padding:4px 8px;border-radius:30px;font-family:var(--sans)}
+.card-body{padding:16px 16px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card-name{font-family:var(--serif);font-size:1.2rem;color:var(--noir);line-height:1.2}
+.card-prices{display:flex;align-items:baseline;gap:8px;margin-top:8px;flex-wrap:wrap}
+.card-price{font-family:var(--serif);font-size:1.15rem;color:var(--ink)}
+.card-price-old{font-size:.74rem;color:var(--ink-soft);text-decoration:line-through;opacity:.8}
+
+/* ============================================================
+   CARRITO (drawer) — compartido con index
+   ============================================================ */
+.overlay{position:fixed;inset:0;background:rgba(20,17,15,.55);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.4s;z-index:100}
+.overlay.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--ivory);z-index:101;display:flex;flex-direction:column;transform:translateX(100%);transition:.45s cubic-bezier(.4,0,.1,1);box-shadow:-20px 0 60px -20px rgba(0,0,0,.4)}
+.drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:24px 26px;border-bottom:1px solid var(--line)}
+.drawer-head h3{font-size:1.5rem;color:var(--noir)}
+.drawer-close{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;transition:.3s;color:var(--ink)}
+.drawer-close:hover{background:var(--white);color:var(--cartier);transform:rotate(90deg)}
+.drawer-body{flex:1;overflow-y:auto;padding:10px 26px}
+.cart-empty{text-align:center;padding:70px 20px;color:var(--ink-soft)}
+.cart-empty svg{opacity:.3;margin-bottom:16px}
+.cart-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.cart-item .thumb{width:74px;height:74px;border-radius:var(--radius);background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;flex-shrink:0}
+.cart-item .thumb svg{width:64%}
+.cart-item .info{flex:1;min-width:0}
+.cart-item .nm{font-family:var(--serif);font-size:1.1rem;color:var(--noir);line-height:1.2}
+.cart-item .vr{font-size:.72rem;color:var(--ink-soft)}
+.cart-item .pr{font-size:.9rem;color:var(--ink);margin-top:2px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:30px;margin-top:8px;background:#fff}
+.qty button{width:32px;height:32px;display:grid;place-items:center;color:var(--ink);font-size:1rem}
+.qty button:hover{color:var(--cartier)}
+.qty span{min-width:26px;text-align:center;font-size:.82rem}
+.cart-item .rm{align-self:flex-start;color:var(--ink-soft);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;transition:.3s}
+.cart-item .rm:hover{color:var(--cartier)}
+.drawer-foot{padding:22px 26px;border-top:1px solid var(--line);background:var(--white)}
+.cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.cart-total .lbl{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.cart-total .val{font-family:var(--serif);font-size:1.9rem;color:var(--noir)}
+.drawer-foot .btn{width:100%}
+
+/* ---------- Toast ---------- */
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,140%);background:var(--noir);color:#fff;padding:15px 26px;border-radius:var(--radius);font-size:.85rem;z-index:120;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);transition:.45s cubic-bezier(.2,.7,.3,1);max-width:90vw}
+.toast.show{transform:translate(-50%,0)}
+.toast svg{color:var(--tiffany);flex-shrink:0}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:980px){
+  .detail-grid{grid-template-columns:1fr;gap:32px}
+  .gallery{position:static;top:auto}
+  .gallery-main{max-width:520px;margin:0 auto}
+  .rel-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  .rel-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+}
+@media(max-width:560px){
+  .nav-inner{height:62px}
+  .brand .name{font-size:1.2rem}
+  .back-link span{display:none}
+  .back-link{padding:11px 13px}
+  .container{width:90%}
+  .detail{padding:18px 0 50px}
+  .gallery-thumb{width:60px;height:60px}
+  .pd-actions{flex-direction:column;align-items:stretch}
+  .pd-qty{align-self:center}
+  .pd-actions .btn{width:100%}
+  .pd-price{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============== HEADER ============== -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <span class="name">Alejandra Vergel</span>
+      <span class="tag">Alta Joyería</span>
+    </a>
+    <div class="nav-actions">
+      <a href="index.html#catalogo" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Volver al catálogo</span>
+      </a>
+      <button class="cart-btn" id="openCart" aria-label="Abrir carrito">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============== DETALLE ============== -->
+<main class="container">
+  <nav class="crumbs" id="crumbs"></nav>
+  <section class="detail">
+    <div id="productRoot"></div>
+  </section>
+</main>
+
+<!-- ============== RELACIONADOS ============== -->
+<section class="related" id="relatedSection" style="display:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">También te puede gustar</span>
+      <h2>Otras piezas de la colección</h2>
+    </div>
+    <div class="rel-grid" id="relGrid"></div>
+  </div>
+</section>
+
+<!-- ============== CARRITO DRAWER ============== -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Carrito de compras">
+  <div class="drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="drawer-close" id="closeCart" aria-label="Cerrar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot" style="display:none">
+    <div class="cart-total"><span class="lbl">Total</span><span class="val" id="cartTotal">$ 0</span></div>
+    <button class="btn btn-dark" id="checkoutBtn">Finalizar por WhatsApp</button>
+  </div>
+</aside>
+
+<!-- ============== TOAST ============== -->
+<div class="toast" id="toast"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Agregado al carrito</span></div>
+
+<script src="products.js"></script>
+<script src="store.js"></script>
+<script>
+/* ============================================================
+   PÁGINA DE DETALLE — lee ?id= de la URL y renderiza
+   ============================================================ */
+let detailState = { id:null, color:null, size:null, qty:1, img:0 };
+
+function getParam(name){
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+function renderNotFound(){
+  $("#crumbs").innerHTML = `<a href="index.html">Inicio</a> / <span>Pieza no encontrada</span>`;
+  $("#productRoot").innerHTML = `
+    <div class="notfound">
+      <h2>No encontramos esa pieza</h2>
+      <p>Es posible que el enlace haya cambiado. Explora toda la colección.</p>
+      <a href="index.html#catalogo" class="btn btn-gold">Ver catálogo</a>
+    </div>`;
+}
+
+function renderDetail(){
+  const p = PRODUCTS.find(x => x.id === detailState.id);
+  if(!p) return renderNotFound();
+
+  document.title = `${p.name} · Alejandra Vergel`;
+  $("#crumbs").innerHTML =
+    `<a href="index.html">Inicio</a> / <a href="index.html#catalogo">${CATS[p.cat].label}</a> / <span>${p.name}</span>`;
+
+  const hasImgs = p.images && p.images.length;
+  const mainImg = hasImgs ? (p.images[detailState.img] || p.images[0]) : null;
+
+  $("#productRoot").innerHTML = `
+    <div class="detail-grid">
+      <!-- Galería -->
+      <div class="gallery">
+        <div class="gallery-main">
+          ${discountPct(p) ? `<span class="gallery-badge">−${discountPct(p)}%</span>` : ""}
+          ${hasImgs ? `<img src="${mainImg}" alt="${p.name}" id="mainImg">` : jewelSVG(p)}
+        </div>
+        ${hasImgs && p.images.length>1 ? `<div class="gallery-thumbs">
+          ${p.images.map((im,i)=>`<button class="gallery-thumb ${i===detailState.img?"active":""}" data-img="${i}"><img src="${im}" alt="${p.name} ${i+1}" loading="lazy"></button>`).join("")}
+        </div>` : ""}
+      </div>
+
+      <!-- Info -->
+      <div class="pd-info">
+        <span class="pd-cat">${CATS[p.cat].label}</span>
+        <h1 class="pd-name">${p.name}</h1>
+        <p class="pd-mat">${p.materials}</p>
+        <div class="pd-price-row">
+          ${p.originalPrice ? `<span class="pd-price-old">${money(p.originalPrice)}</span>` : ""}
+          <span class="pd-price">${money(p.price)}</span>
+          ${discountPct(p) ? `<span class="pd-badge">−${discountPct(p)}%</span>` : ""}
+        </div>
+        <p class="pd-desc">${p.desc}</p>
+
+        <div class="pd-divider"></div>
+
+        <div class="opt-label">Acabado</div>
+        <div class="opts">
+          ${p.colors.map(c=>`<button class="opt ${c===detailState.color?"active":""}" data-color="${c}">${c}</button>`).join("")}
+        </div>
+
+        ${p.sizes && p.sizes.length ? `<div class="opt-label">Talla</div>
+        <div class="opts">
+          ${p.sizes.map(s=>`<button class="opt opt-size ${String(s)===String(detailState.size)?"active":""}" data-size="${s}">${s}</button>`).join("")}
+        </div>` : ""}
+
+        <div class="pd-actions">
+          <div class="pd-qty">
+            <button id="pdDec" aria-label="Restar">−</button>
+            <span id="pdQty">${detailState.qty}</span>
+            <button id="pdInc" aria-label="Sumar">+</button>
+          </div>
+          <button class="btn btn-dark" id="pdAdd">Agregar al carrito</button>
+        </div>
+        <button class="btn btn-wa pd-wa" id="pdWa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.516 5.26l-.999 3.648 3.972-1.207zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Comprar ahora por WhatsApp
+        </button>
+
+        <div class="pd-perks">
+          <div class="pd-perk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg> Hecho a mano en filigrana colombiana</div>
+          <div class="pd-perk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3Z"/></svg> Personalizable en piedra y acabado · bajo pedido</div>
+          <div class="pd-perk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7M5.5 18.5A2.5 2.5 0 1 0 5.5 13a2.5 2.5 0 0 0 0 5.5ZM18.5 18.5A2.5 2.5 0 1 0 18.5 13a2.5 2.5 0 0 0 0 5.5Z"/></svg> Envíos a todo el país</div>
+        </div>
+      </div>
+    </div>`;
+
+  // listeners
+  $$("[data-img]").forEach(b=>b.onclick=()=>{ detailState.img=+b.dataset.img; renderDetail(); });
+  $$("[data-color]").forEach(b=>b.onclick=()=>{ detailState.color=b.dataset.color; renderDetail(); });
+  $$("[data-size]").forEach(b=>b.onclick=()=>{ detailState.size=b.dataset.size; renderDetail(); });
+  $("#pdDec").onclick=()=>{ detailState.qty=Math.max(1,detailState.qty-1); $("#pdQty").textContent=detailState.qty; };
+  $("#pdInc").onclick=()=>{ detailState.qty++; $("#pdQty").textContent=detailState.qty; };
+
+  const variant = () => detailState.size ? `${detailState.color} · Talla ${detailState.size}` : detailState.color;
+  $("#pdAdd").onclick=()=>{ addToCart(p, variant(), detailState.qty); openDrawer(); };
+  $("#pdWa").onclick=()=>{
+    const msg = `¡Hola ${CONFIG.brand}! Me interesa este anillo:%0A%0A• ${p.name} (${variant()})%0APrecio: ${money(p.price)}%0ACantidad: ${detailState.qty}%0A%0A¿Me confirman disponibilidad?`;
+    window.open(`https://wa.me/${CONFIG.whatsapp}?text=${msg}`, "_blank");
+  };
+
+  renderRelated(p);
+}
+
+function renderRelated(current){
+  // misma categoría primero; completa hasta 4
+  let rel = PRODUCTS.filter(p => p.cat===current.cat && p.id!==current.id);
+  if(rel.length < 4){
+    const extra = PRODUCTS.filter(p => p.cat!==current.cat && p.id!==current.id);
+    rel = rel.concat(extra);
+  }
+  rel = rel.slice(0,4);
+  if(!rel.length){ $("#relatedSection").style.display="none"; return; }
+
+  $("#relatedSection").style.display="block";
+  $("#relGrid").innerHTML = rel.map(p=>`
+    <a class="card" href="${productUrl(p.id)}">
+      <div class="card-media">
+        ${discountPct(p) ? `<span class="card-badge">−${discountPct(p)}%</span>` : ""}
+        ${productMedia(p)}
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">${p.name}</h3>
+        <div class="card-prices">
+          ${p.originalPrice ? `<span class="card-price-old">${money(p.originalPrice)}</span>` : ""}
+          <span class="card-price">${money(p.price)}</span>
+        </div>
+      </div>
+    </a>`).join("");
+}
+
+/* ---------- INIT ---------- */
+document.addEventListener("DOMContentLoaded", ()=>{
+  initStore();
+  const id = getParam("id");
+  const p = id ? PRODUCTS.find(x=>x.id===id) : null;
+  if(!p){ renderNotFound(); return; }
+  detailState = { id, color:p.colors[0], size:(p.sizes&&p.sizes.length?p.sizes[0]:null), qty:1, img:0 };
+  renderDetail();
+});
+</script>
+</body>
+</html>
