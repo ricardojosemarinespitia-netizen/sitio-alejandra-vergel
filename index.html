@@ -295,14 +295,22 @@ section{padding:96px 0}
 .card-media{
   position:relative;aspect-ratio:1/1;
   background:linear-gradient(155deg,#FBFAF7,#EFEAE1);
-  display:grid;place-items:center;overflow:hidden;
+  overflow:hidden;
 }
-.card-media svg{width:62%;height:62%;transition:.6s cubic-bezier(.2,.7,.3,1)}
+.card-media img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:.6s cubic-bezier(.2,.7,.3,1);
+}
+.card:hover .card-media img{transform:scale(1.06)}
+.card-media svg{
+  position:absolute;inset:0;margin:auto;width:62%;height:62%;
+  transition:.6s cubic-bezier(.2,.7,.3,1);
+}
 .card:hover .card-media svg{transform:scale(1.08) rotate(-2deg)}
 .card-cat{
-  position:absolute;top:14px;left:14px;font-size:.6rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--ink-soft);background:rgba(255,255,255,.85);
-  padding:5px 11px;border-radius:30px;backdrop-filter:blur(4px);
+  font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);
+  margin-bottom:4px;display:block;
 }
 .card-quick{
   position:absolute;inset:auto 0 0 0;background:var(--noir);color:#fff;
@@ -318,7 +326,7 @@ section{padding:96px 0}
 .card-price-old{font-size:.78rem;color:var(--ink-soft);text-decoration:line-through;opacity:.8}
 .card-price{font-family:var(--serif);font-size:1.25rem;color:var(--ink)}
 .card-badge{
-  position:absolute;top:14px;right:14px;z-index:2;
+  position:absolute;bottom:12px;right:12px;z-index:2;
   background:var(--cartier);color:#fff;font-size:.64rem;font-weight:600;letter-spacing:.08em;
   padding:5px 9px;border-radius:30px;font-family:var(--sans);box-shadow:0 4px 12px -4px rgba(126,14,32,.5);
 }
@@ -869,12 +877,12 @@ function renderGrid(){
   grid.innerHTML = list.map(p => `
     <a class="card" href="${productUrl(p.id)}" data-id="${p.id}">
       <div class="card-media">
-        <span class="card-cat">${CATS[p.cat].label}</span>
         ${discountPct(p) ? `<span class="card-badge">−${discountPct(p)}%</span>` : ""}
         ${productMedia(p)}
         <div class="card-quick">Ver detalle</div>
       </div>
       <div class="card-body">
+        <span class="card-cat">${CATS[p.cat].label}</span>
         <h3 class="card-name">${p.name}</h3>
         <p class="card-mat">${p.materials}</p>
         <div class="card-foot">
