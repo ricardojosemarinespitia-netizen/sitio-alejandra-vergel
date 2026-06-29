@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Alejandra Vergel · Alta joyería. Anillos, collares, aretes y pulseras en oro y diamantes. Piezas atemporales inspiradas en el lujo eterno.">
+<title>Alejandra Vergel · Alta Joyería</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PALETA — referencia Tiffany & Co. + Cartier
+   ============================================================ */
+:root{
+  --ivory:#F7F4EF;        /* marfil de fondo, limpieza Tiffany */
+  --white:#FFFFFF;
+  --noir:#14110F;         /* casi negro cálido */
+  --ink:#2A2622;          /* texto principal */
+  --ink-soft:#6E665E;     /* texto secundario */
+  --tiffany:#0ABAB5;      /* azul Tiffany */
+  --tiffany-soft:#7FD9D4;
+  --cartier:#A6192E;      /* rojo Cartier */
+  --cartier-deep:#7E0E20;
+  --gold:#C9A24B;         /* dorado */
+  --gold-soft:#E7D3A1;
+  --line:#E6DFD4;         /* líneas sutiles */
+  --shadow:0 24px 60px -28px rgba(20,17,15,.30);
+  --shadow-sm:0 10px 30px -16px rgba(20,17,15,.30);
+  --radius:4px;           /* esquinas finas y editoriales */
+  --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans:"Jost", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--ivory);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+ul{list-style:none}
+
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
+.eyebrow{
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;
+}
+.container{width:min(1240px,92%);margin-inline:auto}
+section{padding:96px 0}
+
+/* ---------- Botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;
+  font-family:var(--sans);font-size:.82rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:500;
+  padding:15px 34px;border-radius:var(--radius);
+  transition:.35s cubic-bezier(.2,.7,.3,1);position:relative;overflow:hidden;
+}
+.btn-dark{background:var(--noir);color:var(--white)}
+.btn-dark:hover{background:var(--cartier)}
+.btn-gold{
+  background:linear-gradient(120deg,var(--gold) 0%,var(--gold-soft) 50%,var(--gold) 100%);
+  background-size:200% 100%;color:var(--noir);
+}
+.btn-gold:hover{background-position:100% 0}
+.btn-outline{border:1px solid var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:var(--white)}
+.btn-tiffany{background:var(--tiffany);color:var(--white)}
+.btn-tiffany:hover{background:#089c98}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;width:100%;z-index:90;
+  background:linear-gradient(180deg,rgba(10,8,6,.45) 0%,rgba(10,8,6,.15) 70%,rgba(10,8,6,0) 100%);
+  backdrop-filter:blur(0);
+  border-bottom:none;
+  transition:background .4s,backdrop-filter .4s,box-shadow .4s;
+}
+.nav.scrolled{
+  background:rgba(247,244,239,.88);
+  backdrop-filter:blur(16px);
+  box-shadow:var(--shadow-sm);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+.brand{display:flex;flex-direction:column;line-height:1;align-items:flex-start}
+.brand .name{font-family:var(--serif);font-size:1.55rem;letter-spacing:.06em;color:#fff;transition:color .4s}
+.brand .tag{font-size:.56rem;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:4px;transition:color .4s}
+.nav.scrolled .brand .name{color:var(--noir)}
+.nav.scrolled .brand .tag{color:var(--ink-soft)}
+.nav-links{display:flex;gap:38px}
+.nav-links a{
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:#fff;position:relative;padding:6px 0;transition:color .4s;
+}
+.nav.scrolled .nav-links a{color:var(--ink)}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--gold);transition:.35s;
+}
+.nav-links a:hover::after{width:100%}
+.nav-actions{display:flex;align-items:center;gap:18px}
+.icon-btn{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;transition:.3s;color:var(--ink)}
+.icon-btn:hover{background:var(--white);color:var(--cartier)}
+.cart-btn{position:relative}
+.cart-count{
+  position:absolute;top:2px;right:2px;min-width:18px;height:18px;padding:0 4px;
+  background:var(--cartier);color:#fff;font-size:.62rem;font-weight:600;
+  border-radius:10px;display:grid;place-items:center;font-family:var(--sans);
+  transform:scale(0);transition:.3s;
+}
+.cart-count.show{transform:scale(1)}
+.burger{display:none;flex-direction:column;gap:5px;width:42px;height:42px;justify-content:center;align-items:center}
+.burger span{width:22px;height:1.6px;background:var(--ink);transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(6.6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg)}
+
+/* ============================================================
+   HERO — 5 paneles con cortes diagonales + líneas neo
+   ============================================================ */
+.hero{
+  position:relative;
+  height:100vh;min-height:600px;
+  overflow:hidden;
+  background:#0a0806;
+}
+
+/* Todos los paneles posicionados absolutamente */
+.hpanel{
+  position:absolute;
+  overflow:hidden;
+}
+.hpanel img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center center;
+  display:block;
+}
+
+.hp-medio1{
+  left:0;top:0;width:30%;height:100%;
+  z-index:2;
+}
+.hp-medio1 img{object-position:60% 20%}
+
+/* ── PANEL CENTRAL ── */
+.hp-central{
+  left:30%;top:0;width:40%;height:100%;
+  z-index:1;
+}
+.hp-central img{object-position:center 22%}
+
+/* Overlay — más transparente arriba para ver a Alejandra, texto abajo */
+.hp-central-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;
+  padding:0 24px 28px;
+  background:linear-gradient(to bottom,
+    rgba(6,4,2,.04) 0%,
+    rgba(6,4,2,.08) 35%,
+    rgba(6,4,2,.55) 60%,
+    rgba(6,4,2,.80) 100%);
+  color:#fff;text-align:center;z-index:5;
+}
+.hp-central-overlay .eyebrow{
+  color:var(--gold-soft);margin-bottom:12px;
+}
+.hp-central-overlay .h1-name{
+  font-family:var(--serif);font-size:clamp(1.9rem,3.8vw,3.2rem);
+  font-weight:500;letter-spacing:.04em;color:#fff;
+  line-height:1;margin:0;
+}
+.hero-dotted-line{
+  width:100px;height:2px;margin:12px auto 8px;
+  background:repeating-linear-gradient(
+    90deg,
+    var(--tiffany) 0, var(--tiffany) 6px,
+    transparent 6px, transparent 12px
+  );
+  box-shadow:0 0 8px 1px rgba(10,186,181,.5);
+}
+.hp-central-overlay .h1-surname{
+  font-family:var(--serif);font-size:clamp(1.9rem,3.8vw,3.2rem);
+  font-weight:400;font-style:italic;letter-spacing:.04em;
+  color:var(--gold-soft);line-height:1;margin:0 0 28px;
+}
+
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.hero-outline{color:#fff !important;border-color:rgba(255,255,255,.5) !important}
+.hero-outline:hover{background:#fff !important;color:var(--noir) !important}
+
+.hp-medio2{
+  right:0;top:0;width:30%;height:100%;
+  z-index:2;
+}
+.hp-medio2 img{object-position:100% 45%}
+
+/* ── DIVISORES DORADOS ── */
+.hero-divider{
+  position:absolute;top:0;width:1px;height:100%;z-index:10;pointer-events:none;
+  background:linear-gradient(to bottom,
+    rgba(201,162,75,0) 0%,
+    rgba(201,162,75,0.55) 25%,
+    rgba(255,255,255,0.95) 50%,
+    rgba(201,162,75,0.55) 75%,
+    rgba(201,162,75,0) 100%);
+  filter:drop-shadow(0 0 7px rgba(255,245,195,0.9));
+}
+.hero-divider-left{left:30%}
+.hero-divider-right{left:70%}
+
+/* MOBILE */
+@media(max-width:680px){
+  .hp-medio1,.hp-medio2{display:none}
+  .hp-central{left:0;width:100%}
+  .hero-lines{display:none}
+  .hp-central-overlay{justify-content:flex-end;padding-bottom:28px}
+}
+
+
+/* ============================================================
+   FRANJA / MARQUEE
+   ============================================================ */
+.strip{background:var(--noir);color:var(--ivory);padding:18px 0;overflow:hidden;white-space:nowrap}
+.strip-track{display:inline-flex;gap:60px;animation:scroll 26s linear infinite}
+.strip-track span{font-family:var(--serif);font-style:italic;font-size:1.1rem;letter-spacing:.05em;opacity:.85}
+.strip-track span::after{content:"✦";margin-left:60px;color:var(--gold);font-style:normal}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   SECCIÓN TÍTULOS
+   ============================================================ */
+.sec-head{text-align:center;max-width:640px;margin:0 auto 56px}
+.sec-head h2{font-size:clamp(2.1rem,5vw,3.2rem);margin:14px 0 12px;color:var(--noir)}
+.sec-head p{color:var(--ink-soft);font-weight:300}
+
+/* ============================================================
+   CATÁLOGO — filtros + grid
+   ============================================================ */
+.catalogo{background:var(--white)}
+.filters{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;
+  margin-bottom:14px;
+}
+.chip{
+  font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:9px 20px;border:1px solid var(--line);border-radius:40px;
+  color:var(--ink-soft);transition:.3s;background:var(--white);
+}
+.chip:hover{border-color:var(--gold);color:var(--ink)}
+.chip.active{background:var(--noir);color:#fff;border-color:var(--noir)}
+.filters-row2{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;
+  margin-bottom:44px;color:var(--ink-soft);font-size:.8rem;
+}
+.search-box{position:relative;display:flex;align-items:center}
+.search-box svg{position:absolute;left:14px;color:var(--ink-soft)}
+.search-box input{
+  font-family:var(--sans);font-size:.85rem;padding:11px 16px 11px 40px;
+  border:1px solid var(--line);border-radius:40px;width:230px;background:var(--ivory);
+  color:var(--ink);transition:.3s;
+}
+.search-box input:focus{outline:none;border-color:var(--tiffany);background:#fff}
+.select-wrap select{
+  font-family:var(--sans);font-size:.82rem;padding:11px 38px 11px 16px;
+  border:1px solid var(--line);border-radius:40px;background:var(--ivory);
+  color:var(--ink);cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%236E665E' stroke-width='2'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+}
+.select-wrap select:focus{outline:none;border-color:var(--tiffany)}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.card{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;transition:.45s cubic-bezier(.2,.7,.3,1);position:relative;
+  display:flex;flex-direction:column;cursor:pointer;
+}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
+.card-media{
+  position:relative;aspect-ratio:1/1;
+  background:linear-gradient(155deg,#FBFAF7,#EFEAE1);
+  display:grid;place-items:center;overflow:hidden;
+}
+.card-media svg{width:62%;height:62%;transition:.6s cubic-bezier(.2,.7,.3,1)}
+.card:hover .card-media svg{transform:scale(1.08) rotate(-2deg)}
+.card-cat{
+  position:absolute;top:14px;left:14px;font-size:.6rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-soft);background:rgba(255,255,255,.85);
+  padding:5px 11px;border-radius:30px;backdrop-filter:blur(4px);
+}
+.card-quick{
+  position:absolute;inset:auto 0 0 0;background:var(--noir);color:#fff;
+  text-align:center;padding:13px;font-size:.72rem;letter-spacing:.18em;
+  text-transform:uppercase;transform:translateY(100%);transition:.4s;
+}
+.card:hover .card-quick{transform:translateY(0)}
+.card-body{padding:20px 20px 24px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card-name{font-family:var(--serif);font-size:1.3rem;color:var(--noir);line-height:1.2}
+.card-mat{font-size:.74rem;color:var(--ink-soft);flex:1}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.card-price{font-family:var(--serif);font-size:1.25rem;color:var(--ink)}
+.add-mini{
+  width:42px;height:42px;border-radius:50%;background:var(--ivory);
+  display:grid;place-items:center;color:var(--noir);transition:.3s;border:1px solid var(--line);
+}
+.add-mini:hover{background:var(--tiffany);color:#fff;border-color:var(--tiffany);transform:rotate(90deg)}
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--ink-soft)}
+
+/* ============================================================
+   NOSOTROS
+   ============================================================ */
+.about{background:var(--ivory)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.about-art{
+  aspect-ratio:4/5;border-radius:var(--radius);position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#1B1712,#2C251D);display:grid;place-items:center;
+  box-shadow:var(--shadow);
+}
+.about-art svg{width:58%}
+.about-art .frame{position:absolute;inset:18px;border:1px solid rgba(231,211,161,.4)}
+.about-txt .eyebrow{color:var(--cartier)}
+.about-txt h2{font-size:clamp(2rem,4.5vw,3rem);margin:14px 0 18px;color:var(--noir)}
+.about-txt p{color:var(--ink-soft);margin-bottom:16px;font-weight:300}
+.about-feats{display:flex;gap:36px;margin-top:30px}
+.about-feats .num{font-family:var(--serif);font-size:2.2rem;color:var(--gold)}
+.about-feats .lbl{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+.contact{background:var(--noir);color:var(--ivory)}
+.contact .sec-head h2{color:#fff}
+.contact .sec-head p{color:rgba(247,244,239,.7)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.contact-info h3{font-family:var(--serif);font-size:1.7rem;color:var(--gold-soft);margin-bottom:8px}
+.contact-info p{color:rgba(247,244,239,.72);max-width:380px;margin-bottom:30px;font-weight:300}
+.info-row{display:flex;gap:16px;align-items:center;margin-bottom:20px}
+.info-row .ic{width:46px;height:46px;border-radius:50%;border:1px solid rgba(231,211,161,.35);display:grid;place-items:center;color:var(--gold-soft);flex-shrink:0}
+.info-row .t{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,244,239,.55)}
+.info-row .v{color:#fff}
+.socials{display:flex;gap:14px;margin-top:30px}
+.socials a{width:44px;height:44px;border-radius:50%;border:1px solid rgba(231,211,161,.3);display:grid;place-items:center;color:var(--gold-soft);transition:.3s}
+.socials a:hover{background:var(--gold);color:var(--noir);border-color:var(--gold);transform:translateY(-4px)}
+
+.form-card{background:rgba(255,255,255,.04);border:1px solid rgba(231,211,161,.18);border-radius:var(--radius);padding:36px}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(247,244,239,.6);margin-bottom:8px}
+.field input,.field textarea{
+  width:100%;font-family:var(--sans);font-size:.95rem;color:#fff;
+  background:transparent;border:none;border-bottom:1px solid rgba(231,211,161,.28);
+  padding:10px 2px;transition:.3s;
+}
+.field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--tiffany)}
+.field textarea{resize:vertical;min-height:90px}
+.field .err{display:block;color:#FF9DAB;font-size:.72rem;margin-top:6px;min-height:1em;opacity:0;transition:.2s}
+.field.invalid .err{opacity:1}
+.field.invalid input,.field.invalid textarea{border-bottom-color:#FF6B81}
+.form-note{font-size:.72rem;color:rgba(247,244,239,.5);margin-top:6px}
+
+/* ============================================================
+   NEWSLETTER
+   ============================================================ */
+.news{
+  background:linear-gradient(120deg,var(--tiffany) 0%,#0a9c98 100%);color:#fff;
+  text-align:center;
+}
+.news h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-bottom:10px}
+.news p{max-width:440px;margin:0 auto 30px;font-weight:300;opacity:.92}
+.news-form{display:flex;gap:12px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.news-form input{
+  flex:1;min-width:220px;font-family:var(--sans);font-size:.95rem;padding:15px 22px;
+  border:none;border-radius:var(--radius);background:rgba(255,255,255,.95);color:var(--ink);
+}
+.news-form input:focus{outline:2px solid var(--noir)}
+.news-msg{min-height:1.4em;margin-top:16px;font-size:.85rem;font-weight:500}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{background:var(--noir);color:rgba(247,244,239,.65);padding:60px 0 30px;border-top:1px solid rgba(231,211,161,.12)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.footer .brand .name{color:#fff}
+.footer .brand .tag{color:rgba(247,244,239,.5)}
+.footer-col h4{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:18px}
+.footer-col a{display:block;margin-bottom:10px;font-size:.88rem;transition:.3s}
+.footer-col a:hover{color:#fff;padding-left:5px}
+.footer-bottom{border-top:1px solid rgba(231,211,161,.12);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.76rem}
+
+/* ============================================================
+   CARRITO (drawer)
+   ============================================================ */
+.overlay{position:fixed;inset:0;background:rgba(20,17,15,.55);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.4s;z-index:100}
+.overlay.open{opacity:1;visibility:visible}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--ivory);
+  z-index:101;display:flex;flex-direction:column;transform:translateX(100%);
+  transition:.45s cubic-bezier(.4,0,.1,1);box-shadow:-20px 0 60px -20px rgba(0,0,0,.4);
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:24px 26px;border-bottom:1px solid var(--line)}
+.drawer-head h3{font-size:1.5rem;color:var(--noir)}
+.drawer-close{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:.3s;color:var(--ink)}
+.drawer-close:hover{background:var(--white);color:var(--cartier);transform:rotate(90deg)}
+.drawer-body{flex:1;overflow-y:auto;padding:10px 26px}
+.cart-empty{text-align:center;padding:70px 20px;color:var(--ink-soft)}
+.cart-empty svg{opacity:.3;margin-bottom:16px}
+.cart-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.cart-item .thumb{width:74px;height:74px;border-radius:var(--radius);background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;flex-shrink:0}
+.cart-item .thumb svg{width:64%}
+.cart-item .info{flex:1;min-width:0}
+.cart-item .nm{font-family:var(--serif);font-size:1.1rem;color:var(--noir);line-height:1.2}
+.cart-item .vr{font-size:.72rem;color:var(--ink-soft)}
+.cart-item .pr{font-size:.9rem;color:var(--ink);margin-top:2px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:30px;margin-top:8px;background:#fff}
+.qty button{width:28px;height:28px;display:grid;place-items:center;color:var(--ink);font-size:1rem}
+.qty button:hover{color:var(--cartier)}
+.qty span{min-width:26px;text-align:center;font-size:.82rem}
+.cart-item .rm{align-self:flex-start;color:var(--ink-soft);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;transition:.3s}
+.cart-item .rm:hover{color:var(--cartier)}
+.drawer-foot{padding:22px 26px;border-top:1px solid var(--line);background:var(--white)}
+.cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.cart-total .lbl{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.cart-total .val{font-family:var(--serif);font-size:1.9rem;color:var(--noir)}
+.drawer-foot .btn{width:100%;justify-content:center}
+
+/* ============================================================
+   MODAL producto
+   ============================================================ */
+.modal{
+  position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:20px;
+  opacity:0;visibility:hidden;transition:.35s;
+}
+.modal.open{opacity:1;visibility:visible}
+.modal-bg{position:absolute;inset:0;background:rgba(20,17,15,.6);backdrop-filter:blur(4px)}
+.modal-card{
+  position:relative;background:var(--white);border-radius:var(--radius);
+  width:min(880px,100%);max-height:90vh;overflow:auto;display:grid;
+  grid-template-columns:1fr 1fr;transform:translateY(20px) scale(.98);transition:.4s;
+}
+.modal.open .modal-card{transform:none}
+.modal-media{background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;padding:40px;min-height:340px}
+.modal-media svg{width:74%}
+.modal-info{padding:42px 40px;display:flex;flex-direction:column}
+.modal-info .cat{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.modal-info h3{font-size:2.1rem;color:var(--noir);margin:8px 0 6px;line-height:1.1}
+.modal-info .mat{color:var(--ink-soft);font-size:.9rem;margin-bottom:14px}
+.modal-info .desc{color:var(--ink);font-weight:300;margin-bottom:22px}
+.modal-info .price{font-family:var(--serif);font-size:2rem;color:var(--noir);margin-bottom:22px}
+.opt-label{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.opt{padding:8px 16px;border:1px solid var(--line);border-radius:30px;font-size:.78rem;color:var(--ink-soft);transition:.3s}
+.opt:hover{border-color:var(--gold)}
+.opt.active{background:var(--noir);color:#fff;border-color:var(--noir)}
+.modal-actions{display:flex;gap:12px;margin-top:auto;align-items:center}
+.modal-qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:30px}
+.modal-qty button{width:38px;height:44px;display:grid;place-items:center;font-size:1.1rem;color:var(--ink)}
+.modal-qty span{min-width:30px;text-align:center}
+.modal-actions .btn{flex:1;justify-content:center}
+.modal-close{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.8);display:grid;place-items:center;z-index:3;transition:.3s;color:var(--ink)}
+.modal-close:hover{background:var(--cartier);color:#fff;transform:rotate(90deg)}
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed;bottom:28px;left:50%;transform:translate(-50%,140%);
+  background:var(--noir);color:#fff;padding:15px 26px;border-radius:var(--radius);
+  font-size:.85rem;letter-spacing:.04em;z-index:120;display:flex;align-items:center;gap:12px;
+  box-shadow:var(--shadow);transition:.45s cubic-bezier(.2,.7,.3,1);
+}
+.toast.show{transform:translate(-50%,0)}
+.toast svg{color:var(--tiffany)}
+
+/* ---------- Reveal ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:.8s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1080px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:920px){
+  section{padding:74px 0}
+  .nav-links,.hero-meta{display:none}
+  .burger{display:flex}
+  .nav-links{
+    position:fixed;top:78px;left:0;width:100%;flex-direction:column;gap:0;
+    background:var(--ivory);border-bottom:1px solid var(--line);padding:10px 0;
+    transform:translateY(-150%);transition:.4s;box-shadow:var(--shadow-sm);
+  }
+  .nav-links.open{display:flex;transform:translateY(0)}
+  .nav-links a{padding:16px 6%;border-bottom:1px solid var(--line)}
+  .nav-links a::after{display:none}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+  .about-art{max-width:420px;margin:0 auto;order:-1}
+  .modal-card{grid-template-columns:1fr}
+  .modal-media{min-height:240px}
+}
+@media(max-width:720px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:18px}
+  .footer-grid{grid-template-columns:1fr;gap:30px}
+  .footer-bottom{justify-content:center;text-align:center}
+}
+@media(max-width:480px){
+  .container{width:90%}
+  .card-name{font-size:1.12rem}
+  .hero h1{font-size:2.6rem}
+  .modal-info{padding:30px 24px}
+  .news-form input{min-width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- ============== HEADER ============== -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#inicio" class="brand">
+      <span class="name">Alejandra Vergel</span>
+      <span class="tag">Alta Joyería</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#inicio">Inicio</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn cart-btn" id="openCart" aria-label="Abrir carrito">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="inicio">
+
+  <!-- Panel izquierdo -->
+  <div class="hpanel hp-medio1">
+    <img src="MEDIO 1.PNG" alt="Alta joyería Alejandra Vergel">
+  </div>
+
+  <!-- Panel central -->
+  <div class="hpanel hp-central">
+    <img src="IMAGEN LEJANDRA.jpg" alt="Alejandra Vergel">
+    <div class="hp-central-overlay">
+      <span class="eyebrow">Alta Joyería · 2026</span>
+      <p class="h1-name">Alejandra</p>
+      <p class="h1-surname">Vergel</p>
+      <div class="hero-cta">
+        <a href="#catalogo" class="btn btn-gold">Ver colección</a>
+        <a href="#contacto" class="btn btn-outline hero-outline">Cita privada</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel derecho -->
+  <div class="hpanel hp-medio2">
+    <img src="MEDIO 2 .PNG" alt="Alta joyería Alejandra Vergel">
+  </div>
+
+  <!-- Divisores dorados -->
+  <div class="hero-divider hero-divider-left"></div>
+  <div class="hero-divider hero-divider-right"></div>
+
+</section>
+
+
+<!-- ============== CATÁLOGO ============== -->
+<section class="catalogo" id="catalogo">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">La colección</span>
+      <h2>Piezas que enamoran</h2>
+      <p>Explora nuestra selección de anillos, collares, aretes y pulseras. Filtra y encuentra la joya perfecta.</p>
+    </div>
+
+    <div class="filters reveal" id="catFilters"></div>
+
+    <div class="filters-row2 reveal">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="search" placeholder="Buscar joya...">
+      </div>
+      <div class="select-wrap">
+        <select id="sortBy">
+          <option value="featured">Destacados</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="name">Nombre A–Z</option>
+        </select>
+      </div>
+      <div class="select-wrap">
+        <select id="priceRange">
+          <option value="all">Todos los precios</option>
+          <option value="0-1500000">Hasta $1.500.000</option>
+          <option value="1500000-3500000">$1.500.000 – $3.500.000</option>
+          <option value="3500000-6000000">$3.500.000 – $6.000.000</option>
+          <option value="6000000-999999999">Más de $6.000.000</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- ============== NOSOTROS ============== -->
+<section class="about" id="nosotros">
+  <div class="container about-grid">
+    <div class="about-art reveal">
+      <div class="frame"></div>
+      <svg viewBox="0 0 120 120" fill="none"><defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E7D3A1"/><stop offset="1" stop-color="#C9A24B"/></linearGradient></defs><circle cx="60" cy="46" r="22" stroke="url(#ag)" stroke-width="2"/><circle cx="60" cy="46" r="10" fill="#0ABAB5" opacity=".85"/><path d="M48 64 L40 104 H80 L72 64" stroke="url(#ag)" stroke-width="2" fill="none"/><path d="M60 24 v-10 M50 28 l-6-8 M70 28 l6-8" stroke="url(#ag)" stroke-width="1.5"/></svg>
+    </div>
+    <div class="about-txt reveal">
+      <span class="eyebrow">Nuestra casa</span>
+      <h2>Tradición orfebre, mirada contemporánea</h2>
+      <p>Desde nuestro taller, cada joya nace del encuentro entre el oficio artesanal y un diseño que mira al futuro. Seleccionamos personalmente cada gema y trabajamos el metal con paciencia, hasta que la pieza respira luz.</p>
+      <p>Creemos en el lujo que se hereda: joyas pensadas para acompañar los momentos que importan y trascender el tiempo.</p>
+      <div class="about-feats">
+        <div><div class="num">+15</div><div class="lbl">Años de oficio</div></div>
+        <div><div class="num">100%</div><div class="lbl">Hecho a mano</div></div>
+        <div><div class="num">2.4k</div><div class="lbl">Clientes felices</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTACTO ============== -->
+<section class="contact" id="contacto">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow" style="color:var(--gold-soft)">Hablemos</span>
+      <h2>Agenda una cita privada</h2>
+      <p>Cuéntanos qué buscas y un asesor te contactará para una experiencia personalizada.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Atención exclusiva</h3>
+        <p>Visítanos en nuestro atelier o escríbenos. Respondemos en menos de 24 horas con la atención que mereces.</p>
+        <div class="info-row">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
+          <div><div class="t">Teléfono / WhatsApp</div><div class="v">+57 320 000 0000</div></div>
+        </div>
+        <div class="info-row">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div>
+          <div><div class="t">Correo</div><div class="v">hola@alejandravergel.com</div></div>
+        </div>
+        <div class="info-row">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="t">Atelier</div><div class="v">Bogotá, Colombia</div></div>
+        </div>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5Z"/></svg></a>
+        </div>
+      </div>
+
+      <form class="form-card reveal" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cName">Nombre completo</label>
+          <input type="text" id="cName" name="name" placeholder="Tu nombre">
+          <span class="err">Ingresa tu nombre.</span>
+        </div>
+        <div class="field">
+          <label for="cEmail">Correo electrónico</label>
+          <input type="email" id="cEmail" name="email" placeholder="tucorreo@ejemplo.com">
+          <span class="err">Ingresa un correo válido.</span>
+        </div>
+        <div class="field">
+          <label for="cPhone">Teléfono</label>
+          <input type="tel" id="cPhone" name="phone" placeholder="+57 300 000 0000">
+          <span class="err">Ingresa un teléfono válido (mín. 7 dígitos).</span>
+        </div>
+        <div class="field">
+          <label for="cMsg">Mensaje</label>
+          <textarea id="cMsg" name="message" placeholder="¿Qué joya tienes en mente?"></textarea>
+          <span class="err">Escribe un breve mensaje.</span>
+        </div>
+        <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center">Enviar por WhatsApp</button>
+        <p class="form-note">Al enviar abriremos WhatsApp con tu mensaje listo. También guardamos tus datos localmente.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============== NEWSLETTER ============== -->
+<section class="news">
+  <div class="container reveal">
+    <span class="eyebrow" style="color:#fff;opacity:.85">Club Alejandra Vergel</span>
+    <h2>Sé la primera en saberlo</h2>
+    <p>Lanzamientos privados, ediciones limitadas y un 10% en tu primera compra al suscribirte.</p>
+    <form class="news-form" id="newsForm" novalidate>
+      <input type="email" id="newsEmail" placeholder="Tu correo electrónico">
+      <button type="submit" class="btn btn-dark">Suscribirme</button>
+    </form>
+    <div class="news-msg" id="newsMsg"></div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand"><span class="name" style="font-size:1.7rem;font-family:var(--serif)">Alejandra Vergel</span><span class="tag" style="font-size:.56rem;letter-spacing:.42em;text-transform:uppercase">Alta Joyería</span></div>
+        <p style="margin-top:18px;max-width:300px;font-weight:300;font-size:.9rem">Joyas hechas a mano en oro de 18k y diamantes certificados. Lujo atemporal desde Colombia para el mundo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explora</h4>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#inicio">Inicio</a>
+      </div>
+      <div class="footer-col">
+        <h4>Atención</h4>
+        <a href="#">Envíos y garantía</a>
+        <a href="#">Guía de tallas</a>
+        <a href="#">Cuidado de joyas</a>
+        <a href="#">Preguntas frecuentes</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Alejandra Vergel · Alta Joyería. Todos los derechos reservados.</span>
+      <span>Hecho con dedicación en Colombia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============== CARRITO DRAWER ============== -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Carrito de compras">
+  <div class="drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="drawer-close" id="closeCart" aria-label="Cerrar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot" style="display:none">
+    <div class="cart-total"><span class="lbl">Total</span><span class="val" id="cartTotal">$ 0</span></div>
+    <button class="btn btn-dark" id="checkoutBtn">Finalizar por WhatsApp</button>
+  </div>
+</aside>
+
+<!-- ============== MODAL PRODUCTO ============== -->
+<div class="modal" id="modal">
+  <div class="modal-bg" id="modalBg"></div>
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<!-- ============== TOAST ============== -->
+<div class="toast" id="toast"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Agregado al carrito</span></div>
+
+<script src="products.js"></script>
+<script>
+/* ============================================================
+   CONFIGURACIÓN — personaliza aquí
+   ============================================================ */
+const CONFIG = {
+  whatsapp: "573200000000",                 // número sin + ni espacios
+  email: "hola@alejandravergel.com",
+  brand: "Alejandra Vergel"
+};
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $ = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => [...c.querySelectorAll(s)];
+const money = n => "$ " + n.toLocaleString("es-CO");
+
+const CATS = {
+  anillos:  {label:"Anillos"},
+  collares: {label:"Collares"},
+  aretes:   {label:"Aretes"},
+  pulseras: {label:"Pulseras"}
+};
+
+/* ---- Ilustración SVG de joya (placeholder, reemplazable por foto) ---- */
+const METALS = {
+  gold:    ["#E7D3A1","#C9A24B"],
+  silver:  ["#EDEFF1","#B9C0C7"],
+  rose:    ["#F3D9CE","#D89A86"],
+  platinum:["#F1F3F4","#C8CCD2"]
+};
+function jewelSVG(p){
+  const [m1,m2] = METALS[p.metal] || METALS.gold;
+  const gem = p.gem || "#0ABAB5";
+  const uid = "g"+p.id.replace(/[^a-z0-9]/gi,"");
+  const defs = `<defs>
+    <linearGradient id="${uid}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${m1}"/><stop offset="1" stop-color="${m2}"/></linearGradient>
+    <radialGradient id="${uid}g" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="35%" stop-color="${gem}"/><stop offset="100%" stop-color="${gem}"/></radialGradient>
+  </defs>`;
+  let body = "";
+  if(p.cat==="anillos"){
+    body = `<path d="M30 70 a30 30 0 1 0 60 0 a30 30 0 1 0 -60 0" fill="none" stroke="url(#${uid}m)" stroke-width="7"/>
+      <path d="M52 44 l8 -12 l8 12 l-8 9 z" fill="url(#${uid}g)" stroke="${m2}" stroke-width="1"/>
+      <path d="M52 44 h16 M60 32 v21" stroke="#fff" stroke-width=".7" opacity=".6"/>`;
+  } else if(p.cat==="collares"){
+    body = `<path d="M22 30 q38 46 76 0" fill="none" stroke="url(#${uid}m)" stroke-width="3.5"/>
+      <circle cx="60" cy="78" r="13" fill="url(#${uid}g)" stroke="${m2}" stroke-width="1.5"/>
+      <path d="M60 62 v-8" stroke="url(#${uid}m)" stroke-width="3"/>
+      <circle cx="60" cy="78" r="5" fill="#fff" opacity=".35"/>`;
+  } else if(p.cat==="aretes"){
+    body = `<g>
+      <circle cx="42" cy="40" r="6" fill="none" stroke="url(#${uid}m)" stroke-width="3"/>
+      <path d="M42 46 v10" stroke="url(#${uid}m)" stroke-width="3"/>
+      <path d="M42 56 l9 13 l-9 13 l-9 -13 z" fill="url(#${uid}g)" stroke="${m2}" stroke-width="1"/>
+      <circle cx="78" cy="40" r="6" fill="none" stroke="url(#${uid}m)" stroke-width="3"/>
+      <path d="M78 46 v10" stroke="url(#${uid}m)" stroke-width="3"/>
+      <path d="M78 56 l9 13 l-9 13 l-9 -13 z" fill="url(#${uid}g)" stroke="${m2}" stroke-width="1"/>
+    </g>`;
+  } else { // pulseras
+    body = `<ellipse cx="60" cy="60" rx="38" ry="26" fill="none" stroke="url(#${uid}m)" stroke-width="8"/>
+      <ellipse cx="60" cy="60" rx="38" ry="26" fill="none" stroke="#fff" stroke-width="1.5" opacity=".4"/>
+      <circle cx="60" cy="34" r="8" fill="url(#${uid}g)" stroke="${m2}" stroke-width="1"/>`;
+  }
+  return `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">${defs}${body}</svg>`;
+}
+function productMedia(p){
+  if(p.images && p.images.length){
+    return `<img src="${p.images[0]}" alt="${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`;
+  }
+  return jewelSVG(p);
+}
+
+/* ============================================================
+   ESTADO DE FILTROS + RENDER GRID
+   ============================================================ */
+let state = { cat:"todos", q:"", sort:"featured", price:"all" };
+
+function buildFilters(){
+  const wrap = $("#catFilters");
+  const cats = ["todos", ...Object.keys(CATS)];
+  wrap.innerHTML = cats.map(c => {
+    const label = c==="todos" ? "Todo" : CATS[c].label;
+    return `<button class="chip ${c===state.cat?"active":""}" data-cat="${c}">${label}</button>`;
+  }).join("");
+  $$(".chip", wrap).forEach(b => b.addEventListener("click", () => {
+    state.cat = b.dataset.cat;
+    $$(".chip", wrap).forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    renderGrid();
+  }));
+}
+
+function applyFilters(){
+  let list = PRODUCTS.slice();
+  if(state.cat!=="todos") list = list.filter(p=>p.cat===state.cat);
+  if(state.q){
+    const q = state.q.toLowerCase();
+    list = list.filter(p=> p.name.toLowerCase().includes(q) || p.materials.toLowerCase().includes(q));
+  }
+  if(state.price!=="all"){
+    const [lo,hi] = state.price.split("-").map(Number);
+    list = list.filter(p=> p.price>=lo && p.price<=hi);
+  }
+  if(state.sort==="price-asc") list.sort((a,b)=>a.price-b.price);
+  else if(state.sort==="price-desc") list.sort((a,b)=>b.price-a.price);
+  else if(state.sort==="name") list.sort((a,b)=>a.name.localeCompare(b.name));
+  return list;
+}
+
+function renderGrid(){
+  const grid = $("#grid");
+  const list = applyFilters();
+  if(!list.length){
+    grid.innerHTML = `<div class="empty-state"><p>No encontramos joyas con esos filtros.</p></div>`;
+    return;
+  }
+  grid.innerHTML = list.map(p => `
+    <article class="card" data-id="${p.id}">
+      <div class="card-media">
+        <span class="card-cat">${CATS[p.cat].label}</span>
+        ${productMedia(p)}
+        <div class="card-quick">Ver detalle</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">${p.name}</h3>
+        <p class="card-mat">${p.materials}</p>
+        <div class="card-foot">
+          <span class="card-price">${money(p.price)}</span>
+          <button class="add-mini" data-add="${p.id}" aria-label="Agregar al carrito">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+      </div>
+    </article>`).join("");
+
+  $$(".card", grid).forEach(card => {
+    card.addEventListener("click", e => {
+      if(e.target.closest("[data-add]")) return;
+      openModal(card.dataset.id);
+    });
+  });
+  $$("[data-add]", grid).forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const p = PRODUCTS.find(x=>x.id===btn.dataset.add);
+      addToCart(p, p.colors[0], 1);
+    });
+  });
+  observeReveals();
+}
+
+/* ============================================================
+   CARRITO  (localStorage: av_cart)
+   ============================================================ */
+const CART_KEY = "av_cart";
+const getCart = () => { try{ return JSON.parse(localStorage.getItem(CART_KEY)) || []; }catch{ return []; } };
+const saveCart = c => { localStorage.setItem(CART_KEY, JSON.stringify(c)); renderCart(); updateCount(); };
+
+function addToCart(p, color, qty){
+  const key = `${p.id}__${color}`;
+  const cart = getCart();
+  const ex = cart.find(i=>i.key===key);
+  if(ex) ex.qty += qty;
+  else cart.push({ key, id:p.id, name:p.name, color, qty, price:p.price, cat:p.cat, metal:p.metal, gem:p.gem });
+  saveCart(cart);
+  showToast(`${p.name} · agregado`);
+}
+function updateQty(key, delta){
+  const cart = getCart();
+  const it = cart.find(i=>i.key===key);
+  if(!it) return;
+  it.qty += delta;
+  if(it.qty<=0) return removeItem(key);
+  saveCart(cart);
+}
+function removeItem(key){ saveCart(getCart().filter(i=>i.key!==key)); }
+
+function cartTotal(){ return getCart().reduce((s,i)=>s + i.price*i.qty, 0); }
+function cartQty(){ return getCart().reduce((s,i)=>s + i.qty, 0); }
+
+function updateCount(){
+  const n = cartQty();
+  const el = $("#cartCount");
+  el.textContent = n;
+  el.classList.toggle("show", n>0);
+}
+
+function renderCart(){
+  const body = $("#cartBody");
+  const foot = $("#cartFoot");
+  const cart = getCart();
+  if(!cart.length){
+    body.innerHTML = `<div class="cart-empty">
+      <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>Tu carrito está vacío.</p><p style="font-size:.82rem">Descubre nuestras piezas en el catálogo.</p>
+    </div>`;
+    foot.style.display = "none";
+    return;
+  }
+  body.innerHTML = cart.map(i => {
+    const p = {cat:i.cat, metal:i.metal, gem:i.gem, id:i.id};
+    return `<div class="cart-item">
+      <div class="thumb">${jewelSVG(p)}</div>
+      <div class="info">
+        <div class="nm">${i.name}</div>
+        <div class="vr">${i.color}</div>
+        <div class="pr">${money(i.price)}</div>
+        <div class="qty">
+          <button data-dec="${i.key}" aria-label="Restar">−</button>
+          <span>${i.qty}</span>
+          <button data-inc="${i.key}" aria-label="Sumar">+</button>
+        </div>
+      </div>
+      <button class="rm" data-rm="${i.key}">Quitar</button>
+    </div>`;
+  }).join("");
+  $("#cartTotal").textContent = money(cartTotal());
+  foot.style.display = "block";
+
+  $$("[data-inc]",body).forEach(b=>b.onclick=()=>updateQty(b.dataset.inc,1));
+  $$("[data-dec]",body).forEach(b=>b.onclick=()=>updateQty(b.dataset.dec,-1));
+  $$("[data-rm]",body).forEach(b=>b.onclick=()=>removeItem(b.dataset.rm));
+}
+
+/* ---- abrir/cerrar drawer ---- */
+function openDrawer(){ $("#overlay").classList.add("open"); $("#drawer").classList.add("open"); document.body.style.overflow="hidden"; }
+function closeDrawer(){ $("#overlay").classList.remove("open"); $("#drawer").classList.remove("open"); document.body.style.overflow=""; }
+
+/* ---- checkout por WhatsApp ---- */
+function checkout(){
+  const cart = getCart();
+  if(!cart.length) return;
+  let msg = `¡Hola ${CONFIG.brand}! Quiero realizar este pedido:%0A%0A`;
+  cart.forEach(i=>{ msg += `• ${i.qty}× ${i.name} (${i.color}) — ${money(i.price*i.qty)}%0A`; });
+  msg += `%0ATotal: ${money(cartTotal())}%0A%0A¿Me confirman disponibilidad y forma de pago?`;
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${msg}`, "_blank");
+}
+
+/* ============================================================
+   MODAL DE PRODUCTO
+   ============================================================ */
+let modalState = { id:null, color:null, qty:1 };
+function openModal(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  modalState = { id, color:p.colors[0], qty:1 };
+  renderModal();
+  $("#modal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function renderModal(){
+  const p = PRODUCTS.find(x=>x.id===modalState.id);
+  $("#modalCard").innerHTML = `
+    <button class="modal-close" id="modalClose" aria-label="Cerrar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="modal-media">${productMedia(p)}</div>
+    <div class="modal-info">
+      <span class="cat">${CATS[p.cat].label}</span>
+      <h3>${p.name}</h3>
+      <div class="mat">${p.materials}</div>
+      <p class="desc">${p.desc}</p>
+      <div class="price">${money(p.price)}</div>
+      <div class="opt-label">Acabado</div>
+      <div class="opts">
+        ${p.colors.map(c=>`<button class="opt ${c===modalState.color?"active":""}" data-color="${c}">${c}</button>`).join("")}
+      </div>
+      <div class="modal-actions">
+        <div class="modal-qty">
+          <button id="mDec" aria-label="Restar">−</button>
+          <span id="mQty">${modalState.qty}</span>
+          <button id="mInc" aria-label="Sumar">+</button>
+        </div>
+        <button class="btn btn-dark" id="mAdd">Agregar al carrito</button>
+      </div>
+    </div>`;
+  $("#modalClose").onclick = closeModal;
+  $$("[data-color]").forEach(b=>b.onclick=()=>{ modalState.color=b.dataset.color; renderModal(); });
+  $("#mDec").onclick=()=>{ modalState.qty=Math.max(1,modalState.qty-1); $("#mQty").textContent=modalState.qty; };
+  $("#mInc").onclick=()=>{ modalState.qty++; $("#mQty").textContent=modalState.qty; };
+  $("#mAdd").onclick=()=>{ addToCart(p, modalState.color, modalState.qty); closeModal(); openDrawer(); };
+}
+function closeModal(){ $("#modal").classList.remove("open"); document.body.style.overflow=""; }
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+let toastTimer;
+function showToast(msg){
+  $("#toastMsg").textContent = msg;
+  const t = $("#toast"); t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+/* ============================================================
+   VALIDACIÓN DE FORMULARIOS
+   ============================================================ */
+const reEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const rePhone = /^[\d\s+()\-]{7,}$/;
+
+function setInvalid(field, bad){ field.classList.toggle("invalid", bad); return !bad; }
+
+function handleContact(e){
+  e.preventDefault();
+  const f = e.target;
+  const name=$("#cName"), email=$("#cEmail"), phone=$("#cPhone"), msg=$("#cMsg");
+  let ok = true;
+  ok = setInvalid(name.closest(".field"),  name.value.trim().length<2) && ok;
+  ok = setInvalid(email.closest(".field"), !reEmail.test(email.value.trim())) && ok;
+  ok = setInvalid(phone.closest(".field"), !rePhone.test(phone.value.trim())) && ok;
+  ok = setInvalid(msg.closest(".field"),   msg.value.trim().length<5) && ok;
+  if(!ok) return;
+
+  // guardar lead localmente
+  const leads = JSON.parse(localStorage.getItem("av_leads")||"[]");
+  leads.push({ name:name.value, email:email.value, phone:phone.value, message:msg.value, date:new Date().toISOString() });
+  localStorage.setItem("av_leads", JSON.stringify(leads));
+
+  // abrir WhatsApp con el mensaje
+  const text = `¡Hola ${CONFIG.brand}!%0A%0ANombre: ${encodeURIComponent(name.value)}%0ACorreo: ${encodeURIComponent(email.value)}%0ATeléfono: ${encodeURIComponent(phone.value)}%0A%0A${encodeURIComponent(msg.value)}`;
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${text}`, "_blank");
+  showToast("¡Gracias! Te contactaremos pronto.");
+  f.reset();
+}
+
+function handleNews(e){
+  e.preventDefault();
+  const input = $("#newsEmail"), out = $("#newsMsg");
+  if(!reEmail.test(input.value.trim())){
+    out.style.color = "#7E0E20";
+    out.textContent = "Ingresa un correo válido.";
+    return;
+  }
+  const subs = JSON.parse(localStorage.getItem("av_news")||"[]");
+  if(!subs.includes(input.value.trim())) subs.push(input.value.trim());
+  localStorage.setItem("av_news", JSON.stringify(subs));
+  out.style.color = "#14110F";
+  out.textContent = "✦ ¡Bienvenida al Club! Revisa tu correo para tu 10%.";
+  input.value = "";
+}
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+let io;
+function observeReveals(){
+  if(!io){
+    io = new IntersectionObserver(entries=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold:.12 });
+  }
+  $$(".reveal:not(.in)").forEach(el=>io.observe(el));
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", ()=>{
+  buildFilters();
+  renderGrid();
+  renderCart();
+  updateCount();
+  observeReveals();
+  $("#year").textContent = new Date().getFullYear();
+
+  // nav scroll
+  window.addEventListener("scroll", ()=> $("#nav").classList.toggle("scrolled", window.scrollY>60), {passive:true});
+
+  // burger
+  $("#burger").onclick = function(){ this.classList.toggle("open"); $("#navLinks").classList.toggle("open"); };
+  $$("#navLinks a").forEach(a=>a.onclick=()=>{ $("#burger").classList.remove("open"); $("#navLinks").classList.remove("open"); });
+
+  // carrito
+  $("#openCart").onclick = openDrawer;
+  $("#closeCart").onclick = closeDrawer;
+  $("#overlay").onclick = closeDrawer;
+  $("#checkoutBtn").onclick = checkout;
+
+  // modal
+  $("#modalBg").onclick = closeModal;
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeModal(); closeDrawer(); } });
+
+  // filtros
+  $("#search").addEventListener("input", e=>{ state.q=e.target.value; renderGrid(); });
+  $("#sortBy").addEventListener("change", e=>{ state.sort=e.target.value; renderGrid(); });
+  $("#priceRange").addEventListener("change", e=>{ state.price=e.target.value; renderGrid(); });
+
+  // formularios
+  $("#contactForm").addEventListener("submit", handleContact);
+  $("#newsForm").addEventListener("submit", handleNews);
+});
+</script>
+</body>
+</html>
