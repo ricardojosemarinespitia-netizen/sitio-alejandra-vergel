@@ -162,6 +162,11 @@ section{padding:60px 0}
         <div class="form-group">
           <label for="couponCode">Código de descuento (opcional)</label>
           <input type="text" id="couponCode" name="couponCode" placeholder="AV15-XXXXXXX">
+          <small style="display:block;margin-top:6px;color:var(--ink-soft)">Ej: Ingresa tu código del Club de Alejandra para 15% descuento</small>
+        </div>
+
+        <div id="discountInfo" style="display:none;background:rgba(10,186,181,.1);padding:12px;border-radius:4px;margin-bottom:16px;font-size:.9rem;color:var(--tiffany);font-weight:600;text-align:center;">
+          ✓ Descuento <span id="discountAmount">15%</span> aplicado
         </div>
 
         <button type="submit" class="btn-submit">Ir a pagar con Wompi</button>
@@ -187,6 +192,7 @@ section{padding:60px 0}
 
 <script src="products.js"></script>
 <script src="store.js"></script>
+<script src="club.js"></script>
 <script src="checkout.js"></script>
 
 <script>

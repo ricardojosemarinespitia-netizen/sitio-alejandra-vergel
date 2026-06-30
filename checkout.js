@@ -22,6 +22,26 @@ function initCheckout() {
     e.preventDefault();
     await submitCheckout();
   };
+
+  // Validar código de descuento en tiempo real
+  const couponInput = $("#couponCode");
+  if (couponInput) {
+    couponInput.addEventListener("blur", async () => {
+      const code = couponInput.value?.trim();
+      if (code) {
+        const result = await validateCoupon(code);
+        if (result.valid) {
+          $("#discountInfo").style.display = "block";
+          $("#discountAmount").textContent = result.discount + "%";
+          showToast("✓ Código válido: " + result.discount + "% descuento");
+        } else {
+          $("#discountInfo").style.display = "none";
+          showToast("✗ " + (result.error || "Código no válido"));
+          couponInput.value = "";
+        }
+      }
+    });
+  }
 }
 
 async function submitCheckout() {
@@ -52,7 +72,16 @@ async function submitCheckout() {
     return;
   }
 
-  checkoutState = { email, name, phone, couponCode, total: cartTotal() };
+  // Obtener descuento del Club (si existe código válido)
+  const discount = getClubDiscount();
+  const totalWithDiscount = checkoutState.total - (checkoutState.total * discount / 100);
+
+  checkoutState = { email, name, phone, couponCode, total: checkoutState.total, discount: discount, finalTotal: totalWithDiscount };
+
+  // Guardar en sessionStorage para checkout-success.html
+  sessionStorage.setItem("av_email", email);
+  sessionStorage.setItem("av_total", money(totalWithDiscount));
+  sessionStorage.setItem("av_discount", discount);
 
   // Llamar a Netlify para generar transacción
   try {
@@ -63,9 +92,10 @@ async function submitCheckout() {
         email: checkoutState.email,
         name: checkoutState.name,
         phone: checkoutState.phone,
-        total: checkoutState.total,
+        total: checkoutState.finalTotal,
         items: cart,
-        couponCode: checkoutState.couponCode
+        couponCode: checkoutState.couponCode,
+        discount: discount
       })
     });
 
