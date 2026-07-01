@@ -9,7 +9,7 @@
    · Si algún día mueves TODO el sitio a Netlify, déjalo vacío ("").
    Mientras esté vacío o el backend no responda, el checkout usa WhatsApp como
    respaldo para que ningún pedido se pierda. */
-const FUNCTIONS_BASE = ""; // <-- PON AQUÍ TU URL DE NETLIFY
+const FUNCTIONS_BASE = "https://radiant-lamington-bd56f7.netlify.app"; // Wompi integration
 const WOMPI_API = (FUNCTIONS_BASE || '') + '/.netlify/functions/wompi-pay';
 const WOMPI_CHECKOUT_URL = 'https://checkout.wompi.co/p/';
 const WA_NUMBER = (typeof CONFIG !== 'undefined' && CONFIG.whatsapp) ? CONFIG.whatsapp : '573228505472';
