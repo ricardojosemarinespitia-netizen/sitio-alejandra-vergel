@@ -149,7 +149,7 @@ function renderCart(){
   body.innerHTML = cart.map(i => {
     const p = {cat:i.cat, metal:i.metal, gem:i.gem, id:i.id};
     return `<div class="cart-item">
-      <div class="thumb">${jewelSVG(p)}</div>
+      <div class="thumb">${i.images && i.images.length ? `<img src="${i.images[0]}" alt="${i.name}" style="width:100%;height:100%;object-fit:contain;padding:4px">` : jewelSVG(p)}</div>
       <div class="info">
         <div class="nm">${i.name}</div>
         <div class="vr">${i.color}</div>
