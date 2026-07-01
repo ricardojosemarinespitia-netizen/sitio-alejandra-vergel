@@ -136,8 +136,15 @@ async function submitCheckout() {
     // Guardar referencia en sessionStorage (para recuperar después de pago)
     sessionStorage.setItem('av_reference', result.reference);
 
-    // Redirigir a Wompi Checkout
-    window.location.href = `${WOMPI_CHECKOUT_URL}${result.reference}/?redirectUrl=${encodeURIComponent(result.redirectUrl)}`;
+    // Redirigir a Wompi Checkout con parámetros requeridos
+    const params = new URLSearchParams({
+      'public-key': result.publicKey,
+      'currency': result.currency,
+      'amount-in-cents': result.amountInCents,
+      'reference': result.reference,
+      'redirectUrl': result.redirectUrl
+    });
+    window.location.href = `${WOMPI_CHECKOUT_URL}?${params.toString()}`;
 
   } catch (error) {
     console.error('[Checkout Error]', error);
