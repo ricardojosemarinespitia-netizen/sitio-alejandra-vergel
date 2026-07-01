@@ -254,17 +254,40 @@ section{padding:96px 0}
    CATÁLOGO — filtros + grid
    ============================================================ */
 .catalogo{background:var(--white)}
-.filters{
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;
-  margin-bottom:14px;
+/* Navegación de catálogo · dos niveles, estilo alta joyería */
+.cat-nav{margin-bottom:30px}
+.cat-types{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:40px;
+  padding-bottom:18px;border-bottom:1px solid var(--line);
 }
-.chip{
-  font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
-  padding:9px 20px;border:1px solid var(--line);border-radius:40px;
-  color:var(--ink-soft);transition:.3s;background:var(--white);
+.cat-type{
+  position:relative;background:none;border:none;cursor:pointer;
+  font-family:var(--serif);font-size:1.15rem;letter-spacing:.05em;
+  color:var(--ink-soft);transition:color .3s;padding:2px 0;
 }
-.chip:hover{border-color:var(--gold);color:var(--ink)}
-.chip.active{background:var(--noir);color:#fff;border-color:var(--noir)}
+.cat-type::after{
+  content:"";position:absolute;left:50%;bottom:-19px;width:0;height:2px;
+  background:var(--gold);transform:translateX(-50%);transition:width .38s cubic-bezier(.4,0,.2,1);
+}
+.cat-type:hover{color:var(--noir)}
+.cat-type.active{color:var(--noir)}
+.cat-type.active::after{width:100%}
+.cat-subs{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px;
+  margin-top:22px;min-height:18px;
+}
+.cat-sub{
+  position:relative;background:none;border:none;cursor:pointer;
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-soft);transition:color .3s;padding:2px 0;
+}
+.cat-sub::after{
+  content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;
+  background:var(--cartier);transition:width .3s;
+}
+.cat-sub:hover{color:var(--noir)}
+.cat-sub.active{color:var(--cartier)}
+.cat-sub.active::after{width:100%}
 .filters-row2{
   display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;
   margin-bottom:44px;color:var(--ink-soft);font-size:.8rem;
@@ -517,6 +540,14 @@ section{padding:96px 0}
 .toast.show{transform:translate(-50%,0)}
 .toast svg{color:var(--tiffany)}
 
+/* ---------- WhatsApp flotante ---------- */
+.wa-float{position:fixed;bottom:26px;right:26px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 4px 18px -4px rgba(37,211,102,.45),0 2px 6px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);text-decoration:none}
+.wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(37,211,102,.45);animation:wapulse 2.6s ease-in-out infinite;pointer-events:none}
+.wa-float:hover{transform:scale(1.08) translateY(-2px);background:#1fb655;box-shadow:0 8px 24px -4px rgba(37,211,102,.55),0 4px 10px rgba(0,0,0,.15)}
+.wa-float svg{width:30px;height:30px;position:relative;z-index:1}
+@keyframes wapulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+@media(max-width:640px){.wa-float{width:52px;height:52px;bottom:18px;right:18px}.wa-float svg{width:27px;height:27px}}
+
 /* ============================================================
    MODAL CLUB
    ============================================================ */
@@ -586,8 +617,11 @@ section{padding:96px 0}
   .grid{grid-template-columns:repeat(2,1fr);gap:16px}
   .footer-grid{grid-template-columns:1fr;gap:30px}
   .footer-bottom{justify-content:center;text-align:center}
-  .filters{gap:9px;margin-bottom:12px}
-  .chip{padding:9px 16px;font-size:.7rem}
+  .cat-types{gap:24px;padding-bottom:14px}
+  .cat-type{font-size:1rem}
+  .cat-type.active::after{bottom:-15px}
+  .cat-subs{gap:16px;margin-top:16px}
+  .cat-sub{font-size:.64rem;letter-spacing:.14em}
   .filters-row2{gap:10px;margin-bottom:32px}
   .search-box input{width:100%}
   .search-box{flex:1;min-width:160px}
@@ -638,6 +672,7 @@ section{padding:96px 0}
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="nav-actions">
+      <button class="icon-btn" id="navProfile" aria-label="Únete al Club"></button>
       <button class="icon-btn cart-btn" id="openCart" aria-label="Abrir carrito">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
         <span class="cart-count" id="cartCount">0</span>
@@ -685,17 +720,20 @@ section{padding:96px 0}
 <section class="catalogo" id="catalogo">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="eyebrow">La colección de anillos</span>
-      <h2>Anillos hechos a mano</h2>
-      <p>Filigrana colombiana y piedras naturales. Cada anillo se elabora bajo pedido y es personalizable en piedra y acabado. Encuentra el tuyo.</p>
+      <span class="eyebrow">La colección</span>
+      <h2>Joyas hechas a mano</h2>
+      <p>Anillos y aretes en filigrana colombiana y piedras naturales. Cada pieza se elabora bajo pedido y es personalizable en piedra y acabado. Encuentra la tuya.</p>
     </div>
 
-    <div class="filters reveal" id="catFilters"></div>
+    <div class="cat-nav reveal">
+      <div class="cat-types" id="catTypes"></div>
+      <div class="cat-subs" id="catSubs"></div>
+    </div>
 
     <div class="filters-row2 reveal">
       <div class="search-box">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" id="search" placeholder="Buscar anillo...">
+        <input type="text" id="search" placeholder="Buscar anillo o arete...">
       </div>
       <div class="select-wrap">
         <select id="sortBy">
@@ -752,7 +790,7 @@ section{padding:96px 0}
     <div class="contact-grid">
       <div class="contact-info reveal">
         <h3>Atención exclusiva</h3>
-        <p>Visítanos en nuestro atelier o escríbenos. Respondemos en menos de 24 horas con la atención que mereces.</p>
+        <p>Escríbenos por WhatsApp o correo. Respondemos en menos de 24 horas con la atención que mereces. Todas nuestras piezas se elaboran bajo pedido y se envían a todo el país.</p>
         <div class="info-row">
           <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
           <div><div class="t">Teléfono / WhatsApp</div><div class="v">+57 320 000 0000</div></div>
@@ -762,8 +800,8 @@ section{padding:96px 0}
           <div><div class="t">Correo</div><div class="v">hola@alejandravergel.com</div></div>
         </div>
         <div class="info-row">
-          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><div class="t">Atelier</div><div class="v">Bogotá, Colombia</div></div>
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+          <div><div class="t">Envíos</div><div class="v">A toda Colombia</div></div>
         </div>
         <div class="socials">
           <a href="https://www.instagram.com/alejandravergel.co" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -851,6 +889,38 @@ section{padding:96px 0}
   </div>
 </footer>
 
+<!-- ============== POPUP CLUB ============== -->
+<div class="modal-club" id="clubOverlay">
+  <div class="modal-club-bg" id="clubOverlayBg"></div>
+  <div class="modal-club-card">
+    <button class="modal-club-close" id="clubClose" aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <span class="eyebrow" style="color:var(--gold)">Club Alejandra Vergel</span>
+    <h2>Un 15% en tu primera joya</h2>
+    <p class="subtitle">Regístrate y recibe tu código de descuento, además de acceso anticipado a lanzamientos y ediciones limitadas.</p>
+    <form id="clubForm" novalidate>
+      <div class="form-group">
+        <label for="clubName">Nombre</label>
+        <input type="text" id="clubName" placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label for="clubEmail">Correo electrónico</label>
+        <input type="email" id="clubEmail" placeholder="tucorreo@ejemplo.com">
+      </div>
+      <button type="submit" class="modal-club-btn" id="clubSubmit">Unirme al Club</button>
+    </form>
+    <div class="news-divider" style="margin:18px 0"><span>o</span></div>
+    <div id="googleSignInBtnModal" class="google-signin-wrap" style="display:flex;justify-content:center"></div>
+    <div class="news-msg" id="clubMsg" style="color:var(--ink-soft);margin-top:14px;min-height:20px;font-size:.88rem"></div>
+  </div>
+</div>
+
+<!-- ============== WHATSAPP FLOTANTE ============== -->
+<a href="https://wa.me/573200000000?text=%C2%A1Hola%20Alejandra%20Vergel!%20Me%20interesa%20una%20joya." target="_blank" rel="noopener" class="wa-float" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.7 11.7 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.4M12 22c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.9 9.9 0 0 1 2 12c0-5.5 4.5-10 10-10 5.5 0 10 4.5 10 10 0 5.5-4.5 10-10 10m5.5-7.5c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4"/></svg>
+</a>
+
 <!-- ============== CARRITO DRAWER ============== -->
 <div class="overlay" id="overlay"></div>
 <aside class="drawer" id="drawer" aria-label="Carrito de compras">
@@ -861,7 +931,7 @@ section{padding:96px 0}
   <div class="drawer-body" id="cartBody"></div>
   <div class="drawer-foot" id="cartFoot" style="display:none">
     <div class="cart-total"><span class="lbl">Total</span><span class="val" id="cartTotal">$ 0</span></div>
-    <button class="btn btn-dark" id="checkoutBtn">Finalizar por WhatsApp</button>
+    <button class="btn btn-dark" id="checkoutBtn">Finalizar compra</button>
   </div>
 </aside>
 
@@ -871,6 +941,7 @@ section{padding:96px 0}
 <script src="products.js"></script>
 <script src="store.js"></script>
 <script src="club.js"></script>
+<script src="perfil.js"></script>
 <script>
 /* ============================================================
    CONFIGURACIÓN, helpers, CATS, jewelSVG y carrito viven en
@@ -880,18 +951,33 @@ section{padding:96px 0}
 /* ============================================================
    ESTADO DE FILTROS + RENDER GRID
    ============================================================ */
-let state = { cat:"todos", q:"", sort:"featured", price:"all" };
+let state = { tipo:"todos", sub:"todos", q:"", sort:"featured", price:"all" };
 
 function buildFilters(){
-  const wrap = $("#catFilters");
-  const cats = ["todos", ...Object.keys(CATS)];
-  wrap.innerHTML = cats.map(c => {
-    const label = c==="todos" ? "Todo" : CATS[c].label;
-    return `<button class="chip ${c===state.cat?"active":""}" data-cat="${c}">${label}</button>`;
-  }).join("");
-  $$(".chip", wrap).forEach(b => b.addEventListener("click", () => {
-    state.cat = b.dataset.cat;
-    $$(".chip", wrap).forEach(x=>x.classList.remove("active"));
+  const typesWrap = $("#catTypes");
+  typesWrap.innerHTML = TYPES.map(t =>
+    `<button class="cat-type ${t.key===state.tipo?"active":""}" data-tipo="${t.key}">${t.label}</button>`
+  ).join("");
+  $$(".cat-type", typesWrap).forEach(b => b.addEventListener("click", () => {
+    if(state.tipo === b.dataset.tipo) return;
+    state.tipo = b.dataset.tipo;
+    state.sub = "todos";
+    buildFilters();
+    renderGrid();
+  }));
+  buildSubs();
+}
+
+function buildSubs(){
+  const wrap = $("#catSubs");
+  const t = TYPES.find(x => x.key === state.tipo);
+  if(!t || !t.subs.length){ wrap.innerHTML = ""; return; }
+  wrap.innerHTML = t.subs.map(s =>
+    `<button class="cat-sub ${s.key===state.sub?"active":""}" data-sub="${s.key}">${s.label}</button>`
+  ).join("");
+  $$(".cat-sub", wrap).forEach(b => b.addEventListener("click", () => {
+    state.sub = b.dataset.sub;
+    $$(".cat-sub", wrap).forEach(x=>x.classList.remove("active"));
     b.classList.add("active");
     renderGrid();
   }));
@@ -899,7 +985,9 @@ function buildFilters(){
 
 function applyFilters(){
   let list = PRODUCTS.slice();
-  if(state.cat!=="todos") list = list.filter(p=>p.cat===state.cat);
+  if(state.tipo==="anillos") list = list.filter(p=>RING_CATS.includes(p.cat));
+  else if(state.tipo==="aretes") list = list.filter(p=>EARRING_CATS.includes(p.cat));
+  if(state.sub && state.sub!=="todos") list = list.filter(p=>p.cat===state.sub);
   if(state.q){
     const q = state.q.toLowerCase();
     list = list.filter(p=> p.name.toLowerCase().includes(q) || p.materials.toLowerCase().includes(q));
@@ -1012,6 +1100,10 @@ async function handleNews(e){
   btn.disabled = false;
   btn.textContent = "Unirme al Club";
 
+  if(window.AVPerfil){
+    AVPerfil.save({ nombre:name, email, metodoLogin:"email", codigoDescuento:getClubCode() });
+  }
+
   if(ok){
     out.style.color = "#14110F";
     out.textContent = `✦ ¡Bienvenida al Club! Tu código de 15% descuento: ${getClubCode()}`;
@@ -1056,17 +1148,18 @@ function initGoogleSignIn(retries){
     auto_select: false
   });
 
-  const target = document.getElementById("googleSignInBtn");
-  if (target) {
-    google.accounts.id.renderButton(target, {
-      type: "standard",
-      theme: "filled_black",
-      size: "large",
-      text: "continue_with",
-      shape: "pill",
-      logo_alignment: "left"
-    });
-  }
+  const btnOpts = {
+    type: "standard",
+    theme: "filled_black",
+    size: "large",
+    text: "continue_with",
+    shape: "pill",
+    logo_alignment: "left"
+  };
+  ["googleSignInBtn","googleSignInBtnModal"].forEach(id => {
+    const target = document.getElementById(id);
+    if (target) google.accounts.id.renderButton(target, btnOpts);
+  });
 }
 
 function decodeGoogleJwt(token){
@@ -1081,38 +1174,89 @@ function decodeGoogleJwt(token){
   return JSON.parse(json);
 }
 
+// escribe el mensaje en el newsletter (fondo oscuro) y en el popup (fondo claro)
+function setClubMessage(text){
+  const nm = $("#newsMsg"); if(nm){ nm.style.color = "#fff"; nm.textContent = text; }
+  const cm = $("#clubMsg"); if(cm){ cm.style.color = "var(--ink)"; cm.textContent = text; }
+}
+
 async function handleGoogleCredential(response){
-  const out = $("#newsMsg");
   try {
     const data = decodeGoogleJwt(response.credential);
     const name = data.name || data.given_name || "Suscriptora";
     const email = (data.email || "").trim().toLowerCase();
 
-    if (!email) {
-      out.style.color = "#fff";
-      out.textContent = "No se pudo obtener tu correo de Google.";
-      return;
-    }
+    if (!email) { setClubMessage("No se pudo obtener tu correo de Google."); return; }
 
-    out.style.color = "#fff";
-    out.textContent = "Conectando con Google...";
+    setClubMessage("Conectando con Google...");
 
     const ok = await registerClub(name, email);
 
-    if (ok) {
-      localStorage.setItem("av_club_picture", data.picture || "");
-      out.style.color = "#fff";
-      out.textContent = `✦ ¡Bienvenida al Club, ${name.split(" ")[0]}! Tu código: ${getClubCode()}`;
-    } else {
-      out.style.color = "#fff";
-      out.textContent = getClubCode()
-        ? `✦ Ya estás en el Club. Tu código: ${getClubCode()}`
-        : "Hubo un error registrándote con Google. Intenta de nuevo.";
+    localStorage.setItem("av_club_picture", data.picture || "");
+    if (window.AVPerfil) {
+      AVPerfil.save({ nombre:name, email, avatar:data.picture||"", metodoLogin:"google", codigoDescuento:getClubCode() });
     }
+
+    if (ok) {
+      setClubMessage(`✦ ¡Bienvenida al Club, ${name.split(" ")[0]}! Tu código: ${getClubCode()}`);
+    } else {
+      setClubMessage(getClubCode()
+        ? `✦ Ya estás en el Club. Tu código: ${getClubCode()}`
+        : "Hubo un error registrándote con Google. Intenta de nuevo.");
+    }
+    if (getClubCode()) setTimeout(closeClubPopup, 1800);
   } catch (err) {
     console.error("[Google Sign-In Error]", err);
-    out.style.color = "#fff";
-    out.textContent = "Error con Google Sign-In. Intenta de nuevo.";
+    setClubMessage("Error con Google Sign-In. Intenta de nuevo.");
+  }
+}
+
+/* ============================================================
+   POPUP CLUB · apertura automática + registro manual
+   ============================================================ */
+function openClubPopup(){
+  const co = $("#clubOverlay");
+  if(co) co.classList.add("open");
+}
+function closeClubPopup(){
+  const co = $("#clubOverlay");
+  if(co) co.classList.remove("open");
+}
+function maybeAutoOpenClub(){
+  try {
+    if(getClubCode()) return;                     // ya es miembro
+    if(sessionStorage.getItem("av_club_seen")) return;
+    setTimeout(()=>{
+      if(getClubCode()) return;
+      openClubPopup();
+      try{ sessionStorage.setItem("av_club_seen","1"); }catch(e){}
+    }, 8000);
+  } catch(e){}
+}
+async function handleClubModal(e){
+  e.preventDefault();
+  const nameI = $("#clubName"), emailI = $("#clubEmail"), btn = $("#clubSubmit");
+  const name = nameI.value.trim(), email = emailI.value.trim();
+  const cm = $("#clubMsg");
+  if(name.length<2){ cm.style.color="var(--cartier)"; cm.textContent="Ingresa tu nombre."; return; }
+  if(!reEmail.test(email)){ cm.style.color="var(--cartier)"; cm.textContent="Ingresa un correo válido."; return; }
+
+  btn.disabled = true; btn.textContent = "Uniéndote...";
+  const ok = await registerClub(name, email);
+  btn.disabled = false; btn.textContent = "Unirme al Club";
+
+  if(window.AVPerfil){
+    AVPerfil.save({ nombre:name, email, metodoLogin:"email", codigoDescuento:getClubCode() });
+  }
+
+  cm.style.color = "var(--ink)";
+  if(ok){
+    cm.textContent = `✦ ¡Bienvenida al Club! Tu código de 15%: ${getClubCode()}`;
+    setTimeout(closeClubPopup, 2200);
+  } else {
+    cm.textContent = getClubCode()
+      ? `✦ Ya estás en el Club. Tu código: ${getClubCode()}`
+      : "Hubo un error. Intenta de nuevo.";
   }
 }
 
@@ -1143,6 +1287,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
   // formularios
   $("#contactForm").addEventListener("submit", handleContact);
   $("#newsForm").addEventListener("submit", handleNews);
+
+  // popup Club (auto a los 8s para nuevas visitas)
+  const clubForm = $("#clubForm");
+  if(clubForm) clubForm.addEventListener("submit", handleClubModal);
+  const clubCloseBtn = $("#clubClose");
+  if(clubCloseBtn) clubCloseBtn.addEventListener("click", closeClubPopup);
+  const clubBg = $("#clubOverlayBg");
+  if(clubBg) clubBg.addEventListener("click", closeClubPopup);
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeClubPopup(); });
+  maybeAutoOpenClub();
 });
 </script>
 </body>

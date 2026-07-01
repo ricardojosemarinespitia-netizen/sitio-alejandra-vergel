@@ -289,6 +289,486 @@ const PRODUCTS = [
     desc:"Colección de anillos de diseño contemporáneo con piedras naturales en corte rectangular. Incluye una versión con aguamarina natural y otra con amatista natural, en montajes minimalistas que resaltan la belleza de cada piedra. Precio por anillo.",
     metal:"gold", gem:"#7FBFD4",
     images:["img/anillos/esencia-prisma-1.png","img/anillos/esencia-prisma-2.png"]
+  },
+
+  /* ============================================================
+     ARETES · STATEMENT (piezas de autor)
+     ============================================================ */
+  {
+    id:"ar-alia", sku:"ARE-ALIA", cat:"statement", name:"Aretes Alia",
+    price:390000, originalPrice:523000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Pieza de autor elaborada artesanalmente por maestros filigraneros colombianos. Tejidos a mano en delicados hilos de plata ley 925, destacan por la delicadeza y elegancia de la filigrana tradicional. Cada par se elabora bajo pedido, convirtiéndose en una joya única. Elaboración sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/alia-1.jpg"]
+  },
+  {
+    id:"ar-amara", sku:"ARE-AMARA", cat:"statement", name:"Aretes Amara",
+    price:390000, originalPrice:523000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya artesanal elaborada mediante la técnica tradicional de la filigrana colombiana. Cada pieza es tejida a mano en finos hilos de plata ley 925. Su diseño refleja la belleza del trabajo artesanal y el valor de una tradición transmitida de generación en generación. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/amara-1.jpg"]
+  },
+  {
+    id:"ar-elba", sku:"ARE-ELBA", cat:"statement", name:"Aretes Elba",
+    price:160000, originalPrice:214000,
+    materials:"Plata ley 925 · Flores tejidas en filigrana",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Delicadas flores tejidas completamente a mano mediante la técnica de la filigrana colombiana. Su diseño resalta la delicadeza del tejido artesanal y la elegancia de las formas naturales. Cada pieza se elabora con dedicación por maestros artesanos. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/elba-1.jpg"]
+  },
+  {
+    id:"ar-iris", sku:"ARE-IRIS", cat:"statement", name:"Aretes Iris",
+    price:170000, originalPrice:228000,
+    materials:"Plata ley 925 · Diseño floral en filigrana",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Presentan un delicado diseño floral tejido completamente a mano en filigrana colombiana. Una joya femenina y elegante que resalta el detalle y la tradición artesanal. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/aretes/iris-1.jpg"]
+  },
+  {
+    id:"ar-jazmin", sku:"ARE-JAZMIN", cat:"statement", name:"Aretes Jazmín",
+    price:230000, originalPrice:308000,
+    materials:"Plata ley 925 · Cuarzo ahumado natural",
+    gemName:"Cuarzo ahumado", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combinan la delicadeza de la filigrana colombiana con la elegancia del cuarzo ahumado natural. Su diseño resalta la armonía entre el tejido artesanal y la belleza de las piedras naturales. Personalizable con distintas piedras. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#8B6F5C",
+    images:["img/aretes/jazmin-1.jpg"]
+  },
+  {
+    id:"ar-loto", sku:"ARE-LOTO", cat:"statement", name:"Aretes Loto",
+    price:195000, originalPrice:261000,
+    materials:"Plata ley 925 · Moissanita central",
+    gemName:"Moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Inspirados en la delicadeza de una hoja y elaborados completamente a mano en filigrana colombiana. En el centro destaca una moissanita, que aporta un brillo excepcional y un toque contemporáneo. Personalizable con la piedra de tu elección. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#FFFFFF",
+    images:["img/aretes/loto-1.jpg","img/aretes/loto-2.jpg"]
+  },
+  {
+    id:"ar-mosaico", sku:"ARE-MOSAICO", cat:"statement", name:"Aretes Mosaico",
+    price:450000, originalPrice:603000,
+    materials:"Plata ley 925 · Cuarzo ahumado natural",
+    gemName:"Cuarzo ahumado", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegante diseño cuadrado tejido en filigrana colombiana. Su piedra central es un cuarzo ahumado natural que aporta profundidad, sofisticación y un brillo sutil. La piedra puede personalizarse según la preferencia. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#8B6F5C",
+    images:["img/aretes/mosaico-1.jpg","img/aretes/mosaico-2.jpg"]
+  },
+  {
+    id:"ar-naia", sku:"ARE-NAIA", cat:"statement", name:"Aretes Naia",
+    price:240000, originalPrice:322000,
+    materials:"Plata ley 925 · Filigrana ovalada",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Destacan por su elegante diseño ovalado, tejido completamente a mano en finos hilos de plata ley 925 por artesanos colombianos. Una pieza clásica que refleja la delicadeza y tradición de la filigrana. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/aretes/naia-1.jpeg"]
+  },
+  {
+    id:"ar-ori", sku:"ARE-ORI", cat:"statement", name:"Aretes Ori",
+    price:250000, originalPrice:335000,
+    materials:"Plata ley 925 · Perlas y topacios naturales",
+    gemName:"Perla y topacio", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Pieza elegante que combina la delicadeza de las perlas con el brillo de los topacios naturales. Diseño femenino, atemporal y versátil que realza cualquier ocasión. Personalizable con distintas piedras y colores. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#EDE6D6",
+    images:["img/aretes/ori-1.png"]
+  },
+  {
+    id:"ar-orquidea-dorada", sku:"ARE-ORQD", cat:"statement", name:"Aretes Orquídea Dorada",
+    price:290000, originalPrice:389000,
+    materials:"Plata ley 925 · Filigrana artesanal",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Inspirados en la elegancia de la flor nacional de Colombia. Elaborados artesanalmente en plata ley 925 mediante la técnica de la filigrana, reflejan la belleza de la naturaleza y el valor del trabajo hecho a mano. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C9A24B",
+    images:["img/aretes/orquidea-dorada-1.png"]
+  },
+  {
+    id:"ar-orquidea-real", sku:"ARE-ORQR", cat:"statement", name:"Aretes Orquídea Real",
+    price:350000, originalPrice:469000,
+    materials:"Plata ley 925 · Filigrana artesanal",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Interpretación elegante de la flor símbolo de Colombia. Destacan por su diseño sofisticado y el extraordinario detalle de su elaboración. Cada par es tejido completamente a mano, convirtiéndose en una pieza única de alta joyería artesanal. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C9A24B",
+    images:["img/aretes/orquidea-real-1.png"]
+  },
+  {
+    id:"ar-trilogia", sku:"ARE-TRIL", cat:"statement", name:"Aretes Trilogía",
+    price:320000, originalPrice:429000,
+    materials:"Plata ley 925 · Topacios rosados y granates",
+    gemName:"Topacio rosado y granate", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combinan la delicadeza de la filigrana colombiana con la belleza de los topacios rosados y los granates naturales. Su composición crea un contraste elegante que aporta color, luminosidad y sofisticación. Piedras personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"rose", gem:"#E86FA0",
+    images:["img/aretes/trilogia-1.png"]
+  },
+  {
+    id:"ar-trilogia-azul", sku:"ARE-TRILA", cat:"statement", name:"Aretes Trilogía Azul",
+    price:320000, originalPrice:429000,
+    materials:"Plata ley 925 · Topacios azules naturales",
+    gemName:"Topacio azul", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Destacan por la intensidad y el brillo de sus topacios azules naturales. Combinan la tradición de la filigrana colombiana con un diseño elegante y contemporáneo. Personalizables con distintas piedras según disponibilidad. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#3FA9D4",
+    images:["img/aretes/trilogia-azul-1.png"]
+  },
+  {
+    id:"ar-zaria", sku:"ARE-ZARIA", cat:"statement", name:"Aretes Zaria",
+    price:220000, originalPrice:295000,
+    materials:"Plata ley 925 · Topacios y granates naturales",
+    gemName:"Topacio y granate", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Delicado diseño entorchado tejido completamente a mano mediante la técnica tradicional de la filigrana colombiana. Incorporan topacios y granates naturales que aportan brillo, contraste y elegancia. Piedras personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#9B3B3B",
+    images:["img/aretes/zaria-1.jpg","img/aretes/zaria-2.jpg"]
+  },
+  {
+    id:"ar-legado", sku:"ARE-LEGADO", cat:"statement", name:"Candongas Legado",
+    price:590000, originalPrice:791000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Representan la riqueza de la tradición joyera colombiana. Elaboradas artesanalmente en plata ley 925 mediante la técnica de la filigrana, destacan por su diseño elegante y su meticuloso trabajo manual. Preservan un legado de tradición y excelencia. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C9A24B",
+    images:["img/aretes/candongas-legado-1.png"]
+  },
+  {
+    id:"ar-siena", sku:"ARE-SIENA", cat:"statement", name:"Aretes Siena",
+    price:220000, originalPrice:295000,
+    materials:"Plata ley 925 · Amatistas y cuarzos naturales",
+    gemName:"Amatista y cuarzo", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegante diseño colgante inspirado en la naturaleza. Incorporan amatistas naturales y cuarzos ahumados que aportan profundidad, brillo y sofisticación. Cada pieza puede personalizarse con distintas piedras naturales. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#9B6FB3",
+    images:["img/aretes/siena-1.jpg","img/aretes/siena-2.jpg"]
+  },
+
+  /* ============================================================
+     ARETES · CANDONGAS (hoops)
+     ============================================================ */
+  {
+    id:"ar-esmerald", sku:"ARE-ESM", cat:"candongas", name:"Candongas Esmerald",
+    price:220000, originalPrice:295000,
+    materials:"Plata ley 925 · Circones",
+    gemName:"Circón", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Reinterpretación elegante de un clásico. Elaboradas artesanalmente en plata ley 925, incorporan delicados circones que aportan brillo y sofisticación sin perder la esencia del trabajo hecho a mano. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/aretes/candongas-esmerald-1.jpg"]
+  },
+  {
+    id:"ar-esencia-gruesas", sku:"ARE-ESEG", cat:"candongas", name:"Candongas Esencia · Gruesas",
+    price:250000, originalPrice:335000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elaboradas artesanalmente en finos hilos de plata ley 925, tejidos completamente a mano por artesanos colombianos. Su diseño de mayor volumen conserva la delicadeza y elegancia de la filigrana tradicional. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/esencia-gruesas-1.jpg"]
+  },
+  {
+    id:"ar-esencia-sencillas", sku:"ARE-ESES", cat:"candongas", name:"Candongas Esencia · Sencillas",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Destacan por su diseño ligero y atemporal. Elaboradas artesanalmente en plata ley 925 mediante la técnica de la filigrana, son una pieza versátil para cualquier ocasión. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/esencia-sencillas-1.jpg"]
+  },
+  {
+    id:"ar-gardenia", sku:"ARE-GARD", cat:"candongas", name:"Candongas Gardenia",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Filigrana en espiral",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Expresión de la filigrana colombiana en su máxima delicadeza. Su diseño en forma de espiral resalta el trabajo artesanal realizado completamente a mano. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/gardenia-1.jpg"]
+  },
+  {
+    id:"ar-halo-hoops", sku:"ARE-HALOH", cat:"candongas", name:"Halo Hoops",
+    price:280000, originalPrice:375000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Candongas elaboradas artesanalmente en plata ley 925 mediante la técnica de la filigrana colombiana. Su diseño contemporáneo combina elegancia, ligereza y el valor del trabajo hecho completamente a mano. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/halo-hoops-1.png"]
+  },
+  {
+    id:"ar-nara-hoops", sku:"ARE-NARAH", cat:"candongas", name:"Nara Hoops",
+    price:230000, originalPrice:308000,
+    materials:"Plata ley 925 · Flores tejidas en filigrana",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegantes candongas elaboradas en filigrana colombiana. Su diseño incorpora delicadas flores tejidas en el interior, creando una pieza llena de detalles y sofisticación. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/nara-hoops-1.jpg","img/aretes/nara-hoops-2.jpg"]
+  },
+  {
+    id:"ar-oriana-hoops", sku:"ARE-ORIAH", cat:"candongas", name:"Oriana Hoops",
+    price:340000, originalPrice:456000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Candongas de gran tamaño elaboradas artesanalmente en plata ley 925 mediante la técnica tradicional de la filigrana colombiana. Su diseño elegante y ligero resalta el minucioso trabajo realizado completamente a mano. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/oriana-hoops-1.jpg"]
+  },
+  {
+    id:"ar-primavera-hoops", sku:"ARE-PRIMH", cat:"candongas", name:"Primavera Hoops",
+    price:230000, originalPrice:308000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Candongas inspiradas en la delicadeza y el movimiento de la naturaleza. Elaboradas artesanalmente en plata ley 925 mediante la técnica tradicional de la filigrana colombiana, ofrecen un diseño ligero, elegante y lleno de detalles. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/primavera-hoops-1.jpg","img/aretes/primavera-hoops-2.jpg"]
+  },
+  {
+    id:"ar-cayena-hoops", sku:"ARE-CAYH", cat:"candongas", name:"Cayena Hoops",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Delicadas candongas elaboradas artesanalmente mediante la técnica tradicional de la filigrana colombiana. Tejidas completamente a mano en finos hilos de plata ley 925, destacan por su diseño ligero, elegante y atemporal. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/cayena-hoops-1.jpg"]
+  },
+  {
+    id:"ar-elia-hoops", sku:"ARE-ELIAH", cat:"candongas", name:"Elia Hoops",
+    price:350000, originalPrice:469000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegantes candongas elaboradas en filigrana colombiana, tejidas completamente a mano por maestros artesanos. Su diseño combina delicadeza, movimiento y sofisticación, convirtiéndolas en una pieza versátil para cualquier ocasión. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/elia-hoops-1.jpg"]
+  },
+  {
+    id:"ar-jardin-hoops", sku:"ARE-JARDH", cat:"candongas", name:"Jardín Hoops",
+    price:220000, originalPrice:295000,
+    materials:"Plata ley 925 · Hojas tejidas en filigrana",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Inspiradas en la belleza de las hojas y las formas orgánicas de la naturaleza. Su diseño de hojas delicadamente torcidas, elaborado completamente a mano en filigrana colombiana, aporta movimiento, elegancia y un estilo único. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C9A24B",
+    images:["img/aretes/jardin-hoops-1.jpg","img/aretes/jardin-hoops-2.jpg"]
+  },
+  {
+    id:"ar-liora-hoops", sku:"ARE-LIORH", cat:"candongas", name:"Liora Hoops",
+    price:260000, originalPrice:349000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegantes candongas elaboradas artesanalmente en plata ley 925 mediante la técnica tradicional de la filigrana colombiana. Su diseño ligero y sofisticado resalta el delicado tejido realizado completamente a mano, convirtiéndolas en una pieza atemporal. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/aretes/liora-hoops-1.jpg"]
+  },
+  {
+    id:"ar-nela-hoops", sku:"ARE-NELAH", cat:"candongas", name:"Mini Nela Hoops",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Versión delicada y versátil de las clásicas candongas de filigrana. Elaboradas completamente a mano en plata ley 925, destacan por su ligereza y elegancia, ideales para el uso diario sin perder el encanto del trabajo artesanal. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/nela-hoops-1.jpg"]
+  },
+  {
+    id:"ar-trama-hoops", sku:"ARE-TRAMH", cat:"candongas", name:"Trama Hoops",
+    price:230000, originalPrice:308000,
+    materials:"Plata ley 925 · Hilos entorchados y granulados",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Candongas que resaltan la riqueza de la filigrana colombiana a través de un delicado tejido de hilos de plata entorchados y granulados, elaborados completamente a mano. Su diseño combina textura, profundidad y elegancia. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/aretes/trama-hoops-1.jpg","img/aretes/trama-hoops-2.jpg"]
+  },
+
+  /* ============================================================
+     ARETES · MINI STUDS (topos)
+     ============================================================ */
+  {
+    id:"ar-aira", sku:"ARE-AIRA", cat:"studs", name:"Mini Aira",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Turmalinas naturales",
+    gemName:"Turmalina", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Pieza delicada y luminosa elaborada en plata ley 925, realzada con turmalinas naturales que aportan color, brillo y elegancia. Su diseño minimalista los convierte en el complemento ideal para el día a día. Piedra personalizable. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#D98FA8",
+    images:["img/aretes/aira-1.jpg"]
+  },
+  {
+    id:"ar-carmesi", sku:"ARE-CARM", cat:"studs", name:"Aretes Carmesí",
+    price:290000, originalPrice:389000,
+    materials:"Plata ley 925 · Rubíes, esmeraldas y diamantes naturales",
+    gemName:"Rubí, esmeralda y diamante", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combinan la intensidad de los rubíes naturales, la frescura de las esmeraldas naturales y el brillo de los diamantes naturales en una composición elegante y sofisticada. Disponibles con cierre de rosca de seguridad o mariposa tradicional. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#A6192E",
+    images:["img/aretes/carmesi-1.jpg"]
+  },
+  {
+    id:"ar-corona", sku:"ARE-CORO", cat:"studs", name:"Mini Corona",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Rubí natural",
+    gemName:"Rubí natural", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Destacan por la belleza de su rubí natural, cuidadosamente montado para crear una pieza clásica, delicada y elegante que puede acompañarte todos los días. Piedra personalizable. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#A6192E",
+    images:["img/aretes/corona-1.png"]
+  },
+  {
+    id:"ar-florina", sku:"ARE-FLOR", cat:"studs", name:"Mini Florina",
+    price:150000, originalPrice:201000,
+    materials:"Plata ley 925 · Moissanitas",
+    gemName:"Moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya delicada elaborada en plata ley 925 con brillantes moissanitas, una piedra reconocida por su extraordinario brillo y elegancia. Su diseño floral los convierte en una pieza sutil y femenina. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#FFFFFF",
+    images:["img/aretes/florina-1.jpg"]
+  },
+  {
+    id:"ar-halo", sku:"ARE-HALO", cat:"studs", name:"Aretes Halo",
+    price:170000, originalPrice:228000,
+    materials:"Plata ley 925 · Diseño clásico",
+    gemName:"Circón", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Diseño clásico, elegante y atemporal, pensado para acompañarte todos los días. Elaborados en plata ley 925, destacan por su sencillez y versatilidad, convirtiéndose en un básico imprescindible. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/aretes/halo-1.jpg"]
+  },
+  {
+    id:"ar-jade", sku:"ARE-JADE", cat:"studs", name:"Aretes Jade",
+    price:160000, originalPrice:214000,
+    materials:"Plata ley 925 · Circón y moissanita",
+    gemName:"Circón y moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combinan un delicado circón con una brillante moissanita, creando una joya elegante, luminosa y perfecta para cualquier ocasión. Personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#FFFFFF",
+    images:["img/aretes/jade-1.png"]
+  },
+  {
+    id:"ar-lady", sku:"ARE-LADY", cat:"studs", name:"Aretes Lady",
+    price:160000, originalPrice:214000,
+    materials:"Plata ley 925 · Circones",
+    gemName:"Circón", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Destacan por su diseño clásico de tamaño mediano y el brillo de sus circones cuidadosamente seleccionados. Una joya elegante y versátil que complementa cualquier estilo. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/aretes/lady-1.jpg"]
+  },
+  {
+    id:"ar-laguna", sku:"ARE-LAGU", cat:"studs", name:"Aretes Laguna",
+    price:150000, originalPrice:201000,
+    materials:"Plata ley 925 · Circones",
+    gemName:"Circón", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegante diseño rectangular que resalta el brillo de sus delicados circones. Una pieza moderna y sofisticada, ideal para quienes buscan una joya de líneas limpias y atemporales. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/aretes/laguna-1.jpg"]
+  },
+  {
+    id:"ar-lavanda", sku:"ARE-LAVA", cat:"studs", name:"Aretes Lavanda",
+    price:160000, originalPrice:214000,
+    materials:"Plata ley 925 · Amatista de laboratorio",
+    gemName:"Amatista", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Destacan por su elegante diseño ovalado y el delicado color de su amatista de laboratorio. Una joya sofisticada que aporta un toque de color y elegancia a cualquier ocasión. Piedra personalizable. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#9B6FB3",
+    images:["img/aretes/lavanda-1.jpg"]
+  },
+  {
+    id:"ar-mini-lavanda", sku:"ARE-MLAVA", cat:"studs", name:"Mini Lavanda",
+    price:140000, originalPrice:188000,
+    materials:"Plata ley 925 · Amatista de laboratorio",
+    gemName:"Amatista", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Versión más delicada del diseño Lavanda, ideal para quienes prefieren una joya sutil sin perder la elegancia y el brillo de la amatista de laboratorio. Piedra personalizable. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#9B6FB3",
+    images:["img/aretes/mini-lavanda-1.jpg"]
+  },
+  {
+    id:"ar-lila", sku:"ARE-LILA", cat:"studs", name:"Aretes Lila",
+    price:170000, originalPrice:228000,
+    materials:"Plata ley 925 · Diseño rectangular",
+    gemName:"Circón", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Refinado diseño rectangular que combina elegancia y modernidad. Su estilo minimalista los convierte en una pieza perfecta tanto para el día como para la noche. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/aretes/lila-1.jpg","img/aretes/lila-2.jpg"]
+  },
+  {
+    id:"ar-lumi", sku:"ARE-LUMI", cat:"studs", name:"Mini Lumi",
+    price:150000, originalPrice:201000,
+    materials:"Plata ley 925 · Diseño clásico",
+    gemName:"Circón", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Clásico imprescindible para el uso diario. Su diseño delicado y atemporal aporta un brillo sutil que combina fácilmente con cualquier estilo. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#FFFFFF",
+    images:["img/aretes/lumi-1.png"]
+  },
+  {
+    id:"ar-marea", sku:"ARE-MAREA", cat:"studs", name:"Aretes Marea",
+    price:220000, originalPrice:295000,
+    materials:"Plata ley 925 · Turquesas naturales y moissanitas",
+    gemName:"Turquesa y moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combinan la belleza de las turquesas naturales con el brillo excepcional de las moissanitas. Inspirados en los colores del mar, ofrecen un diseño fresco, elegante y lleno de personalidad. Piedras personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#0ABAB5",
+    images:["img/aretes/marea-1.jpg"]
+  },
+  {
+    id:"ar-mini-emerald", sku:"ARE-MEMR", cat:"studs", name:"Mini Candongas Esmeralda",
+    price:160000, originalPrice:214000,
+    materials:"Plata ley 925 · Esmeralda de laboratorio",
+    gemName:"Esmeralda", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Versión delicada y elegante de un clásico. Elaboradas en plata ley 925, incorporan esmeraldas de laboratorio que aportan un intenso color verde y un brillo sofisticado. Piedra personalizable. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#1F8A70",
+    images:["img/aretes/mini-emerald-1.png"]
+  },
+  {
+    id:"ar-nacar", sku:"ARE-NACAR", cat:"studs", name:"Aretes Nácar",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Perlas naturales",
+    gemName:"Perla natural", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combinan la delicadeza de las perlas con un diseño clásico y elegante, convirtiéndose en una joya versátil que nunca pasa de moda. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDE6D6",
+    images:["img/aretes/nacar-1.jpg"]
+  },
+  {
+    id:"ar-prisma", sku:"ARE-PRIS", cat:"studs", name:"Aretes Prisma",
+    price:250000, originalPrice:335000,
+    materials:"Plata ley 925 · Esmeraldas de laboratorio",
+    gemName:"Esmeralda", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Destacan por su elegante diseño rectangular y el intenso color de sus esmeraldas de laboratorio. Una joya contemporánea que aporta sofisticación y brillo. Personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#1F8A70",
+    images:["img/aretes/prisma-1.jpg"]
+  },
+  {
+    id:"ar-rosalia", sku:"ARE-ROSA", cat:"studs", name:"Aretes Rosalía",
+    price:150000, originalPrice:201000,
+    materials:"Plata ley 925 · Topacios rosados",
+    gemName:"Topacio rosado", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Incorporan delicados topacios rosados que aportan un toque femenino, elegante y luminoso. Su diseño clásico permite lucirlos tanto en ocasiones especiales como en el día a día. Personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#E86FA0",
+    images:["img/aretes/rosalia-1.png"]
+  },
+  {
+    id:"ar-sky", sku:"ARE-SKY", cat:"studs", name:"Aretes Sky",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Topacios azules",
+    gemName:"Topacio azul", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Resaltan la intensidad y el brillo de sus topacios azules, evocando los tonos del cielo y transmitiendo elegancia en una pieza clásica y sofisticada. Personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#3FA9D4",
+    images:["img/aretes/sky-1.jpg","img/aretes/sky-2.jpg"]
+  },
+  {
+    id:"ar-sky-oval", sku:"ARE-SKYO", cat:"studs", name:"Aretes Sky Oval",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Topacios azules",
+    gemName:"Topacio azul", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegante diseño ovalado que resalta la belleza de los topacios azules. Una joya refinada que combina delicadeza, brillo y un estilo atemporal. Personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#3FA9D4",
+    images:["img/aretes/sky-oval-1.jpg","img/aretes/sky-oval-2.jpg"]
+  },
+  {
+    id:"ar-sky-shine", sku:"ARE-SKYS", cat:"studs", name:"Aretes Sky Shine",
+    price:270000, originalPrice:362000,
+    materials:"Plata ley 925 · Topacios azules y moissanitas",
+    gemName:"Topacio azul y moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combinan el intenso color de los topacios azules con el extraordinario brillo de las moissanitas, creando una pieza elegante y sofisticada que destaca por su luminosidad. Personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#3FA9D4",
+    images:["img/aretes/sky-shine-1.jpg"]
+  },
+  {
+    id:"ar-tria", sku:"ARE-TRIA", cat:"studs", name:"Mini Tría",
+    price:130000, originalPrice:174000,
+    materials:"Plata ley 925 · Moissanitas",
+    gemName:"Moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya delicada elaborada con moissanitas, reconocidas por su brillo excepcional. Su diseño minimalista los convierte en una excelente opción para el uso diario. Personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#FFFFFF",
+    images:["img/aretes/tria-1.jpg"]
+  },
+  {
+    id:"ar-vera", sku:"ARE-VERA", cat:"studs", name:"Aretes Vera",
+    price:250000, originalPrice:335000,
+    materials:"Plata ley 925 · Esmeraldas de laboratorio y moissanitas",
+    gemName:"Esmeralda y moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combinan la intensidad del verde de las esmeraldas de laboratorio con el brillo de las moissanitas, logrando una pieza elegante, contemporánea y llena de luz. Personalizables con distintas piedras. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#1F8A70",
+    images:["img/aretes/vera-1.png"]
   }
 ];
 

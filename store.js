@@ -33,8 +33,34 @@ const CATS = {
   filigrana:  { label:"Filigrana" },
   color:      { label:"Piedras de Color" },
   compromiso: { label:"Compromiso" },
-  sets:       { label:"Sets" }
+  sets:       { label:"Sets" },
+  statement:  { label:"Aretes · Statement" },
+  candongas:  { label:"Candongas" },
+  studs:      { label:"Mini Studs" }
 };
+
+/* Categorías que pertenecen a anillos (para el filtro agrupado) */
+const RING_CATS = ["filigrana","color","compromiso","sets"];
+const EARRING_CATS = ["statement","candongas","studs"];
+
+/* Navegación del catálogo en dos niveles (estilo Cartier / Tiffany):
+   nivel 1 = tipo de joya · nivel 2 = colección / subcategoría */
+const TYPES = [
+  { key:"todos",   label:"Todo",    subs:[] },
+  { key:"anillos", label:"Anillos", subs:[
+      { key:"todos",      label:"Todas" },
+      { key:"filigrana",  label:"Filigrana" },
+      { key:"color",      label:"Piedras de color" },
+      { key:"compromiso", label:"Compromiso" },
+      { key:"sets",       label:"Sets" }
+  ]},
+  { key:"aretes",  label:"Aretes",  subs:[
+      { key:"todos",     label:"Todos" },
+      { key:"statement", label:"Statement" },
+      { key:"candongas", label:"Candongas" },
+      { key:"studs",     label:"Mini Studs" }
+  ]}
+];
 
 /* ---------- URL del detalle (con anticaché) ---------- */
 const productUrl = id => `product.html?id=${encodeURIComponent(id)}&t=${Date.now()}`;

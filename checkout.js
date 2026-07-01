@@ -3,8 +3,31 @@
    Maneja el flujo de pago con Wompi
    ============================================================ */
 
-const WOMPI_API = '/.netlify/functions/wompi-pay';
+/* ⬇️ URL base de las Netlify Functions (repo av-functions).
+   · Si el sitio está en GitHub Pages (alejandravergel.com), aquí DEBE ir la URL
+     ABSOLUTA de tu sitio de Netlify, p.ej: "https://av-functions.netlify.app"
+   · Si algún día mueves TODO el sitio a Netlify, déjalo vacío ("").
+   Mientras esté vacío o el backend no responda, el checkout usa WhatsApp como
+   respaldo para que ningún pedido se pierda. */
+const FUNCTIONS_BASE = ""; // <-- PON AQUÍ TU URL DE NETLIFY
+const WOMPI_API = (FUNCTIONS_BASE || '') + '/.netlify/functions/wompi-pay';
 const WOMPI_CHECKOUT_URL = 'https://checkout.wompi.co/p/';
+const WA_NUMBER = (typeof CONFIG !== 'undefined' && CONFIG.whatsapp) ? CONFIG.whatsapp : '573200000000';
+
+/* Respaldo: arma el pedido y abre WhatsApp con todo el detalle */
+function checkoutViaWhatsApp(data){
+  const cart = getCart();
+  const lines = cart.map(i => `• ${i.qty}× ${i.name}${i.color ? ' ('+i.color+')' : ''} — ${money(i.price*i.qty)}`).join('%0A');
+  const desc = (data.discount ? `%0ADescuento Club: ${data.discount}%25` : '');
+  const msg =
+    `¡Hola Alejandra Vergel! Quiero finalizar mi compra:%0A%0A${lines}${desc}` +
+    `%0A%0A*Total: ${money(data.finalTotal)}*` +
+    `%0A%0AMis datos:%0ANombre: ${encodeURIComponent(data.name)}` +
+    `%0ACorreo: ${encodeURIComponent(data.email)}` +
+    `%0ATeléfono: ${encodeURIComponent(data.phone)}` +
+    (data.couponCode ? `%0ACódigo: ${encodeURIComponent(data.couponCode)}` : '');
+  window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+}
 
 let checkoutState = {
   email: null,
@@ -83,7 +106,14 @@ async function submitCheckout() {
   sessionStorage.setItem("av_total", money(totalWithDiscount));
   sessionStorage.setItem("av_discount", discount);
 
-  // Llamar a Netlify para generar transacción
+  // Sin backend de pagos configurado → finalizar por WhatsApp (respaldo)
+  if (!FUNCTIONS_BASE) {
+    showToast("Te llevamos a WhatsApp para confirmar tu pedido…");
+    checkoutViaWhatsApp(checkoutState);
+    return;
+  }
+
+  // Llamar a Netlify para generar transacción con Wompi
   try {
     const response = await fetch(WOMPI_API, {
       method: 'POST',
@@ -100,12 +130,7 @@ async function submitCheckout() {
     });
 
     const result = await response.json();
-
-    if (!result.success) {
-      showToast("Error generando pago. Intenta de nuevo.");
-      console.error(result.error);
-      return;
-    }
+    if (!result.success) throw new Error(result.error || 'pago no generado');
 
     // Guardar referencia en sessionStorage (para recuperar después de pago)
     sessionStorage.setItem('av_reference', result.reference);
@@ -115,7 +140,8 @@ async function submitCheckout() {
 
   } catch (error) {
     console.error('[Checkout Error]', error);
-    showToast("Error al procesar el pago. Intenta de nuevo.");
+    showToast("No pudimos abrir el pago en línea. Te llevamos a WhatsApp…");
+    checkoutViaWhatsApp(checkoutState);
   }
 }
 

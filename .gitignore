@@ -22,3 +22,6 @@ logs/
 # Temporal
 .env.local
 .env.*.local
+
+# Material fuente (fotos originales, .docx, .tif) — no se publica
+/ARETES/
