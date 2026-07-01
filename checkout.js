@@ -97,9 +97,10 @@ async function submitCheckout() {
 
   // Obtener descuento del Club (si existe código válido)
   const discount = getClubDiscount();
-  const totalWithDiscount = checkoutState.total - (checkoutState.total * discount / 100);
+  const total = cartTotal();
+  const totalWithDiscount = total - (total * discount / 100);
 
-  checkoutState = { email, name, phone, couponCode, total: checkoutState.total, discount: discount, finalTotal: totalWithDiscount };
+  checkoutState = { email, name, phone, couponCode, total: total, discount: discount, finalTotal: totalWithDiscount };
 
   // Guardar en sessionStorage para checkout-success.html
   sessionStorage.setItem("av_email", email);
