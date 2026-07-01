@@ -91,7 +91,8 @@ function jewelSVG(p){
 function productMedia(p){
   if(p.images && p.images.length){
     const pos = p.imgPos || "center 50%";
-    return `<img src="${p.images[0]}" alt="${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:${pos}">`;
+    const zoom = p.imgZoom || 1;
+    return `<img src="${p.images[0]}" alt="${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:${pos};transform:scale(${zoom});transform-origin:${pos}">`;
   }
   return jewelSVG(p);
 }

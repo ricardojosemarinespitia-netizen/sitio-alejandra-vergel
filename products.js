@@ -449,7 +449,7 @@ const PRODUCTS = [
     gemName:"Circón", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Reinterpretación elegante de un clásico. Elaboradas artesanalmente en plata ley 925, incorporan delicados circones que aportan brillo y sofisticación sin perder la esencia del trabajo hecho a mano. Sobre pedido (15 a 25 días hábiles).",
     metal:"silver", gem:"#EDEFF1",
-    images:["img/aretes/candongas-esmerald-1.jpg"]
+    images:["img/aretes/candongas-esmerald-1.jpg"], imgPos:"58% 50%", imgZoom:2.2
   },
   {
     id:"ar-esencia-gruesas", sku:"ARE-ESEG", cat:"candongas", name:"Candongas Esencia · Gruesas",
@@ -458,7 +458,7 @@ const PRODUCTS = [
     gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Elaboradas artesanalmente en finos hilos de plata ley 925, tejidos completamente a mano por artesanos colombianos. Su diseño de mayor volumen conserva la delicadeza y elegancia de la filigrana tradicional. Sobre pedido (15 a 25 días hábiles).",
     metal:"gold", gem:"#E7D3A1",
-    images:["img/aretes/esencia-gruesas-1.jpg"]
+    images:["img/aretes/esencia-gruesas-1.jpg"], imgPos:"47% 46%", imgZoom:1.6
   },
   {
     id:"ar-esencia-sencillas", sku:"ARE-ESES", cat:"candongas", name:"Candongas Esencia · Sencillas",
@@ -467,7 +467,7 @@ const PRODUCTS = [
     gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Destacan por su diseño ligero y atemporal. Elaboradas artesanalmente en plata ley 925 mediante la técnica de la filigrana, son una pieza versátil para cualquier ocasión. Sobre pedido (15 a 25 días hábiles).",
     metal:"gold", gem:"#E7D3A1",
-    images:["img/aretes/esencia-sencillas-1.jpg"]
+    images:["img/aretes/esencia-sencillas-1.jpg"], imgPos:"47% 47%", imgZoom:1.6
   },
   {
     id:"ar-gardenia", sku:"ARE-GARD", cat:"candongas", name:"Candongas Gardenia",
