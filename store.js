@@ -15,7 +15,7 @@
 /* ---------- Configuración de marca ---------- */
 const CONFIG = {
   whatsapp: "573228505472",                 // número sin + ni espacios
-  email: "hola@alejandravergel.com",
+  email: "Avjewelrydesign@gmail.com",
   brand: "Alejandra Vergel"
 };
 
@@ -109,7 +109,7 @@ function addToCart(p, color, qty){
   const cart = getCart();
   const ex = cart.find(i=>i.key===key);
   if(ex) ex.qty += qty;
-  else cart.push({ key, id:p.id, name:p.name, color, qty, price:p.price, cat:p.cat, metal:p.metal, gem:p.gem });
+  else cart.push({ key, id:p.id, name:p.name, color, qty, price:p.price, cat:p.cat, metal:p.metal, gem:p.gem, images:p.images, imgPos:p.imgPos, imgZoom:p.imgZoom });
   saveCart(cart);
   showToast(`${p.name} · agregado`);
 }
