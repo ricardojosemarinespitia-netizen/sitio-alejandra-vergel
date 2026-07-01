@@ -14,7 +14,7 @@
 
 /* ---------- Configuración de marca ---------- */
 const CONFIG = {
-  whatsapp: "573200000000",                 // número sin + ni espacios
+  whatsapp: "573228505472",                 // número sin + ni espacios
   email: "hola@alejandravergel.com",
   brand: "Alejandra Vergel"
 };

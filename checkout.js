@@ -12,7 +12,7 @@
 const FUNCTIONS_BASE = ""; // <-- PON AQUÍ TU URL DE NETLIFY
 const WOMPI_API = (FUNCTIONS_BASE || '') + '/.netlify/functions/wompi-pay';
 const WOMPI_CHECKOUT_URL = 'https://checkout.wompi.co/p/';
-const WA_NUMBER = (typeof CONFIG !== 'undefined' && CONFIG.whatsapp) ? CONFIG.whatsapp : '573200000000';
+const WA_NUMBER = (typeof CONFIG !== 'undefined' && CONFIG.whatsapp) ? CONFIG.whatsapp : '573228505472';
 
 /* Respaldo: arma el pedido y abre WhatsApp con todo el detalle */
 function checkoutViaWhatsApp(data){
