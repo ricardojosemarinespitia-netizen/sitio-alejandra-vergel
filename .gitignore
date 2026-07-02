@@ -25,3 +25,6 @@ logs/
 
 # Material fuente (fotos originales, .docx, .tif) — no se publica
 /ARETES/
+/FOTOS_INFO_COMPLEMENTARIA/
+*.zip
+LOGO AV Joyas de autor.pdf
