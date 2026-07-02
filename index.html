@@ -13,23 +13,32 @@
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 /* ============================================================
-   PALETA — referencia Tiffany & Co. + Cartier
+   PALETA OFICIAL ALEJANDRA VERGEL
+   Ivory · Nude · Chai · Shell · Blush · Vainilla · Sage · Dusty Rose
    ============================================================ */
 :root{
-  --ivory:#F7F4EF;        /* marfil de fondo, limpieza Tiffany */
-  --white:#FFFFFF;
-  --noir:#14110F;         /* casi negro cálido */
-  --ink:#2A2622;          /* texto principal */
-  --ink-soft:#6E665E;     /* texto secundario */
-  --tiffany:#0ABAB5;      /* azul Tiffany */
-  --tiffany-soft:#7FD9D4;
-  --cartier:#A6192E;      /* rojo Cartier */
-  --cartier-deep:#7E0E20;
-  --gold:#C9A24B;         /* dorado */
+  --ivory:#EBE5DB;        /* fondo principal — paleta AV */
+  --vainilla:#F6EADA;     /* fondo cálido alterno */
+  --white:#FFFDFA;
+  --noir:#2B211B;         /* espresso cálido (reemplaza al negro) */
+  --ink:#3A2F27;          /* texto principal */
+  --ink-soft:#85756A;     /* texto secundario */
+  --nude:#E6D0BF;
+  --chai:#DFCBBB;
+  --shell:#E0C2AF;
+  --blush:#E4C3B8;
+  --sage:#B2B3A0;         /* acento verde salvia */
+  --rose:#CEA69B;         /* dusty rose — acento primario */
+  --rose-deep:#A97C6E;    /* dusty rose profundo (hovers, énfasis) */
+  --cartier:#A97C6E;      /* alias legado → dusty rose profundo */
+  --cartier-deep:#8E6355;
+  --tiffany:#B2B3A0;      /* alias legado → sage */
+  --tiffany-soft:#C9CABA;
+  --gold:#C9A24B;         /* dorado del monograma */
   --gold-soft:#E7D3A1;
-  --line:#E6DFD4;         /* líneas sutiles */
-  --shadow:0 24px 60px -28px rgba(20,17,15,.30);
-  --shadow-sm:0 10px 30px -16px rgba(20,17,15,.30);
+  --line:#DED2C2;         /* líneas sutiles */
+  --shadow:0 24px 60px -28px rgba(43,33,27,.28);
+  --shadow-sm:0 10px 30px -16px rgba(43,33,27,.26);
   --radius:4px;           /* esquinas finas y editoriales */
   --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans:"Jost", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -157,6 +166,13 @@ section{padding:96px 0}
   object-fit:cover;object-position:center center;
   display:block;
 }
+/* Entrada cinematográfica sutil, estilo maison */
+.hp-central img{animation:heroZoom 12s cubic-bezier(.2,.6,.3,1) forwards}
+.hp-medio1 img,.hp-medio2 img{animation:heroZoom 16s cubic-bezier(.2,.6,.3,1) forwards}
+@keyframes heroZoom{from{transform:scale(1.07)}to{transform:scale(1)}}
+@media (prefers-reduced-motion: reduce){
+  .hp-central img,.hp-medio1 img,.hp-medio2 img{animation:none}
+}
 
 .hp-medio1{
   left:0;top:0;width:30%;height:100%;
@@ -185,29 +201,29 @@ section{padding:96px 0}
   color:#fff;text-align:center;z-index:5;
 }
 .hp-central-overlay .eyebrow{
-  color:var(--gold-soft);margin-bottom:12px;
+  color:var(--vainilla);letter-spacing:.44em;font-size:.66rem;margin-bottom:14px;opacity:.92;
 }
 .hp-central-overlay .h1-name{
-  font-family:var(--serif);font-size:clamp(1.9rem,3.8vw,3.2rem);
-  font-weight:500;letter-spacing:.04em;color:#fff;
+  font-family:var(--serif);font-size:clamp(2.1rem,4.2vw,3.6rem);
+  font-weight:500;letter-spacing:.05em;color:#fff;
   line-height:1;margin:0;
 }
-.hero-dotted-line{
-  width:100px;height:2px;margin:12px auto 8px;
-  background:repeating-linear-gradient(
-    90deg,
-    var(--tiffany) 0, var(--tiffany) 6px,
-    transparent 6px, transparent 12px
-  );
-  box-shadow:0 0 8px 1px rgba(10,186,181,.5);
+.hero-rule{
+  width:56px;height:1px;margin:14px auto 10px;
+  background:linear-gradient(90deg,transparent,var(--gold-soft),transparent);
 }
 .hp-central-overlay .h1-surname{
-  font-family:var(--serif);font-size:clamp(1.9rem,3.8vw,3.2rem);
-  font-weight:400;font-style:italic;letter-spacing:.04em;
-  color:var(--gold-soft);line-height:1;margin:0 0 28px;
+  font-family:var(--serif);font-size:clamp(2.1rem,4.2vw,3.6rem);
+  font-weight:400;font-style:italic;letter-spacing:.05em;
+  color:var(--gold-soft);line-height:1;margin:0 0 30px;
 }
 
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn-hero{
+  border:1px solid rgba(255,253,250,.7);color:#fff;background:rgba(43,33,27,.12);
+  backdrop-filter:blur(2px);
+}
+.btn-hero:hover{background:var(--vainilla);color:var(--noir);border-color:var(--vainilla)}
 .hero-outline{color:#fff !important;border-color:rgba(255,255,255,.5) !important}
 .hero-outline:hover{background:#fff !important;color:var(--noir) !important}
 
@@ -217,16 +233,15 @@ section{padding:96px 0}
 }
 .hp-medio2 img{object-position:100% 45%}
 
-/* ── DIVISORES DORADOS ── */
+/* ── DIVISORES — línea de luz sutil, sin brillo artificial ── */
 .hero-divider{
   position:absolute;top:0;width:1px;height:100%;z-index:10;pointer-events:none;
   background:linear-gradient(to bottom,
-    rgba(201,162,75,0) 0%,
-    rgba(201,162,75,0.55) 25%,
-    rgba(255,255,255,0.95) 50%,
-    rgba(201,162,75,0.55) 75%,
-    rgba(201,162,75,0) 100%);
-  filter:drop-shadow(0 0 7px rgba(255,245,195,0.9));
+    rgba(246,234,218,0) 0%,
+    rgba(246,234,218,.45) 30%,
+    rgba(246,234,218,.65) 50%,
+    rgba(246,234,218,.45) 70%,
+    rgba(246,234,218,0) 100%);
 }
 .hero-divider-left{left:30%}
 .hero-divider-right{left:70%}
@@ -324,7 +339,7 @@ section{padding:96px 0}
 .card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
 .card-media{
   position:relative;aspect-ratio:1/1;
-  background:linear-gradient(155deg,#FBFAF7,#EFEAE1);
+  background:linear-gradient(155deg,#FDF8F0,#EFE3D3);
   overflow:hidden;
 }
 .card-media img{
@@ -385,14 +400,23 @@ section{padding:96px 0}
    ============================================================ */
 .about{background:var(--ivory)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
-.about-art{
-  aspect-ratio:4/5;border-radius:var(--radius);position:relative;overflow:hidden;
-  background:linear-gradient(160deg,#1B1712,#2C251D);display:grid;place-items:center;
-  box-shadow:var(--shadow);
+/* Collage editorial: el oficio + las generaciones */
+.about-art{position:relative;padding:0 34px 64px 0}
+.about-photo-main{
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin:0;
 }
-.about-art svg{width:58%}
-.about-art .frame{position:absolute;inset:18px;border:1px solid rgba(231,211,161,.4)}
-.about-txt .eyebrow{color:var(--cartier)}
+.about-photo-main img{width:100%;height:auto;display:block}
+.about-photo-over{
+  position:absolute;right:0;bottom:0;width:42%;margin:0;
+  border:6px solid var(--vainilla);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow-sm);
+}
+.about-photo-over img{width:100%;height:auto;display:block}
+.about-caption{
+  position:absolute;left:0;bottom:10px;font-family:var(--serif);font-style:italic;
+  font-size:.98rem;color:var(--ink-soft);max-width:52%;line-height:1.45;
+}
+.about-txt .eyebrow{color:var(--rose-deep)}
 .about-txt h2{font-size:clamp(2rem,4.5vw,3rem);margin:14px 0 18px;color:var(--noir)}
 .about-txt p{color:var(--ink-soft);margin-bottom:16px;font-weight:300}
 .about-feats{display:flex;gap:36px;margin-top:30px}
@@ -435,19 +459,19 @@ section{padding:96px 0}
    NEWSLETTER
    ============================================================ */
 .news{
-  background:linear-gradient(120deg,var(--tiffany) 0%,#0a9c98 100%);color:#fff;
-  text-align:center;
+  background:var(--vainilla);color:var(--ink);
+  text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
 }
-.news h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-bottom:10px}
-.news p{max-width:440px;margin:0 auto 30px;font-weight:300;opacity:.92}
+.news h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-bottom:10px;color:var(--noir)}
+.news p{max-width:440px;margin:0 auto 30px;font-weight:300;color:var(--ink-soft)}
 .news-form{display:flex;gap:12px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
 .news-form input{
   flex:1;min-width:220px;font-family:var(--sans);font-size:.95rem;padding:15px 22px;
-  border:none;border-radius:var(--radius);background:rgba(255,255,255,.95);color:var(--ink);
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--white);color:var(--ink);
 }
-.news-form input:focus{outline:2px solid var(--noir)}
-.news-divider{display:flex;align-items:center;gap:14px;max-width:480px;margin:22px auto;color:rgba(255,255,255,.7);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em}
-.news-divider::before,.news-divider::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.3)}
+.news-form input:focus{outline:none;border-color:var(--gold)}
+.news-divider{display:flex;align-items:center;gap:14px;max-width:480px;margin:22px auto;color:var(--ink-soft);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em}
+.news-divider::before,.news-divider::after{content:"";flex:1;height:1px;background:var(--line)}
 .google-signin-wrap{display:flex;justify-content:center;min-height:44px}
 .news-msg{min-height:1.4em;margin-top:16px;font-size:.85rem;font-weight:500}
 
@@ -482,7 +506,7 @@ section{padding:96px 0}
 .cart-empty{text-align:center;padding:70px 20px;color:var(--ink-soft)}
 .cart-empty svg{opacity:.3;margin-bottom:16px}
 .cart-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
-.cart-item .thumb{width:74px;height:74px;border-radius:var(--radius);background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;flex-shrink:0}
+.cart-item .thumb{width:74px;height:74px;border-radius:var(--radius);background:linear-gradient(155deg,#FDF8F0,#EFE3D3);display:grid;place-items:center;flex-shrink:0}
 .cart-item .thumb svg{width:64%}
 .cart-item .info{flex:1;min-width:0}
 .cart-item .nm{font-family:var(--serif);font-size:1.1rem;color:var(--noir);line-height:1.2}
@@ -515,7 +539,7 @@ section{padding:96px 0}
   grid-template-columns:1fr 1fr;transform:translateY(20px) scale(.98);transition:.4s;
 }
 .modal.open .modal-card{transform:none}
-.modal-media{background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;padding:40px;min-height:340px}
+.modal-media{background:linear-gradient(155deg,#FDF8F0,#EFE3D3);display:grid;place-items:center;padding:40px;min-height:340px}
 .modal-media svg{width:74%}
 .modal-info{padding:42px 40px;display:flex;flex-direction:column}
 .modal-info .cat{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
@@ -589,6 +613,29 @@ section{padding:96px 0}
   background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--ink);transition:.3s;
 }
 .modal-club-close:hover{background:var(--ivory);color:var(--cartier);transform:rotate(90deg)}
+
+/* ============================================================
+   MODAL GUÍA DE TALLAS
+   ============================================================ */
+.modal-guide{
+  position:fixed;inset:0;z-index:115;display:grid;place-items:center;padding:20px;
+  opacity:0;visibility:hidden;transition:.35s;
+}
+.modal-guide.open{opacity:1;visibility:visible}
+.modal-guide-bg{position:absolute;inset:0;background:rgba(43,33,27,.6);backdrop-filter:blur(4px)}
+.modal-guide-card{
+  position:relative;background:var(--white);border-radius:var(--radius);
+  width:min(560px,100%);max-height:92vh;overflow:auto;
+  transform:translateY(20px) scale(.98);transition:.4s;box-shadow:var(--shadow);
+}
+.modal-guide.open .modal-guide-card{transform:none}
+.modal-guide-card img{width:100%;display:block}
+.modal-guide-close{
+  position:sticky;top:12px;margin-left:auto;margin-right:12px;width:42px;height:42px;
+  border-radius:50%;background:rgba(255,253,250,.92);display:grid;place-items:center;
+  z-index:3;transition:.3s;color:var(--ink);box-shadow:var(--shadow-sm);
+}
+.modal-guide-close:hover{background:var(--rose-deep);color:#fff;transform:rotate(90deg)}
 
 /* ---------- Reveal ---------- */
 .reveal{opacity:0;transform:translateY(34px);transition:.8s cubic-bezier(.2,.7,.3,1)}
@@ -706,11 +753,12 @@ section{padding:96px 0}
   <div class="hpanel hp-central">
     <img src="IMAGEN LEJANDRA.jpg" alt="Alejandra Vergel">
     <div class="hp-central-overlay">
-      <span class="eyebrow">Piezas de autor</span>
+      <span class="eyebrow">Joyas de autor</span>
       <p class="h1-name">Alejandra</p>
+      <div class="hero-rule"></div>
       <p class="h1-surname">Vergel</p>
       <div class="hero-cta">
-        <a href="#catalogo" class="btn btn-gold">Ver colección</a>
+        <a href="#catalogo" class="btn btn-hero">Descubrir la colección</a>
       </div>
     </div>
   </div>
@@ -773,8 +821,13 @@ section{padding:96px 0}
 <section class="about" id="nosotros">
   <div class="container about-grid">
     <div class="about-art reveal">
-      <div class="frame"></div>
-      <img src="img/brand/logo-mark-white.png" alt="Alejandra Vergel · Joyas de Autor" style="width:34%">
+      <figure class="about-photo-main">
+        <img src="img/context/orfebre-proceso.jpg" alt="Maestro orfebre engastando una esmeralda a mano" loading="lazy">
+      </figure>
+      <figure class="about-photo-over">
+        <img src="img/context/generaciones.jpg" alt="Tres generaciones de mujeres con joyas Alejandra Vergel" loading="lazy">
+      </figure>
+      <p class="about-caption">Manos de maestros orfebres, joyas que unen generaciones.</p>
     </div>
     <div class="about-txt reveal">
       <span class="eyebrow">Nuestra casa</span>
@@ -852,7 +905,7 @@ section{padding:96px 0}
 <!-- ============== NEWSLETTER ============== -->
 <section class="news">
   <div class="container reveal">
-    <span class="eyebrow" style="color:#fff;opacity:.85">Club Alejandra Vergel</span>
+    <span class="eyebrow" style="color:var(--rose-deep)">Club Alejandra Vergel</span>
     <h2>Sé la primera en saberlo</h2>
     <p>Lanzamientos privados, ediciones limitadas y un 10% en tu primera compra al suscribirte.</p>
     <form class="news-form" id="newsForm" novalidate>
@@ -891,7 +944,7 @@ section{padding:96px 0}
       <div class="footer-col">
         <h4>Atención</h4>
         <a href="#">Envíos y garantía</a>
-        <a href="#">Guía de tallas</a>
+        <a href="#" data-guide-open>Guía de tallas</a>
         <a href="#">Cuidado de joyas</a>
         <a href="#">Preguntas frecuentes</a>
       </div>
@@ -948,6 +1001,17 @@ section{padding:96px 0}
     <button class="btn btn-dark" id="checkoutBtn">Finalizar compra</button>
   </div>
 </aside>
+
+<!-- ============== MODAL GUÍA DE TALLAS ============== -->
+<div class="modal-guide" id="guideModal" aria-label="Guía de tallas de anillos">
+  <div class="modal-guide-bg" data-guide-close></div>
+  <div class="modal-guide-card">
+    <button class="modal-guide-close" data-guide-close aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <img src="img/brand/guia-tallas.jpg" alt="Guía de tallas de anillos Alejandra Vergel — tabla de medidas CO, US y EU" loading="lazy">
+  </div>
+</div>
 
 <!-- ============== TOAST ============== -->
 <div class="toast" id="toast"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Agregado al carrito</span></div>
@@ -1096,12 +1160,12 @@ async function handleNews(e){
   const email = input.value.trim();
 
   if(name.length<2){
-    out.style.color = "#7E0E20";
+    out.style.color = "#8E6355";
     out.textContent = "Ingresa tu nombre.";
     return;
   }
   if(!reEmail.test(email)){
-    out.style.color = "#7E0E20";
+    out.style.color = "#8E6355";
     out.textContent = "Ingresa un correo válido.";
     return;
   }
@@ -1188,9 +1252,9 @@ function decodeGoogleJwt(token){
   return JSON.parse(json);
 }
 
-// escribe el mensaje en el newsletter (fondo oscuro) y en el popup (fondo claro)
+// escribe el mensaje en el newsletter y en el popup (ambos con fondo claro)
 function setClubMessage(text){
-  const nm = $("#newsMsg"); if(nm){ nm.style.color = "#fff"; nm.textContent = text; }
+  const nm = $("#newsMsg"); if(nm){ nm.style.color = "var(--noir)"; nm.textContent = text; }
   const cm = $("#clubMsg"); if(cm){ cm.style.color = "var(--ink)"; cm.textContent = text; }
 }
 

@@ -14,11 +14,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ivory:#F7F4EF;--white:#FFFFFF;--noir:#14110F;--ink:#2A2622;--ink-soft:#6E665E;
-  --tiffany:#0ABAB5;--tiffany-soft:#7FD9D4;--cartier:#A6192E;--cartier-deep:#7E0E20;
-  --gold:#C9A24B;--gold-soft:#E7D3A1;--line:#E6DFD4;
-  --shadow:0 24px 60px -28px rgba(20,17,15,.30);
-  --shadow-sm:0 10px 30px -16px rgba(20,17,15,.30);
+  --ivory:#EBE5DB;--vainilla:#F6EADA;--white:#FFFDFA;--noir:#2B211B;--ink:#3A2F27;--ink-soft:#85756A;
+  --nude:#E6D0BF;--chai:#DFCBBB;--shell:#E0C2AF;--blush:#E4C3B8;
+  --sage:#B2B3A0;--rose:#CEA69B;--rose-deep:#A97C6E;
+  --tiffany:#B2B3A0;--tiffany-soft:#C9CABA;--cartier:#A97C6E;--cartier-deep:#8E6355;
+  --gold:#C9A24B;--gold-soft:#E7D3A1;--line:#DED2C2;
+  --shadow:0 24px 60px -28px rgba(43,33,27,.28);
+  --shadow-sm:0 10px 30px -16px rgba(43,33,27,.26);
   --radius:4px;
   --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans:"Jost", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -95,7 +97,7 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 .gallery{position:sticky;top:96px}
 .gallery-main{
   position:relative;border-radius:var(--radius);overflow:hidden;
-  background:linear-gradient(155deg,#FBFAF7,#EFEAE1);box-shadow:var(--shadow-sm);
+  background:linear-gradient(155deg,#FDF8F0,#EFE3D3);box-shadow:var(--shadow-sm);
 }
 /* Placeholder SVG: marco cuadrado centrado */
 .gallery-main:not(.has-img){aspect-ratio:1/1;display:grid;place-items:center}
@@ -110,7 +112,7 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 .gallery-thumbs{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 .gallery-thumb{
   width:70px;height:70px;border-radius:var(--radius);overflow:hidden;border:2px solid transparent;
-  transition:.25s;padding:0;background:linear-gradient(155deg,#FBFAF7,#EFEAE1);flex-shrink:0;
+  transition:.25s;padding:0;background:linear-gradient(155deg,#FDF8F0,#EFE3D3);flex-shrink:0;
 }
 .gallery-thumb.active{border-color:var(--gold)}
 .gallery-thumb img{width:100%;height:100%;object-fit:contain;padding:4px}
@@ -161,7 +163,7 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
   transition:.45s cubic-bezier(.2,.7,.3,1);position:relative;display:flex;flex-direction:column;cursor:pointer;
 }
 .card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
-.card-media{position:relative;aspect-ratio:1/1;background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;overflow:hidden}
+.card-media{position:relative;aspect-ratio:1/1;background:linear-gradient(155deg,#FDF8F0,#EFE3D3);display:grid;place-items:center;overflow:hidden}
 .card-media svg{width:62%;height:62%}
 .card-badge{position:absolute;top:12px;right:12px;z-index:2;background:var(--cartier);color:#fff;font-size:.62rem;font-weight:600;padding:4px 8px;border-radius:30px;font-family:var(--sans)}
 .card-body{padding:16px 16px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
@@ -185,7 +187,7 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 .cart-empty{text-align:center;padding:70px 20px;color:var(--ink-soft)}
 .cart-empty svg{opacity:.3;margin-bottom:16px}
 .cart-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
-.cart-item .thumb{width:74px;height:74px;border-radius:var(--radius);background:linear-gradient(155deg,#FBFAF7,#EFEAE1);display:grid;place-items:center;flex-shrink:0}
+.cart-item .thumb{width:74px;height:74px;border-radius:var(--radius);background:linear-gradient(155deg,#FDF8F0,#EFE3D3);display:grid;place-items:center;flex-shrink:0}
 .cart-item .thumb svg{width:64%}
 .cart-item .info{flex:1;min-width:0}
 .cart-item .nm{font-family:var(--serif);font-size:1.1rem;color:var(--noir);line-height:1.2}
@@ -202,6 +204,21 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 .cart-total .lbl{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
 .cart-total .val{font-family:var(--serif);font-size:1.9rem;color:var(--noir)}
 .drawer-foot .btn{width:100%}
+
+/* ---------- Guía de tallas ---------- */
+.guide-link{
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--rose-deep);text-decoration:underline;text-underline-offset:4px;transition:.3s;padding:0;
+}
+.guide-link:hover{color:var(--noir)}
+.modal-guide{position:fixed;inset:0;z-index:115;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:.35s}
+.modal-guide.open{opacity:1;visibility:visible}
+.modal-guide-bg{position:absolute;inset:0;background:rgba(43,33,27,.6);backdrop-filter:blur(4px)}
+.modal-guide-card{position:relative;background:var(--white);border-radius:var(--radius);width:min(560px,100%);max-height:92vh;overflow:auto;transform:translateY(20px) scale(.98);transition:.4s;box-shadow:var(--shadow)}
+.modal-guide.open .modal-guide-card{transform:none}
+.modal-guide-card img{width:100%;display:block}
+.modal-guide-close{position:sticky;top:12px;margin-left:auto;margin-right:12px;width:42px;height:42px;border-radius:50%;background:rgba(255,253,250,.92);display:grid;place-items:center;z-index:3;transition:.3s;color:var(--ink);box-shadow:var(--shadow-sm)}
+.modal-guide-close:hover{background:var(--rose-deep);color:#fff;transform:rotate(90deg)}
 
 /* ---------- Toast ---------- */
 .toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,140%);background:var(--noir);color:#fff;padding:15px 26px;border-radius:var(--radius);font-size:.85rem;z-index:120;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);transition:.45s cubic-bezier(.2,.7,.3,1);max-width:90vw}
@@ -242,7 +259,7 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
   <div class="container nav-inner">
     <a href="index.html" class="brand">
       <span class="name">Alejandra Vergel</span>
-      <span class="tag">Alta Joyería</span>
+      <span class="tag">Joyas de Autor</span>
     </a>
     <div class="nav-actions">
       <a href="index.html#catalogo" class="back-link">
@@ -289,6 +306,17 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
     <button class="btn btn-dark" id="checkoutBtn">Finalizar por WhatsApp</button>
   </div>
 </aside>
+
+<!-- ============== MODAL GUÍA DE TALLAS ============== -->
+<div class="modal-guide" id="guideModal" aria-label="Guía de tallas de anillos">
+  <div class="modal-guide-bg" data-guide-close></div>
+  <div class="modal-guide-card">
+    <button class="modal-guide-close" data-guide-close aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <img src="img/brand/guia-tallas.jpg" alt="Guía de tallas de anillos Alejandra Vergel — tabla de medidas CO, US y EU" loading="lazy">
+  </div>
+</div>
 
 <!-- ============== TOAST ============== -->
 <div class="toast" id="toast"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Agregado al carrito</span></div>
@@ -358,10 +386,13 @@ function renderDetail(){
           ${p.colors.map(c=>`<button class="opt ${c===detailState.color?"active":""}" data-color="${c}">${c}</button>`).join("")}
         </div>
 
-        ${p.sizes && p.sizes.length ? `<div class="opt-label">Talla</div>
+        ${p.sizes && p.sizes.length ? `<div class="opt-label" style="display:flex;align-items:center;justify-content:space-between">
+          <span>Talla</span>
+          <button type="button" class="guide-link" data-guide-open>Guía de tallas</button>
+        </div>
         <div class="opts">
           ${p.sizes.map(s=>`<button class="opt opt-size ${String(s)===String(detailState.size)?"active":""}" data-size="${s}">${s}</button>`).join("")}
-        </div>` : ""}
+        </div>` : `<div style="margin-bottom:20px"><button type="button" class="guide-link" data-guide-open>¿No conoces tu talla? Ver guía de tallas</button></div>`}
 
         <div class="pd-actions">
           <div class="pd-qty">

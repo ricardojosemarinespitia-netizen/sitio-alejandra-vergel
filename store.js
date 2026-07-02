@@ -222,5 +222,12 @@ function initStore(){
   const cl=$("#closeCart");   if(cl) cl.onclick = closeDrawer;
   const ov=$("#overlay");     if(ov) ov.onclick = closeDrawer;
   const cb=$("#checkoutBtn"); if(cb) cb.onclick = checkout;
-  document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeDrawer(); });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeDrawer(); const g=$("#guideModal"); if(g) g.classList.remove("open"); } });
+
+  // Guía de tallas — delegación: funciona aunque el contenido se re-renderice
+  document.addEventListener("click", e=>{
+    const open = e.target.closest("[data-guide-open]");
+    if(open){ e.preventDefault(); const g=$("#guideModal"); if(g) g.classList.add("open"); return; }
+    if(e.target.closest("[data-guide-close]")){ const g=$("#guideModal"); if(g) g.classList.remove("open"); }
+  });
 }
