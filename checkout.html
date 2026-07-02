@@ -4,219 +4,335 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#14110F">
-<meta name="description" content="Checkout - Alejandra Vergel · Alta Joyería">
-<title>Checkout · Alejandra Vergel</title>
+<meta name="theme-color" content="#2B211B">
+<meta name="description" content="Checkout · Alejandra Vergel · Joyas de Autor">
+<title>Información de envío · Alejandra Vergel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ivory:#F7F4EF;
-  --white:#FFFFFF;
-  --noir:#14110F;
-  --ink:#2A2622;
-  --ink-soft:#6E665E;
-  --tiffany:#0ABAB5;
-  --cartier:#A6192E;
-  --gold:#C9A24B;
-  --gold-soft:#E7D3A1;
-  --line:#E6DFD4;
-  --shadow:0 24px 60px -28px rgba(20,17,15,.30);
-  --shadow-sm:0 10px 30px -16px rgba(20,17,15,.30);
+  --ivory:#EBE5DB;--vainilla:#F6EADA;--white:#FFFDFA;--noir:#2B211B;--ink:#3A2F27;--ink-soft:#85756A;
+  --nude:#E6D0BF;--chai:#DFCBBB;--shell:#E0C2AF;--blush:#E4C3B8;
+  --sage:#B2B3A0;--rose:#CEA69B;--rose-deep:#A97C6E;
+  --tiffany:#B2B3A0;--cartier:#A97C6E;
+  --gold:#C9A24B;--gold-soft:#E7D3A1;--line:#DED2C2;
+  --shadow:0 24px 60px -28px rgba(43,33,27,.28);
+  --shadow-sm:0 10px 30px -16px rgba(43,33,27,.26);
   --radius:4px;
   --serif:"Cormorant Garamond", Georgia, serif;
   --sans:"Jost", -apple-system, "Segoe UI", Roboto, sans-serif;
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{
-  font-family:var(--sans);
-  color:var(--ink);
-  background:var(--ivory);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-  -webkit-tap-highlight-color:transparent;
-}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--ink);background:var(--ivory);line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
+.container{width:min(1180px,92%);margin-inline:auto}
 
-h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
-.container{width:min(1240px,92%);margin-inline:auto}
-section{padding:60px 0}
+/* ---------- Header ---------- */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,253,250,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand .name{font-family:var(--serif);font-size:1.5rem;letter-spacing:.06em;color:var(--noir)}
+.brand .tag{font-size:.54rem;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);transition:.3s}
+.back-link:hover{color:var(--noir)}
 
-/* Header */
-.nav{
-  position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--line);
-  height:96px;display:flex;align-items:center;
-  padding:0 20px;
-}
-.nav-logo{font-family:var(--serif);font-size:1.8rem;font-weight:500;color:var(--noir)}
-.nav-logo span{font-size:.6rem;letter-spacing:.2em;color:var(--ink-soft);display:block}
-.nav-spacer{flex:1}
-.nav-actions{display:flex;align-items:center;gap:20px}
-.icon-btn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);transition:.3s;color:var(--ink)}
-.icon-btn:hover{background:var(--ivory);border-color:var(--gold)}
-#cartCount{
-  position:absolute;width:18px;height:18px;background:var(--cartier);color:#fff;
-  border-radius:50%;display:grid;place-items:center;font-size:.65rem;font-weight:700;
-  top:14px;right:14px;opacity:0;transition:.3s;
-}
-#cartCount.show{opacity:1}
+/* ---------- Pasos ---------- */
+.steps{display:flex;align-items:center;justify-content:center;gap:0;margin:38px auto 8px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:10px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.step .dot{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--white);font-size:.78rem;font-family:var(--sans)}
+.step.done .dot{background:var(--sage);border-color:var(--sage);color:#fff}
+.step.active{color:var(--noir);font-weight:500}
+.step.active .dot{background:var(--noir);border-color:var(--noir);color:#fff}
+.step-line{width:70px;height:1px;background:var(--line);margin:0 14px}
+@media(max-width:560px){.step-line{width:26px;margin:0 8px}.step span.lbl{display:none}.step.active span.lbl{display:inline}}
 
-/* Checkout Grid */
-.checkout-grid{display:grid;grid-template-columns:2fr 1fr;gap:60px;align-items:start}
-.checkout-form{background:var(--white);padding:40px;border:1px solid var(--line);border-radius:var(--radius)}
-.checkout-form h2{font-size:2rem;margin-bottom:30px;color:var(--noir)}
-.form-group{margin-bottom:24px}
-.form-group label{display:block;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
-.form-group input{
-  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);
-  font-family:inherit;font-size:1rem;color:var(--ink);transition:.3s;
+.page-head{text-align:center;margin:18px 0 36px}
+.page-head h1{font-size:clamp(1.9rem,4.5vw,2.7rem);color:var(--noir)}
+.page-head p{color:var(--ink-soft);font-weight:300;max-width:480px;margin:6px auto 0}
+
+/* ---------- Layout ---------- */
+.checkout-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:44px;align-items:start;padding-bottom:80px}
+
+/* ---------- Tarjetas de formulario ---------- */
+.fcard{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:30px 32px;margin-bottom:22px}
+.fcard h2{font-size:1.45rem;color:var(--noir);margin-bottom:4px}
+.fcard .sub{font-size:.86rem;color:var(--ink-soft);font-weight:300;margin-bottom:22px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fgroup{margin-bottom:16px}
+.fgroup label{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
+.fgroup input,.fgroup textarea,.fgroup select{
+  width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:var(--radius);
+  font-family:inherit;font-size:.95rem;color:var(--ink);background:var(--white);transition:.3s;
 }
-.form-group input:focus{outline:none;border-color:var(--gold);background:rgba(201,162,75,.05)}
+.fgroup input:focus,.fgroup textarea:focus{outline:none;border-color:var(--gold);background:#FFFDF8}
+.fgroup input.invalid{border-color:var(--rose-deep);background:rgba(206,166,155,.07)}
+.fgroup .hint{font-size:.74rem;color:var(--ink-soft);margin-top:5px}
+.fgroup textarea{resize:vertical;min-height:74px}
+.fcheck{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--ink-soft);margin-top:10px;cursor:pointer}
+.fcheck input{width:16px;height:16px;margin-top:3px;accent-color:var(--rose-deep);flex-shrink:0}
+
+/* ---------- Método de entrega ---------- */
+.ship-opts{display:flex;flex-direction:column;gap:12px}
+.ship-opt{
+  display:flex;gap:14px;align-items:flex-start;padding:18px;border:1px solid var(--line);
+  border-radius:var(--radius);cursor:pointer;transition:.3s;background:var(--white);
+}
+.ship-opt:hover{border-color:var(--rose)}
+.ship-opt.selected{border-color:var(--noir);background:var(--vainilla)}
+.ship-opt input{width:17px;height:17px;margin-top:3px;accent-color:var(--noir);flex-shrink:0}
+.ship-opt .tt{font-weight:500;color:var(--noir);font-size:.95rem}
+.ship-opt .dd{font-size:.82rem;color:var(--ink-soft);font-weight:300}
+.ship-opt .price-tag{margin-left:auto;font-family:var(--serif);font-size:1.05rem;color:var(--noir);white-space:nowrap;flex-shrink:0}
+.free-note{
+  display:flex;gap:10px;align-items:center;margin-top:14px;padding:12px 14px;border-radius:var(--radius);
+  background:rgba(178,179,160,.16);border:1px solid rgba(178,179,160,.45);font-size:.84rem;color:var(--ink);
+}
+.free-note svg{color:var(--sage);flex-shrink:0}
+
+/* ---------- Cupón ---------- */
+#discountInfo{display:none;background:rgba(178,179,160,.18);padding:12px;border-radius:var(--radius);margin-top:12px;font-size:.9rem;color:var(--ink);font-weight:500;text-align:center}
+
+/* ---------- Botones ---------- */
 .btn-submit{
-  width:100%;padding:16px;background:var(--noir);color:#fff;font-size:.9rem;
-  letter-spacing:.15em;text-transform:uppercase;font-weight:600;border-radius:var(--radius);
-  cursor:pointer;transition:.35s;margin-top:10px;
+  width:100%;padding:17px;background:var(--noir);color:#fff;font-size:.88rem;
+  letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-radius:var(--radius);
+  transition:.35s;margin-top:6px;
 }
-.btn-submit:hover{background:var(--cartier)}
+.btn-submit:hover{background:var(--rose-deep)}
 .btn-submit:disabled{opacity:.5;cursor:not-allowed}
+.btn-back{display:block;text-align:center;margin-top:16px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);transition:.3s}
+.btn-back:hover{color:var(--noir)}
 
-/* Resumen */
-.checkout-summary{position:sticky;top:120px}
-.summary-box{background:var(--white);padding:30px;border:1px solid var(--line);border-radius:var(--radius)}
-.summary-box h3{font-size:1.3rem;margin-bottom:20px;color:var(--noir)}
-.summary-item{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 0;border-bottom:1px solid var(--line);font-size:.95rem;
-}
-.summary-item:last-child{border-bottom:none}
-.summary-total{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:16px 0;border-top:2px solid var(--noir);font-family:var(--serif);
-  font-size:1.8rem;font-weight:600;color:var(--noir);margin-top:14px;
-}
+/* ---------- Resumen ---------- */
+.summary{position:sticky;top:100px}
+.summary-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px 26px 22px}
+.summary-box h3{font-size:1.35rem;color:var(--noir);margin-bottom:2px}
+.summary-count{font-size:.78rem;color:var(--ink-soft);margin-bottom:16px}
+.sum-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.sum-item .thumb{width:64px;height:64px;border-radius:var(--radius);overflow:hidden;background:linear-gradient(155deg,#FDF8F0,#EFE3D3);flex-shrink:0;display:grid;place-items:center}
+.sum-item .thumb img{width:100%;height:100%;object-fit:cover}
+.sum-item .thumb svg{width:60%}
+.sum-item .inf{flex:1;min-width:0}
+.sum-item .nm{font-family:var(--serif);font-size:1.02rem;color:var(--noir);line-height:1.2}
+.sum-item .vr{font-size:.7rem;color:var(--ink-soft)}
+.sum-item .pr{font-size:.85rem;color:var(--ink);margin-top:2px}
+.sum-qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:30px;margin-top:7px;background:var(--white)}
+.sum-qty button{width:26px;height:26px;display:grid;place-items:center;color:var(--ink);font-size:.95rem}
+.sum-qty button:hover{color:var(--rose-deep)}
+.sum-qty span{min-width:24px;text-align:center;font-size:.8rem}
+.sum-item .rm{align-self:flex-start;color:var(--ink-soft);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;transition:.3s}
+.sum-item .rm:hover{color:var(--rose-deep)}
+.sum-line{display:flex;justify-content:space-between;padding:8px 0;font-size:.92rem;color:var(--ink)}
+.sum-line.first{margin-top:14px}
+.sum-line .lb{color:var(--ink-soft)}
+.sum-line.total{border-top:2px solid var(--noir);margin-top:10px;padding-top:14px;font-family:var(--serif);font-size:1.55rem;color:var(--noir)}
+.sum-note{font-size:.76rem;color:var(--ink-soft);margin-top:14px;line-height:1.55;font-weight:300}
+.sum-secure{display:flex;align-items:center;gap:8px;justify-content:center;font-size:.72rem;color:var(--ink-soft);margin-top:14px}
+.sum-secure svg{color:var(--sage)}
+.empty-cart{text-align:center;padding:80px 20px}
+.empty-cart h2{color:var(--noir);margin-bottom:10px}
+.empty-cart p{color:var(--ink-soft);margin-bottom:24px}
+.empty-cart a{display:inline-block;padding:15px 34px;background:var(--noir);color:#fff;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;border-radius:var(--radius);transition:.3s}
+.empty-cart a:hover{background:var(--rose-deep)}
 
-/* Toast */
-#toast{
-  position:fixed;bottom:20px;left:20px;right:20px;background:var(--ink);color:#fff;
-  padding:16px 20px;border-radius:var(--radius);font-size:.9rem;
-  opacity:0;transition:.3s;pointer-events:none;z-index:1000;
-}
-#toast.show{opacity:1;pointer-events:auto}
+/* ---------- Footer ---------- */
+.foot{border-top:1px solid var(--line);padding:22px 0;text-align:center;font-size:.76rem;color:var(--ink-soft)}
 
-/* Mobile */
-@media(max-width:768px){
-  .checkout-grid{grid-template-columns:1fr;gap:30px}
-  .checkout-summary{position:static}
-  .checkout-form{padding:24px}
+/* ---------- Toast ---------- */
+#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,150%);background:var(--noir);color:#fff;padding:15px 26px;border-radius:var(--radius);font-size:.86rem;z-index:1000;transition:.4s;max-width:90vw}
+#toast.show{transform:translate(-50%,0)}
+
+/* ---------- Mobile ---------- */
+@media(max-width:880px){
+  .checkout-grid{grid-template-columns:1fr;gap:26px}
+  .summary{position:static;order:-1}
+  .fcard{padding:22px 18px}
+  .frow{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
 <!-- Header -->
-<nav class="nav">
-  <div class="nav-logo">Alejandra Vergel<span>Alta Joyería</span></div>
-  <div class="nav-spacer"></div>
-  <div class="nav-actions">
-    <button class="icon-btn" id="openCart" title="Carrito">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-      </svg>
-      <span id="cartCount" class="show">0</span>
-    </button>
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <span class="name">Alejandra Vergel</span>
+      <span class="tag">Joyas de Autor</span>
+    </a>
+    <a href="index.html#catalogo" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Seguir comprando
+    </a>
   </div>
-</nav>
+</header>
 
-<!-- Main -->
-<section>
-  <div class="container">
-    <h1 style="font-size:2.5rem;margin-bottom:40px;color:var(--noir)">Finaliza tu compra</h1>
+<div class="container">
 
-    <div class="checkout-grid">
-      <!-- Formulario -->
-      <form id="checkoutForm" class="checkout-form">
-        <h2>Tus datos</h2>
+  <!-- Pasos -->
+  <div class="steps">
+    <div class="step done"><span class="dot">✓</span><span class="lbl">Carrito</span></div>
+    <div class="step-line"></div>
+    <div class="step active"><span class="dot">2</span><span class="lbl">Información</span></div>
+    <div class="step-line"></div>
+    <div class="step"><span class="dot">3</span><span class="lbl">Pago</span></div>
+  </div>
 
-        <div class="form-group">
-          <label for="name">Nombre completo *</label>
-          <input type="text" id="name" name="name" placeholder="Juan Pérez" required>
-        </div>
+  <div class="page-head">
+    <h1>Información de envío</h1>
+    <p>Completa tus datos para coordinar la entrega de tus joyas de autor.</p>
+  </div>
 
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="email" placeholder="juan@ejemplo.com" required>
-        </div>
+  <div id="checkoutRoot" class="checkout-grid">
 
-        <div class="form-group">
-          <label for="phone">Teléfono *</label>
-          <input type="tel" id="phone" name="phone" placeholder="+57 300 123 4567" required>
-        </div>
+    <!-- ============ FORMULARIO ============ -->
+    <form id="checkoutForm" novalidate>
 
-        <div class="form-group">
-          <label for="couponCode">Código de descuento (opcional)</label>
-          <input type="text" id="couponCode" name="couponCode" placeholder="AV15-XXXXXXX">
-          <small style="display:block;margin-top:6px;color:var(--ink-soft)">Ej: Ingresa tu código del Club de Alejandra para 15% descuento</small>
-        </div>
-
-        <div id="discountInfo" style="display:none;background:rgba(10,186,181,.1);padding:12px;border-radius:4px;margin-bottom:16px;font-size:.9rem;color:var(--tiffany);font-weight:600;text-align:center;">
-          ✓ Descuento <span id="discountAmount">15%</span> aplicado
-        </div>
-
-        <button type="submit" class="btn-submit">Ir a pagar con Wompi</button>
-      </form>
-
-      <!-- Resumen -->
-      <div class="checkout-summary">
-        <div class="summary-box">
-          <h3>Resumen</h3>
-          <div id="summaryItems"></div>
-          <div class="summary-total">
-            <span>Total</span>
-            <span id="summaryTotal">$ 0</span>
+      <!-- Contacto -->
+      <div class="fcard">
+        <h2>Contacto</h2>
+        <p class="sub">Para confirmar tu orden y enviarte actualizaciones.</p>
+        <div class="frow">
+          <div class="fgroup">
+            <label for="email">Correo electrónico *</label>
+            <input type="email" id="email" placeholder="tu@correo.com" autocomplete="email">
+          </div>
+          <div class="fgroup">
+            <label for="phone">Teléfono *</label>
+            <input type="tel" id="phone" placeholder="Ej: 322 850 5472" autocomplete="tel">
           </div>
         </div>
+        <label class="fcheck"><input type="checkbox" id="waNotif" checked> Quiero recibir notificaciones de mi pedido por WhatsApp.</label>
+        <label class="fcheck"><input type="checkbox" id="newsOpt"> Quiero recibir novedades, lanzamientos y nuevas piezas por correo.</label>
       </div>
-    </div>
+
+      <!-- Método de entrega -->
+      <div class="fcard">
+        <h2>Método de entrega</h2>
+        <p class="sub">Elige cómo prefieres recibir tus joyas.</p>
+        <div class="ship-opts">
+          <label class="ship-opt selected" id="optMetro">
+            <input type="radio" name="shipMethod" value="metro" checked>
+            <span>
+              <span class="tt">Área metropolitana de Barranquilla</span><br>
+              <span class="dd">Barranquilla, Soledad, Malambo, Galapa y Puerto Colombia · entrega rápida</span>
+            </span>
+            <span class="price-tag" id="metroPrice">$ 8.000</span>
+          </label>
+          <label class="ship-opt" id="optNacional">
+            <input type="radio" name="shipMethod" value="nacional">
+            <span>
+              <span class="tt">Envío nacional</span><br>
+              <span class="dd">Envíos seguros a toda Colombia con empaque de joyería</span>
+            </span>
+            <span class="price-tag" id="nacionalPrice">$ 15.000</span>
+          </label>
+        </div>
+        <div class="free-note">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><strong>Envío gratis</strong> en compras superiores a $ 200.000.</span>
+        </div>
+      </div>
+
+      <!-- Datos de envío -->
+      <div class="fcard">
+        <h2>Datos de envío</h2>
+        <p class="sub">Información del destinatario y dirección de entrega.</p>
+        <div class="frow">
+          <div class="fgroup">
+            <label for="firstName">Nombre *</label>
+            <input type="text" id="firstName" placeholder="Nombre" autocomplete="given-name">
+          </div>
+          <div class="fgroup">
+            <label for="lastName">Apellido *</label>
+            <input type="text" id="lastName" placeholder="Apellido" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="fgroup">
+          <label for="cedula">Cédula / NIT *</label>
+          <input type="text" id="cedula" placeholder="Documento de identidad" inputmode="numeric">
+        </div>
+        <div class="fgroup">
+          <label for="address">Dirección *</label>
+          <input type="text" id="address" placeholder="Calle, carrera, avenida..." autocomplete="street-address">
+        </div>
+        <div class="fgroup">
+          <label for="address2">Apartamento, casa, edificio (opcional)</label>
+          <input type="text" id="address2" placeholder="Apto 502, Casa 12, Torre B...">
+        </div>
+        <div class="frow">
+          <div class="fgroup">
+            <label for="departamento">Departamento *</label>
+            <input type="text" id="departamento" list="deptList" placeholder="Escribe o selecciona..." autocomplete="off">
+            <datalist id="deptList"></datalist>
+          </div>
+          <div class="fgroup">
+            <label for="municipio">Municipio / Ciudad *</label>
+            <input type="text" id="municipio" list="muniList" placeholder="Elige el departamento primero" autocomplete="off" disabled>
+            <datalist id="muniList"></datalist>
+            <p class="hint" id="muniHint"></p>
+          </div>
+        </div>
+        <div class="fgroup">
+          <label for="postal">Código postal</label>
+          <input type="text" id="postal" placeholder="Opcional" inputmode="numeric">
+        </div>
+        <div class="fgroup">
+          <label for="notes">Notas para el pedido (opcional)</label>
+          <textarea id="notes" placeholder="Indicaciones especiales, talla, acabado preferido..."></textarea>
+        </div>
+      </div>
+
+      <!-- Cupón -->
+      <div class="fcard">
+        <h2>Código de descuento</h2>
+        <p class="sub">¿Eres del Club? Ingresa tu código para 15% de descuento.</p>
+        <div class="fgroup">
+          <input type="text" id="couponCode" placeholder="AV15-XXXXXXX">
+        </div>
+        <div id="discountInfo">✓ Descuento <span id="discountAmount">15%</span> aplicado</div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="payBtn">Continuar al pago</button>
+      <a href="index.html#catalogo" class="btn-back">Volver al catálogo</a>
+    </form>
+
+    <!-- ============ RESUMEN ============ -->
+    <aside class="summary">
+      <div class="summary-box">
+        <h3>Resumen del pedido</h3>
+        <div class="summary-count" id="sumCount"></div>
+        <div id="sumItems"></div>
+        <div class="sum-line first"><span class="lb">Subtotal</span><span id="sumSubtotal">$ 0</span></div>
+        <div class="sum-line" id="sumDiscountRow" style="display:none"><span class="lb">Descuento Club</span><span id="sumDiscount">− $ 0</span></div>
+        <div class="sum-line"><span class="lb">Envío</span><span id="sumShipping">$ 0</span></div>
+        <div class="sum-line total"><span>Total</span><span id="sumTotal">$ 0</span></div>
+        <p class="sum-note">⏱ Cada joya se elabora a mano tras tu compra. El envío se calcula según tu ubicación y es <strong>gratis desde $ 200.000</strong>. Pago seguro mediante PSE / tarjetas (Wompi) o WhatsApp.</p>
+        <div class="sum-secure">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3Z"/></svg>
+          Información protegida · No compartimos tus datos
+        </div>
+      </div>
+    </aside>
   </div>
-</section>
+</div>
+
+<footer class="foot">
+  © <span id="year"></span> Alejandra Vergel · Joyas de Autor · Barranquilla, Colombia
+</footer>
 
 <!-- Toast -->
 <div id="toast"><span id="toastMsg"></span></div>
 
 <script src="products.js"></script>
+<script src="colombia.js"></script>
 <script src="store.js"></script>
 <script src="club.js"></script>
 <script src="checkout.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  initStore();
-  initCheckout();
-
-  // Renderizar resumen
-  const cart = getCart();
-  if (!cart.length) {
-    document.body.innerHTML += '<p style="text-align:center;margin-top:40px;color:var(--ink-soft)">Tu carrito está vacío. <a href="index.html">Volver al catálogo</a></p>';
-    return;
-  }
-
-  const summaryItems = document.getElementById("summaryItems");
-  summaryItems.innerHTML = cart.map(i => `
-    <div class="summary-item">
-      <span>${i.qty}× ${i.name}</span>
-      <span>${money(i.price * i.qty)}</span>
-    </div>
-  `).join("");
-
-  document.getElementById("summaryTotal").textContent = money(cartTotal());
-});
-</script>
 </body>
 </html>
