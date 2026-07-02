@@ -148,8 +148,12 @@ function renderCart(){
   }
   body.innerHTML = cart.map(i => {
     const p = {cat:i.cat, metal:i.metal, gem:i.gem, id:i.id};
+    // Buscar SIEMPRE el producto en el catálogo para obtener su foto real,
+    // aunque el ítem se haya guardado en el carrito antes de tener imágenes.
+    const prod = (typeof PRODUCTS !== "undefined") ? PRODUCTS.find(x=>x.id===i.id) : null;
+    const imgs = (prod && prod.images && prod.images.length) ? prod.images : (i.images || []);
     return `<div class="cart-item">
-      <div class="thumb">${i.images && i.images.length ? `<img src="${i.images[0]}" alt="${i.name}" style="width:100%;height:100%;object-fit:contain;padding:4px">` : jewelSVG(p)}</div>
+      <div class="thumb">${imgs.length ? `<img src="${imgs[0]}" alt="${i.name}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` : jewelSVG(p)}</div>
       <div class="info">
         <div class="nm">${i.name}</div>
         <div class="vr">${i.color}</div>
