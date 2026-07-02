@@ -6,7 +6,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#14110F">
 <meta name="description" content="Alejandra Vergel · Alta joyería. Anillos artesanales en filigrana colombiana y piedras naturales. Piezas únicas hechas a mano.">
-<title>Alejandra Vergel · Alta Joyería</title>
+<title>Alejandra Vergel · Joyas de Autor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -95,7 +95,13 @@ section{padding:96px 0}
   box-shadow:var(--shadow-sm);
 }
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px}
-.brand{display:flex;flex-direction:column;line-height:1;align-items:flex-start}
+.brand{display:flex;align-items:center;gap:12px;line-height:1}
+.brand-mark{height:36px;width:auto;flex-shrink:0;transition:opacity .4s}
+.brand-mark.on-dark{position:absolute;opacity:1}
+.brand-mark.on-light{position:absolute;opacity:0}
+.nav.scrolled .brand-mark.on-dark{opacity:0}
+.nav.scrolled .brand-mark.on-light{opacity:1}
+.brand-txt{display:flex;flex-direction:column;align-items:flex-start}
 .brand .name{font-family:var(--serif);font-size:1.55rem;letter-spacing:.06em;color:#fff;transition:color .4s}
 .brand .tag{font-size:.56rem;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:4px;transition:color .4s}
 .nav.scrolled .brand .name{color:var(--noir)}
@@ -662,8 +668,14 @@ section{padding:96px 0}
 <header class="nav" id="nav">
   <div class="container nav-inner">
     <a href="#inicio" class="brand">
-      <span class="name">Alejandra Vergel</span>
-      <span class="tag">Alta Joyería</span>
+      <span style="position:relative;display:inline-block;height:36px;width:32px">
+        <img class="brand-mark on-dark" src="img/brand/logo-mark-white.png" alt="">
+        <img class="brand-mark on-light" src="img/brand/logo-mark.png" alt="">
+      </span>
+      <span class="brand-txt">
+        <span class="name">Alejandra Vergel</span>
+        <span class="tag">Joyas de Autor</span>
+      </span>
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="#inicio">Inicio</a>
@@ -762,13 +774,13 @@ section{padding:96px 0}
   <div class="container about-grid">
     <div class="about-art reveal">
       <div class="frame"></div>
-      <svg viewBox="0 0 120 120" fill="none"><defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E7D3A1"/><stop offset="1" stop-color="#C9A24B"/></linearGradient></defs><circle cx="60" cy="46" r="22" stroke="url(#ag)" stroke-width="2"/><circle cx="60" cy="46" r="10" fill="#0ABAB5" opacity=".85"/><path d="M48 64 L40 104 H80 L72 64" stroke="url(#ag)" stroke-width="2" fill="none"/><path d="M60 24 v-10 M50 28 l-6-8 M70 28 l6-8" stroke="url(#ag)" stroke-width="1.5"/></svg>
+      <img src="img/brand/logo-mark-white.png" alt="Alejandra Vergel · Joyas de Autor" style="width:34%">
     </div>
     <div class="about-txt reveal">
       <span class="eyebrow">Nuestra casa</span>
       <h2>Tradición orfebre, mirada contemporánea</h2>
-      <p>Desde nuestro taller, cada joya nace del encuentro entre el oficio artesanal y un diseño que mira al futuro. Seleccionamos personalmente cada gema y trabajamos el metal con paciencia, hasta que la pieza respira luz.</p>
-      <p>Creemos en el lujo que se hereda: joyas pensadas para acompañar los momentos que importan y trascender el tiempo.</p>
+      <p>Alejandra Vergel · Joyas de Autor nace de la unión entre diseño contemporáneo, tradición artesanal y belleza femenina. La marca preserva la filigrana colombiana apoyando a maestros orfebres que han dedicado su vida a este oficio ancestral.</p>
+      <p>Cada joya es elaborada a mano, fusionando técnicas tradicionales con una estética moderna y sofisticada, creando piezas exclusivas, auténticas y atemporales. Nuestro propósito: honrar nuestras raíces y llevar la artesanía colombiana a un escenario internacional, a través de joyas hechas con amor, dedicación y significado.</p>
       <div class="about-feats">
         <div><div class="num">+15</div><div class="lbl">Años de oficio</div></div>
         <div><div class="num">100%</div><div class="lbl">Hecho a mano</div></div>
@@ -859,7 +871,10 @@ section{padding:96px 0}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="brand"><span class="name" style="font-size:1.7rem;font-family:var(--serif)">Alejandra Vergel</span><span class="tag" style="font-size:.56rem;letter-spacing:.42em;text-transform:uppercase">Alta Joyería</span></div>
+        <div class="brand" style="align-items:center">
+          <img src="img/brand/logo-mark-white.png" alt="" style="height:34px;width:auto">
+          <span class="brand-txt"><span class="name" style="font-size:1.7rem;font-family:var(--serif)">Alejandra Vergel</span><span class="tag" style="font-size:.56rem;letter-spacing:.42em;text-transform:uppercase">Joyas de Autor</span></span>
+        </div>
         <p style="margin-top:18px;max-width:300px;font-weight:300;font-size:.9rem">Anillos hechos a mano en filigrana de plata ley 925 y piedras naturales. Artesanía colombiana, piezas únicas bajo pedido.</p>
         <a href="https://www.instagram.com/alejandravergel.co" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:rgba(247,244,239,.65);transition:.3s;font-size:.85rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(247,244,239,.65)'">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -882,7 +897,7 @@ section{padding:96px 0}
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Alejandra Vergel · Alta Joyería. Todos los derechos reservados.</span>
+      <span>© <span id="year"></span> Alejandra Vergel · Joyas de Autor. Todos los derechos reservados.</span>
       <span>Hecho con dedicación en Colombia</span>
     </div>
   </div>
