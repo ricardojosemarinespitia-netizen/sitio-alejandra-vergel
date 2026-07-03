@@ -266,6 +266,32 @@ section{padding:112px 0}
 
 
 /* ============================================================
+   EDITORIAL — CARDS DE CATEGORÍA (estilo Cartier)
+   ============================================================ */
+.editorial{padding:0;background:var(--ivory)}
+.edit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.edit-card{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer}
+.edit-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+.edit-card:hover img{transform:scale(1.05)}
+.edit-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,15,10,.75) 0%,rgba(20,15,10,.1) 60%,transparent 100%)}
+.edit-txt{position:absolute;bottom:0;left:0;right:0;padding:28px;z-index:2}
+.edit-txt .eyebrow2{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:500}
+.edit-txt h3{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);color:#fff;margin:6px 0 10px;font-weight:500}
+.edit-txt p{font-size:.82rem;color:rgba(255,255,255,.8);font-weight:300;margin-bottom:18px;max-width:260px;line-height:1.5}
+.edit-btn{display:inline-block;border:1.5px solid rgba(255,255,255,.7);color:#fff;padding:10px 22px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;cursor:pointer;transition:.3s;font-family:var(--sans)}
+.edit-card:hover .edit-btn,.edit-btn:hover{background:#fff;color:var(--noir);border-color:#fff}
+@media(max-width:920px){
+  .edit-grid{grid-template-columns:repeat(2,1fr)}
+  .edit-card:last-child{grid-column:1/-1;aspect-ratio:16/9}
+}
+@media(max-width:640px){
+  .edit-grid{grid-template-columns:1fr}
+  .edit-card{aspect-ratio:16/9}
+  .edit-card:last-child{grid-column:auto}
+  .edit-txt{padding:22px}
+}
+
+/* ============================================================
    FRANJA / MARQUEE
    ============================================================ */
 .strip{background:var(--noir);color:var(--ivory);padding:18px 0;overflow:hidden;white-space:nowrap}
@@ -810,6 +836,40 @@ section{padding:112px 0}
   <div class="hero-divider hero-divider-left"></div>
   <div class="hero-divider hero-divider-right"></div>
 
+</section>
+
+
+<!-- ============== EDITORIAL CATEGORÍAS ============== -->
+<section class="editorial" aria-label="Colecciones">
+  <div class="edit-grid">
+    <article class="edit-card" data-tipo="anillos">
+      <img src="img/anillos/marea-1.png" alt="Anillo Marea en oro con topacios azules">
+      <div class="edit-txt">
+        <span class="eyebrow2">Nueva Colección</span>
+        <h3>Anillos</h3>
+        <p>Piezas únicas en plata con baño de oro y piedras naturales.</p>
+        <button class="edit-btn" type="button">Descubrir</button>
+      </div>
+    </article>
+    <article class="edit-card" data-tipo="collares">
+      <img src="img/collares/origen-1.jpg" alt="Gargantilla Origen en filigrana dorada">
+      <div class="edit-txt">
+        <span class="eyebrow2">Colección Permanente</span>
+        <h3>Collares</h3>
+        <p>Filigrana colombiana con diseño contemporáneo.</p>
+        <button class="edit-btn" type="button">Descubrir</button>
+      </div>
+    </article>
+    <article class="edit-card" data-tipo="aretes">
+      <img src="img/aretes/laguna-1.jpg" alt="Aretes Laguna con topacio azul">
+      <div class="edit-txt">
+        <span class="eyebrow2">Bestsellers</span>
+        <h3>Aretes</h3>
+        <p>Desde minimalistas hasta statement, para cada ocasión.</p>
+        <button class="edit-btn" type="button">Descubrir</button>
+      </div>
+    </article>
+  </div>
 </section>
 
 
@@ -1427,6 +1487,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
   $("#search").addEventListener("input", e=>{ state.q=e.target.value; renderGrid(); });
   $("#sortBy").addEventListener("change", e=>{ state.sort=e.target.value; renderGrid(); });
   $("#priceRange").addEventListener("change", e=>{ state.price=e.target.value; renderGrid(); });
+
+  // editorial: activar categoría y llevar al catálogo
+  $$(".edit-card").forEach(card => card.addEventListener("click", ()=>{
+    state.tipo = card.dataset.tipo;
+    state.sub = "todos";
+    buildFilters();
+    renderGrid();
+    $("#catalogo").scrollIntoView({behavior:"smooth"});
+  }));
 
   // formularios
   $("#contactForm").addEventListener("submit", handleContact);
