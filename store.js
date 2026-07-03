@@ -36,12 +36,15 @@ const CATS = {
   sets:       { label:"Sets" },
   statement:  { label:"Aretes · Statement" },
   candongas:  { label:"Candongas" },
-  studs:      { label:"Mini Studs" }
+  studs:      { label:"Mini Studs" },
+  dijes:      { label:"Cadenas y Dijes" },
+  gargantillas:{ label:"Gargantillas" }
 };
 
 /* Categorías que pertenecen a anillos (para el filtro agrupado) */
 const RING_CATS = ["filigrana","color","compromiso","sets"];
 const EARRING_CATS = ["statement","candongas","studs"];
+const NECKLACE_CATS = ["dijes","gargantillas"];
 
 /* Navegación del catálogo en dos niveles (estilo Cartier / Tiffany):
    nivel 1 = tipo de joya · nivel 2 = colección / subcategoría */
@@ -59,6 +62,11 @@ const TYPES = [
       { key:"statement", label:"Statement" },
       { key:"candongas", label:"Candongas" },
       { key:"studs",     label:"Mini Studs" }
+  ]},
+  { key:"collares", label:"Collares", subs:[
+      { key:"todos",        label:"Todos" },
+      { key:"dijes",        label:"Cadenas y Dijes" },
+      { key:"gargantillas", label:"Gargantillas" }
   ]}
 ];
 

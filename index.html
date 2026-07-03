@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Versión ACTUALIZADA con paleta oficial AV - 2026-07-02 -->
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +6,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#14110F">
 <meta name="description" content="Alejandra Vergel · Alta joyería. Anillos artesanales en filigrana colombiana y piedras naturales. Piezas únicas hechas a mano.">
-<title>✓ ACTUALIZADO - Alejandra Vergel · Joyas de Autor (2026-07-02)</title>
+<title>Alejandra Vergel · Joyas de Autor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -782,7 +781,7 @@ section{padding:96px 0}
     <div class="sec-head reveal">
       <span class="eyebrow">La colección</span>
       <h2>Joyas hechas a mano</h2>
-      <p>Anillos y aretes en filigrana colombiana y piedras naturales. Cada pieza se elabora bajo pedido y es personalizable en piedra y acabado. Encuentra la tuya.</p>
+      <p>Anillos, aretes y collares en filigrana colombiana y piedras naturales. Cada pieza se elabora bajo pedido y es personalizable en piedra y acabado. Encuentra la tuya.</p>
     </div>
 
     <div class="cat-nav reveal">
@@ -1066,6 +1065,7 @@ function applyFilters(){
   let list = PRODUCTS.slice();
   if(state.tipo==="anillos") list = list.filter(p=>RING_CATS.includes(p.cat));
   else if(state.tipo==="aretes") list = list.filter(p=>EARRING_CATS.includes(p.cat));
+  else if(state.tipo==="collares") list = list.filter(p=>NECKLACE_CATS.includes(p.cat));
   if(state.sub && state.sub!=="todos") list = list.filter(p=>p.cat===state.sub);
   if(state.q){
     const q = state.q.toLowerCase();

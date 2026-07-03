@@ -769,6 +769,248 @@ const PRODUCTS = [
     desc:"Combinan la intensidad del verde de las esmeraldas de laboratorio con el brillo de las moissanitas, logrando una pieza elegante, contemporánea y llena de luz. Personalizables con distintas piedras. Sobre pedido (15 a 25 días hábiles).",
     metal:"silver", gem:"#1F8A70",
     images:["img/aretes/vera-1.png"]
+  },
+
+  /* ============================================================
+     COLLARES · CADENAS Y DIJES
+     ============================================================ */
+  {
+    id:"co-amet", sku:"COL-AMET", cat:"dijes", name:"Collar Amet",
+    price:160000, originalPrice:214000,
+    materials:"Plata ley 925 · Moissanita en dije rectangular",
+    gemName:"Moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Pieza de autor de líneas limpias y contemporáneas, diseñada para resaltar una deslumbrante moissanita engastada en un elegante dije rectangular. Incluye cadena en plata ley 925. Disponible en plateado o dorado. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#FFFFFF",
+    images:["img/collares/amet-1.jpg"]
+  },
+  {
+    id:"co-mini-charms", sku:"COL-MCHARM", cat:"dijes", name:"Collar Mini Charms",
+    price:190000, originalPrice:255000,
+    materials:"Plata ley 925 · Circones multicolor",
+    gemName:"Circones multicolor", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya delicada y versátil: una cadena en plata ley 925 acompañada por pequeños corazones adornados con circones de diferentes colores. Alegre, elegante y perfecta para llevar todos los días, sola o combinada con otras cadenas. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#C56FA0",
+    images:["img/collares/mini-charms-1.jpg","img/collares/mini-charms-2.jpg","img/collares/mini-charms-3.jpg"]
+  },
+  {
+    id:"co-dijes-nacimiento", sku:"COL-NACIM", cat:"dijes", name:"Dijes de Nacimiento",
+    price:160000, originalPrice:214000,
+    materials:"Plata ley 925 · Piedra del mes de nacimiento",
+    gemName:"Piedra de nacimiento", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Cadena delicada con la piedra del mes de nacimiento, un regalo lleno de significado para celebrar los momentos que marcan la vida. Elige la gema del mes y el acabado plateado o dorado. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#7FBFD4",
+    images:["img/collares/dijes-nacimiento-1.jpg","img/collares/dijes-nacimiento-2.jpg","img/collares/dijes-nacimiento-3.jpg"]
+  },
+  {
+    id:"co-amuleto", sku:"COL-AMUL", cat:"dijes", name:"Amuleto · Set de 3 dijes",
+    price:450000, originalPrice:599000,
+    materials:"Plata ley 925 · Dijes grabables con inicial o nombre",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Colección de tres delicados dijes personalizados: cada uno puede grabarse con la inicial o el nombre que desees, convirtiéndose en un símbolo único de amor e identidad. Incluye cadena en plata ley 925. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C9A24B",
+    images:["img/collares/amuleto-1.jpg"]
+  },
+  {
+    id:"co-amuleto-corazon", sku:"COL-AMULC", cat:"dijes", name:"Amuleto Corazón",
+    price:250000, originalPrice:333000,
+    materials:"Plata ley 925 · Dije corazón grabable",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya personalizada creada para conservar cerca aquello que más amas. Su delicado corazón puede grabarse con una inicial, un nombre o una palabra especial, convirtiéndose en un recuerdo lleno de significado. Incluye cadena. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C9A24B",
+    images:["img/collares/amuleto-corazon-1.jpg","img/collares/amuleto-corazon-2.jpg"]
+  },
+  {
+    id:"co-azure", sku:"COL-AZURE", cat:"dijes", name:"Collar Azure",
+    price:230000, originalPrice:306000,
+    materials:"Plata ley 925 · Topacio azul natural",
+    gemName:"Topacio azul", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegante dije rectangular con un luminoso topacio azul, gema que evoca la serenidad del cielo y la profundidad del océano. Su diseño minimalista deja que la piedra sea la protagonista. Personalizable con diferentes gemas. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#3FA9D4",
+    images:["img/collares/azure-1.jpg"]
+  },
+  {
+    id:"co-azur-gota", sku:"COL-AZURG", cat:"dijes", name:"Azur Gota",
+    price:270000, originalPrice:359000,
+    materials:"Plata ley 925 · Turquesa natural o fósil natural",
+    gemName:"Turquesa / fósil natural", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Delicado dije en forma de gota que resalta la belleza de las piedras naturales. Disponible con turquesa o con un exclusivo fósil natural: cada pieza posee colores y vetas únicas que la hacen irrepetible. Incluye cadena. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#7FD4D0",
+    images:["img/collares/azur-gota-1.jpg"]
+  },
+  {
+    id:"co-latido", sku:"COL-LATIDO", cat:"dijes", name:"Collar Latido",
+    price:260000, originalPrice:346000,
+    materials:"Plata ley 925 · Corazón con moissanitas",
+    gemName:"Moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Simboliza el amor y los vínculos que nos acompañan para siempre. Su delicado corazón está adornado con una brillante piedra central rodeada de moissanitas que realzan su luminosidad. Una joya romántica y atemporal. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#A6192E",
+    images:["img/collares/latido-1.jpg","img/collares/latido-2.jpg"]
+  },
+  {
+    id:"co-emera-duo", sku:"COL-EMERA", cat:"dijes", name:"Emera Duo",
+    price:590000, originalPrice:786000,
+    materials:"Plata ley 925 · Esmeralda de laboratorio y moissanita",
+    gemName:"Esmeralda y moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Celebra la armonía entre dos gemas excepcionales: una elegante esmeralda de laboratorio junto a una brillante moissanita, en equilibrio perfecto entre color y luz. Disponible también con esmeralda y diamante naturales bajo cotización. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#1F8A70",
+    images:["img/collares/emera-duo-1.jpg","img/collares/emera-duo-2.jpg"]
+  },
+  {
+    id:"co-granate-duo", sku:"COL-GRANA", cat:"dijes", name:"Granate Duo",
+    price:490000, originalPrice:652000,
+    materials:"Plata ley 925 · Granate natural y moissanita",
+    gemName:"Granate y moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Versión del diseño Duo protagonizada por un granate natural de tono profundo acompañado de una brillante moissanita. Un contraste cálido y sofisticado entre color y luz, en una pieza contemporánea y elegante. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#9B3B3B",
+    images:["img/collares/granate-duo-1.jpg","img/collares/granate-duo-2.jpg"]
+  },
+  {
+    id:"co-lady", sku:"COL-LADY", cat:"dijes", name:"Collar Lady",
+    price:200000, originalPrice:266000,
+    materials:"Plata ley 925 · Gema oval con halo de circones",
+    gemName:"Gema personalizable", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegante dije oval rodeado por un delicado halo de circones, disponible en una variedad de colores de gema para elegir. Una joya clásica, femenina y luminosa que complementa cualquier estilo. Incluye cadena. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#C56FA0",
+    images:["img/collares/lady-1.jpg","img/collares/lady-2.jpg","img/collares/lady-3.jpg"]
+  },
+  {
+    id:"co-lady-mini", sku:"COL-LADYM", cat:"dijes", name:"Collar Lady Mini",
+    price:180000, originalPrice:240000,
+    materials:"Plata ley 925 · Gema oval con halo de circones",
+    gemName:"Gema personalizable", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Versión delicada del Collar Lady: un pequeño dije oval con halo de circones, disponible en distintos colores de gema. Sutil y elegante, ideal para el uso diario o para combinar en capas. Incluye cadena. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#E86FA0",
+    images:["img/collares/lady-mini-1.jpg"]
+  },
+  {
+    id:"co-laguna", sku:"COL-LAGUNA", cat:"dijes", name:"Collar Laguna",
+    price:350000, originalPrice:466000,
+    materials:"Plata ley 925 con baño de oro · Topacio azul y esmeraldas",
+    gemName:"Topacio azul y esmeralda", colors:["Baño de oro","Plateado"], sizes:[],
+    desc:"Composición orgánica que reúne un luminoso topacio azul redondo con esmeraldas y un destello de moissanita, evocando los colores del agua. Una pieza fresca, elegante y llena de personalidad. Piedras personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#3FA9D4",
+    images:["img/collares/laguna-1.jpg"]
+  },
+  {
+    id:"co-lila", sku:"COL-LILA", cat:"dijes", name:"Collar Lila",
+    price:180000, originalPrice:240000,
+    materials:"Plata ley 925 con baño de oro · Amatista en gota",
+    gemName:"Amatista", colors:["Baño de oro","Plateado"], sizes:[],
+    desc:"Cadena delicada con una amatista en gota de tono lila suave, pensada para acompañarte con un toque de color discreto y femenino. Ligera y versátil, perfecta para el día a día. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#9B6FB3",
+    images:["img/collares/lila-1.jpg"]
+  },
+  {
+    id:"co-luna", sku:"COL-LUNA", cat:"dijes", name:"Collar Luna",
+    price:210000, originalPrice:280000,
+    materials:"Plata ley 925 con baño de oro · Gemas delicadas",
+    gemName:"Gema personalizable", colors:["Baño de oro","Plateado"], sizes:[],
+    desc:"Diseño delicado pensado para el estilo en capas: cadenas finas con pequeñas gemas que aportan un brillo sutil y sofisticado. Ideal para usar solo o combinado con otros collares. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#FFFFFF",
+    images:["img/collares/luna-1.jpg"]
+  },
+  {
+    id:"co-mi-todo", sku:"COL-MITODO", cat:"dijes", name:"Collar Mi Todo",
+    price:260000, originalPrice:346000,
+    materials:"Plata ley 925 · Dijes de figuras con circones de color",
+    gemName:"Circones de color", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Un homenaje a los que más amas: pequeñas figuras con circones de color que representan a cada miembro de la familia. Personalizable con la cantidad de dijes y los colores que elijas. Incluye cadena. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C56FA0",
+    images:["img/collares/mi-todo-1.jpg","img/collares/mi-todo-2.jpg"]
+  },
+  {
+    id:"co-heart-charm", sku:"COL-HEART", cat:"dijes", name:"Heart Charm",
+    price:240000, originalPrice:320000,
+    materials:"Plata ley 925 · Corazón con turquesas naturales",
+    gemName:"Turquesa", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Dije en forma de corazón adornado con turquesas naturales que aportan un color fresco y vibrante. Una pieza romántica y contemporánea, elaborada artesanalmente. Incluye cadena en plata ley 925. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#0ABAB5",
+    images:["img/collares/heart-charm-1.jpg","img/collares/heart-charm-2.jpg","img/collares/heart-charm-3.jpg"]
+  },
+  {
+    id:"co-numa", sku:"COL-NUMA", cat:"dijes", name:"Collar Numa",
+    price:290000, originalPrice:386000,
+    materials:"Plata ley 925 con baño de oro · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Baño de oro","Plateado"], sizes:[],
+    desc:"Rosetón de filigrana tejido completamente a mano por maestros artesanos colombianos. Su diseño floral captura la delicadeza de la técnica ancestral en una pieza ligera y elegante. Incluye cadena. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/collares/numa-1.jpg","img/collares/numa-2.jpg"]
+  },
+  {
+    id:"co-prisma", sku:"COL-PRISMA", cat:"dijes", name:"Collar Prisma",
+    price:220000, originalPrice:293000,
+    materials:"Plata ley 925 con baño de oro · Gema cuadrada natural",
+    gemName:"Gema personalizable", colors:["Baño de oro","Plateado"], sizes:[],
+    desc:"Diseño minimalista protagonizado por una gema cuadrada engastada sobre una cadena fina. Disponible en distintas piedras y tonos para elegir. Una joya geométrica, moderna y atemporal. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#8B6F5C",
+    images:["img/collares/prisma-1.jpg"]
+  },
+  {
+    id:"co-prisma-amatista", sku:"COL-PRISA", cat:"dijes", name:"Prisma Amatista",
+    price:240000, originalPrice:320000,
+    materials:"Plata ley 925 · Amatista con halo de circones",
+    gemName:"Amatista", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Elegante dije de amatista enmarcado por un delicado halo de circones que realzan su brillo. Perfecto solo o en capas con otras cadenas. Piedra personalizable. Incluye cadena en plata ley 925. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#9B6FB3",
+    images:["img/collares/prisma-amatista-1.jpg"]
+  },
+  {
+    id:"co-prisma-rectangular", sku:"COL-PRISR", cat:"dijes", name:"Prisma Rectangular",
+    price:290000, originalPrice:386000,
+    materials:"Plata ley 925 · Gema rectangular sobre cadena gruesa",
+    gemName:"Gema personalizable", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Versión statement del diseño Prisma: una gema rectangular de gran formato sobre una cadena de eslabones con carácter. Disponible en amatista, prasiolita o topacio azul, entre otras. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#9B6FB3",
+    images:["img/collares/prisma-rectangular-1.jpg"]
+  },
+  {
+    id:"co-tres-almas", sku:"COL-TRESA", cat:"dijes", name:"Collar Tres Almas",
+    price:390000, originalPrice:519000,
+    materials:"Plata ley 925 con baño de oro · Tres gemas naturales",
+    gemName:"Gemas naturales", colors:["Baño de oro","Plateado"], sizes:[],
+    desc:"Tres gemas naturales reunidas en una sola pieza, simbolizando los vínculos que nos unen. Cada composición combina colores y cortes distintos, creando una joya única y llena de significado. Piedras personalizables. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#7FBFD4",
+    images:["img/collares/tres-almas-1.jpg","img/collares/tres-almas-2.jpg"]
+  },
+
+  /* ============================================================
+     COLLARES · GARGANTILLAS
+     ============================================================ */
+  {
+    id:"co-gargantilla-raiz", sku:"COL-RAIZ", cat:"gargantillas", name:"Gargantilla Raíz",
+    price:470000, originalPrice:626000,
+    materials:"Plata ley 925 con baño de oro · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Baño de oro","Plateado"], sizes:[],
+    desc:"Gargantilla de eslabones tipo marquesa tejidos a mano en filigrana colombiana. Su diseño orgánico envuelve el cuello con elegancia, celebrando el legado de los maestros orfebres. Puede acompañarse con aretes a juego. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C9A24B",
+    images:["img/collares/gargantilla-raiz-1.jpg","img/collares/gargantilla-raiz-2.jpg","img/collares/gargantilla-raiz-3.jpg"]
+  },
+  {
+    id:"co-orquidea", sku:"COL-ORQUI", cat:"gargantillas", name:"Collar Orquídea",
+    price:170000, originalPrice:226000,
+    materials:"Bronce con baño de oro · Moissanita",
+    gemName:"Moissanita", colors:["Baño de oro"], sizes:[],
+    desc:"Inspirado en la flor más representativa de Colombia. Su delicado diseño resalta una brillante moissanita central y su cadena graduable ofrece comodidad y versatilidad. Elaborado artesanalmente por joyeros colombianos. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#FFFFFF",
+    images:["img/collares/orquidea-1.jpg","img/collares/orquidea-2.jpg"]
+  },
+  {
+    id:"co-mare", sku:"COL-MARE", cat:"gargantillas", name:"Collar Mare",
+    price:420000, originalPrice:559000,
+    materials:"Plata ley 925 · Filigrana y topacio natural en gota",
+    gemName:"Topacio azul", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Pieza de autor tejida a mano por maestros filigraneros colombianos. El delicado tejido de plata enmarca una hermosa gota de topacio natural, gema que evoca la serenidad del mar. Personalizable con diferentes piedras. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#3FA9D4",
+    images:["img/collares/mare-1.jpg","img/collares/mare-2.jpg"]
+  },
+  {
+    id:"co-origen", sku:"COL-ORIGEN", cat:"gargantillas", name:"Gargantilla Origen",
+    price:490000, originalPrice:652000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Homenaje a la tradición de la filigrana colombiana: un delicado tejido en hilos de plata ley 925 que envuelve el cuello con elegancia y sofisticación. Una joya atemporal que celebra la artesanía hecha a mano. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#E7D3A1",
+    images:["img/collares/origen-1.jpg"]
   }
 ];
 
