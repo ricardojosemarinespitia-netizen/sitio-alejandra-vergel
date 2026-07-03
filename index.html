@@ -109,12 +109,17 @@ section{padding:112px 0}
 .nav-inner .brand{justify-self:start}
 .nav-inner .nav-links{justify-self:center}
 .nav-inner .nav-actions{justify-self:end}
-.brand{display:block;position:relative;height:42px;width:160px;flex-shrink:0}
-.brand-logo{position:absolute;top:0;left:0;height:42px;width:auto;transition:opacity .4s}
-.brand-logo.on-dark{opacity:1}
-.brand-logo.on-light{opacity:0}
-.nav.scrolled .brand-logo.on-dark{opacity:0}
-.nav.scrolled .brand-logo.on-light{opacity:1}
+.brand{display:flex;align-items:center;gap:12px;line-height:1}
+.brand-mark{height:36px;width:auto;flex-shrink:0;transition:opacity .4s}
+.brand-mark.on-dark{position:absolute;opacity:1}
+.brand-mark.on-light{position:absolute;opacity:0}
+.nav.scrolled .brand-mark.on-dark{opacity:0}
+.nav.scrolled .brand-mark.on-light{opacity:1}
+.brand-txt{display:flex;flex-direction:column;align-items:flex-start}
+.brand .name{font-family:var(--serif);font-size:1.55rem;letter-spacing:.06em;color:#fff;transition:color .4s}
+.brand .tag{font-size:.56rem;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:4px;transition:color .4s}
+.nav.scrolled .brand .name{color:var(--noir)}
+.nav.scrolled .brand .tag{color:var(--ink-soft)}
 .nav-links{display:flex;gap:38px}
 .nav-links a{
   font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
@@ -570,13 +575,13 @@ section{padding:112px 0}
 
 /* ---------- Toast ---------- */
 .toast{
-  position:fixed;bottom:28px;left:50%;transform:translate(-50%,140%);
+  position:fixed;bottom:28px;left:50%;transform:translate(-50%,calc(100% + 60px));
   background:var(--noir);color:#fff;padding:15px 24px;border-radius:999px;
   font-size:.82rem;letter-spacing:.02em;z-index:120;display:flex;align-items:center;gap:10px;
   box-shadow:0 12px 40px -8px rgba(43,33,27,.4);transition:.45s cubic-bezier(.2,.7,.3,1);
-  max-width:90vw;
+  max-width:90vw;visibility:hidden;pointer-events:none;
 }
-.toast.show{transform:translate(-50%,0)}
+.toast.show{transform:translate(-50%,0);visibility:visible;pointer-events:auto}
 .toast svg{width:18px;height:18px;color:var(--gold-soft);flex-shrink:0}
 .toast a{color:var(--gold-soft);text-decoration:underline;font-weight:600;margin-left:4px;white-space:nowrap;cursor:pointer}
 .toast a:hover{opacity:.8}
@@ -640,10 +645,11 @@ section{padding:112px 0}
 }
 .modal-club-btn:hover{background:var(--cartier-deep)}
 .modal-club-close{
-  position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;
-  background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--ink);transition:.3s;
+  position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;z-index:8;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(4px);box-shadow:0 2px 12px rgba(0,0,0,.18);
+  display:grid;place-items:center;cursor:pointer;color:var(--noir);transition:.3s;
 }
-.modal-club-close:hover{background:var(--ivory);color:var(--cartier);transform:rotate(90deg)}
+.modal-club-close:hover{background:#fff;color:var(--cartier);transform:rotate(90deg)}
 
 /* ============================================================
    MODAL GUÍA DE TALLAS
@@ -682,7 +688,9 @@ section{padding:112px 0}
   section{padding:74px 0}
   .nav-links,.hero-meta{display:none}
   .burger{display:flex}
-  .nav-inner{height:70px}
+  .nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between}
+  .nav-actions{gap:6px}
+  .icon-btn,.burger{width:42px;height:42px}
   .nav-links{
     position:fixed;top:70px;left:0;width:100%;flex-direction:column;gap:0;
     background:var(--ivory);border-bottom:1px solid var(--line);padding:6px 0;
@@ -735,7 +743,7 @@ section{padding:112px 0}
   .modal-info{padding:28px 22px}
   .modal-actions{flex-wrap:wrap}
   .modal-actions .btn{flex:1 1 100%}
-  .toast{left:16px;right:16px;transform:translate(0,140%);max-width:none;border-radius:16px}
+  .toast{left:16px;right:16px;transform:translate(0,calc(100% + 60px));max-width:none;border-radius:16px}
   .toast.show{transform:translate(0,0)}
 }
 @media(max-width:360px){
@@ -749,8 +757,14 @@ section{padding:112px 0}
 <header class="nav" id="nav">
   <div class="container nav-inner">
     <a href="#inicio" class="brand">
-      <img class="brand-logo on-dark" src="img/brand/logo-full-white.png" alt="Alejandra Vergel · Joyas de Autor">
-      <img class="brand-logo on-light" src="img/brand/logo-full.png" alt="Alejandra Vergel · Joyas de Autor">
+      <span style="position:relative;display:inline-block;height:36px;width:32px">
+        <img class="brand-mark on-dark" src="img/brand/logo-mark-white.png" alt="">
+        <img class="brand-mark on-light" src="img/brand/logo-mark.png" alt="">
+      </span>
+      <span class="brand-txt">
+        <span class="name">Alejandra Vergel</span>
+        <span class="tag">Joyas de Autor</span>
+      </span>
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="#inicio">Inicio</a>
@@ -948,7 +962,10 @@ section{padding:112px 0}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <img src="img/brand/logo-full-white.png" alt="Alejandra Vergel · Joyas de Autor" style="height:40px;width:auto">
+        <div class="brand" style="align-items:center">
+          <img src="img/brand/logo-mark-white.png" alt="" style="height:34px;width:auto">
+          <span class="brand-txt"><span class="name" style="font-size:1.7rem;font-family:var(--serif)">Alejandra Vergel</span><span class="tag" style="font-size:.56rem;letter-spacing:.42em;text-transform:uppercase">Joyas de Autor</span></span>
+        </div>
         <p style="margin-top:18px;max-width:300px;font-weight:300;font-size:.9rem">Anillos hechos a mano en filigrana de plata ley 925 y piedras naturales. Artesanía colombiana, piezas únicas bajo pedido.</p>
         <a href="https://www.instagram.com/alejandravergel.co" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:rgba(247,244,239,.65);transition:.3s;font-size:.85rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(247,244,239,.65)'">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -1318,11 +1335,9 @@ async function handleGoogleCredential(response){
 /* ============================================================
    POPUP CLUB · apertura automática + registro manual
    ============================================================ */
-let _googleInited = false;
 function openClubPopup(){
   const co = $("#clubOverlay");
   if(co) co.classList.add("open");
-  if(!_googleInited){ initGoogleSignIn(); _googleInited = true; }
 }
 function closeClubPopup(){
   const co = $("#clubOverlay");
@@ -1394,7 +1409,7 @@ function initClubPhotos(){
 document.addEventListener("DOMContentLoaded", ()=>{
   initStore();              // carrito + drawer + toast (store.js)
   initClub();                // estado del Club (club.js)
-  // Google Sign-In se inicia lazy (solo cuando abre el modal del Club)
+  initGoogleSignIn();        // botón "Continuar con Google"
   initClubPhotos();          // fotos rotativas del modal Club
   buildFilters();
   renderGrid();
