@@ -109,17 +109,12 @@ section{padding:112px 0}
 .nav-inner .brand{justify-self:start}
 .nav-inner .nav-links{justify-self:center}
 .nav-inner .nav-actions{justify-self:end}
-.brand{display:flex;align-items:center;gap:12px;line-height:1}
-.brand-mark{height:36px;width:auto;flex-shrink:0;transition:opacity .4s}
-.brand-mark.on-dark{position:absolute;opacity:1}
-.brand-mark.on-light{position:absolute;opacity:0}
-.nav.scrolled .brand-mark.on-dark{opacity:0}
-.nav.scrolled .brand-mark.on-light{opacity:1}
-.brand-txt{display:flex;flex-direction:column;align-items:flex-start}
-.brand .name{font-family:var(--serif);font-size:1.55rem;letter-spacing:.06em;color:#fff;transition:color .4s}
-.brand .tag{font-size:.56rem;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:4px;transition:color .4s}
-.nav.scrolled .brand .name{color:var(--noir)}
-.nav.scrolled .brand .tag{color:var(--ink-soft)}
+.brand{display:block;position:relative;height:42px;width:160px;flex-shrink:0}
+.brand-logo{position:absolute;top:0;left:0;height:42px;width:auto;transition:opacity .4s}
+.brand-logo.on-dark{opacity:1}
+.brand-logo.on-light{opacity:0}
+.nav.scrolled .brand-logo.on-dark{opacity:0}
+.nav.scrolled .brand-logo.on-light{opacity:1}
 .nav-links{display:flex;gap:38px}
 .nav-links a{
   font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
@@ -605,10 +600,11 @@ section{padding:112px 0}
 .modal-club-bg{position:absolute;inset:0;background:rgba(20,17,15,.6);backdrop-filter:blur(4px)}
 .modal-club-card{
   position:relative;background:var(--white);border-radius:var(--radius);
-  width:min(480px,100%);padding:40px;transform:translateY(20px) scale(.98);transition:.4s;
+  width:min(480px,100%);transform:translateY(20px) scale(.98);transition:.4s;
   box-shadow:0 20px 60px -20px rgba(0,0,0,.3);
-  max-height:92vh;max-height:92dvh;overflow-y:auto;
+  max-height:92vh;max-height:92dvh;display:flex;flex-direction:column;
 }
+.modal-club-body{overflow-y:auto;padding:40px;flex:1}
 .modal-club.open .modal-club-card{transform:none}
 /* Carrusel de fotos aleatorias del Club (cambian cada 1.5s) */
 .club-photos{position:relative;width:100%;height:160px;border-radius:var(--radius);overflow:hidden;margin-bottom:24px;background:linear-gradient(155deg,#FDF8F0,#EFE3D3)}
@@ -617,16 +613,17 @@ section{padding:112px 0}
 .modal-club h2{font-family:var(--serif);font-size:2rem;margin-bottom:8px;color:var(--noir)}
 @media(max-width:480px){
   .modal-club{padding:12px}
-  .modal-club-card{padding:26px 22px;max-height:94vh;max-height:94dvh}
-  .club-photos{height:120px;margin-bottom:18px}
-  .modal-club h2{font-size:1.6rem}
-  .modal-club .subtitle{font-size:.84rem;margin-bottom:18px}
-  .modal-club .form-group{margin-bottom:14px}
+  .modal-club-card{max-height:96vh;max-height:96dvh}
+  .modal-club-body{padding:22px 22px 28px}
+  .club-photos{height:100px;margin-bottom:14px}
+  .modal-club h2{font-size:1.5rem;margin-bottom:6px}
+  .modal-club .subtitle{font-size:.84rem;margin-bottom:14px}
+  .modal-club .form-group{margin-bottom:12px}
 }
 @media(max-height:700px){
-  .club-photos{height:110px;margin-bottom:14px}
-  .modal-club h2{font-size:1.5rem;margin-bottom:4px}
-  .modal-club .subtitle{margin-bottom:14px}
+  .club-photos{height:90px;margin-bottom:12px}
+  .modal-club h2{font-size:1.4rem;margin-bottom:4px}
+  .modal-club .subtitle{margin-bottom:12px}
 }
 .modal-club .subtitle{font-size:.9rem;color:var(--ink-soft);margin-bottom:24px}
 .modal-club .form-group{margin-bottom:18px}
@@ -707,22 +704,25 @@ section{padding:112px 0}
   .cat-types{gap:24px;padding-bottom:14px}
   .cat-type{font-size:1rem}
   .cat-type.active::after{bottom:-15px}
-  .cat-subs{gap:16px;margin-top:16px}
+  .cat-subs{gap:16px;margin-top:16px;min-height:0}
   .cat-sub{font-size:.64rem;letter-spacing:.14em}
-  .filters-row2{gap:10px;margin-bottom:32px}
+  .filters-row2{gap:10px;margin-bottom:24px}
   .search-box input{width:100%}
   .search-box{flex:1;min-width:160px}
   .select-wrap{flex:1;min-width:140px}
   .select-wrap select{width:100%}
-  .card-body{padding:14px 14px 18px}
-  .card-name{font-size:1.12rem}
-  .card-price{font-size:1.1rem}
-  .add-mini{width:38px;height:38px}
+  .card-body{padding:12px 12px 16px}
+  .card-name{font-size:1.05rem}
+  .card-mat{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card-price{font-size:1.05rem}
+  .add-mini{width:36px;height:36px}
   .card-quick{display:none}
   .about-feats{gap:24px;flex-wrap:wrap}
   .form-card{padding:26px 20px}
   .news-form input{min-width:100%}
   .news-form .btn{width:100%;justify-content:center}
+  .sec-head p{display:none}
+  .sec-head{margin-bottom:36px}
 }
 @media(max-width:480px){
   .container{width:92%}
@@ -749,14 +749,8 @@ section{padding:112px 0}
 <header class="nav" id="nav">
   <div class="container nav-inner">
     <a href="#inicio" class="brand">
-      <span style="position:relative;display:inline-block;height:36px;width:32px">
-        <img class="brand-mark on-dark" src="img/brand/logo-mark-white.png" alt="">
-        <img class="brand-mark on-light" src="img/brand/logo-mark.png" alt="">
-      </span>
-      <span class="brand-txt">
-        <span class="name">Alejandra Vergel</span>
-        <span class="tag">Joyas de Autor</span>
-      </span>
+      <img class="brand-logo on-dark" src="img/brand/logo-full-white.png" alt="Alejandra Vergel · Joyas de Autor">
+      <img class="brand-logo on-light" src="img/brand/logo-full.png" alt="Alejandra Vergel · Joyas de Autor">
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="#inicio">Inicio</a>
@@ -954,10 +948,7 @@ section{padding:112px 0}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="brand" style="align-items:center">
-          <img src="img/brand/logo-mark-white.png" alt="" style="height:34px;width:auto">
-          <span class="brand-txt"><span class="name" style="font-size:1.7rem;font-family:var(--serif)">Alejandra Vergel</span><span class="tag" style="font-size:.56rem;letter-spacing:.42em;text-transform:uppercase">Joyas de Autor</span></span>
-        </div>
+        <img src="img/brand/logo-full-white.png" alt="Alejandra Vergel · Joyas de Autor" style="height:40px;width:auto">
         <p style="margin-top:18px;max-width:300px;font-weight:300;font-size:.9rem">Anillos hechos a mano en filigrana de plata ley 925 y piedras naturales. Artesanía colombiana, piezas únicas bajo pedido.</p>
         <a href="https://www.instagram.com/alejandravergel.co" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:rgba(247,244,239,.65);transition:.3s;font-size:.85rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(247,244,239,.65)'">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -993,24 +984,26 @@ section{padding:112px 0}
     <button class="modal-club-close" id="clubClose" aria-label="Cerrar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
-    <div class="club-photos" id="clubPhotos"></div>
-    <span class="eyebrow" style="color:var(--gold)">Club Alejandra Vergel</span>
-    <h2>Un 15% en tu primera joya</h2>
-    <p class="subtitle">Regístrate y recibe tu código de descuento, además de acceso anticipado a lanzamientos y ediciones limitadas.</p>
-    <form id="clubForm" novalidate>
-      <div class="form-group">
-        <label for="clubName">Nombre</label>
-        <input type="text" id="clubName" placeholder="Tu nombre">
-      </div>
-      <div class="form-group">
-        <label for="clubEmail">Correo electrónico</label>
-        <input type="email" id="clubEmail" placeholder="tucorreo@ejemplo.com">
-      </div>
-      <button type="submit" class="modal-club-btn" id="clubSubmit">Unirme al Club</button>
-    </form>
-    <div class="news-divider" style="margin:18px 0"><span>o</span></div>
-    <div id="googleSignInBtnModal" class="google-signin-wrap" style="display:flex;justify-content:center"></div>
-    <div class="news-msg" id="clubMsg" style="color:var(--ink-soft);margin-top:14px;min-height:20px;font-size:.88rem"></div>
+    <div class="modal-club-body">
+      <div class="club-photos" id="clubPhotos"></div>
+      <span class="eyebrow" style="color:var(--gold)">Club Alejandra Vergel</span>
+      <h2>Un 15% en tu primera joya</h2>
+      <p class="subtitle">Regístrate y recibe tu código de descuento, además de acceso anticipado a lanzamientos y ediciones limitadas.</p>
+      <div id="googleSignInBtnModal" class="google-signin-wrap" style="display:flex;justify-content:center;margin-bottom:4px"></div>
+      <div class="news-divider" style="margin:14px 0"><span>o</span></div>
+      <form id="clubForm" novalidate>
+        <div class="form-group">
+          <label for="clubName">Nombre</label>
+          <input type="text" id="clubName" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label for="clubEmail">Correo electrónico</label>
+          <input type="email" id="clubEmail" placeholder="tucorreo@ejemplo.com">
+        </div>
+        <button type="submit" class="modal-club-btn" id="clubSubmit">Unirme al Club</button>
+      </form>
+      <div class="news-msg" id="clubMsg" style="color:var(--ink-soft);margin-top:14px;min-height:20px;font-size:.88rem"></div>
+    </div>
   </div>
 </div>
 
@@ -1325,9 +1318,11 @@ async function handleGoogleCredential(response){
 /* ============================================================
    POPUP CLUB · apertura automática + registro manual
    ============================================================ */
+let _googleInited = false;
 function openClubPopup(){
   const co = $("#clubOverlay");
   if(co) co.classList.add("open");
+  if(!_googleInited){ initGoogleSignIn(); _googleInited = true; }
 }
 function closeClubPopup(){
   const co = $("#clubOverlay");
@@ -1399,7 +1394,7 @@ function initClubPhotos(){
 document.addEventListener("DOMContentLoaded", ()=>{
   initStore();              // carrito + drawer + toast (store.js)
   initClub();                // estado del Club (club.js)
-  initGoogleSignIn();        // botón "Continuar con Google"
+  // Google Sign-In se inicia lazy (solo cuando abre el modal del Club)
   initClubPhotos();          // fotos rotativas del modal Club
   buildFilters();
   renderGrid();
