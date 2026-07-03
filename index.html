@@ -66,7 +66,7 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
   text-transform:uppercase;color:var(--gold);font-weight:500;
 }
 .container{width:min(1240px,92%);margin-inline:auto}
-section{padding:96px 0}
+section{padding:112px 0}
 
 /* ---------- Botones ---------- */
 .btn{
@@ -201,10 +201,10 @@ section{padding:96px 0}
   color:#fff;text-align:center;z-index:5;
 }
 .hp-central-overlay .eyebrow{
-  color:var(--vainilla);letter-spacing:.44em;font-size:.66rem;margin-bottom:14px;opacity:.92;
+  color:var(--vainilla);letter-spacing:.46em;font-size:.68rem;margin-bottom:18px;opacity:.92;
 }
 .hp-central-overlay .h1-name{
-  font-family:var(--serif);font-size:clamp(2.1rem,4.2vw,3.6rem);
+  font-family:var(--serif);font-size:clamp(2.3rem,4.6vw,4.2rem);
   font-weight:500;letter-spacing:.05em;color:#fff;
   line-height:1;margin:0;
 }
@@ -213,9 +213,9 @@ section{padding:96px 0}
   background:linear-gradient(90deg,transparent,var(--gold-soft),transparent);
 }
 .hp-central-overlay .h1-surname{
-  font-family:var(--serif);font-size:clamp(2.1rem,4.2vw,3.6rem);
+  font-family:var(--serif);font-size:clamp(2.3rem,4.6vw,4.2rem);
   font-weight:400;font-style:italic;letter-spacing:.05em;
-  color:var(--gold-soft);line-height:1;margin:0 0 30px;
+  color:var(--gold-soft);line-height:1;margin:0 0 34px;
 }
 
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
@@ -337,6 +337,9 @@ section{padding:96px 0}
   display:flex;flex-direction:column;cursor:pointer;
 }
 .card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
+/* Entrada suave de las cards (solo opacidad — no interfiere con el hover) */
+#grid .card{opacity:0;transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s cubic-bezier(.2,.7,.3,1),border-color .45s cubic-bezier(.2,.7,.3,1)}
+#grid .card.in{opacity:1}
 .card-media{
   position:relative;aspect-ratio:1/1;
   background:linear-gradient(155deg,#FDF8F0,#EFE3D3);
@@ -998,7 +1001,7 @@ section{padding:96px 0}
   <div class="drawer-body" id="cartBody"></div>
   <div class="drawer-foot" id="cartFoot" style="display:none">
     <div class="cart-total"><span class="lbl">Total</span><span class="val" id="cartTotal">$ 0</span></div>
-    <button class="btn btn-dark" id="checkoutBtn">Finalizar compra</button>
+    <button class="btn btn-dark" id="checkoutBtn">Continuar compra</button>
   </div>
 </aside>
 
@@ -1207,6 +1210,7 @@ function observeReveals(){
     }, { threshold:.12 });
   }
   $$(".reveal:not(.in)").forEach(el=>io.observe(el));
+  $$("#grid .card:not(.in)").forEach(el=>io.observe(el));
 }
 
 /* ============================================================

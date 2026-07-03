@@ -55,17 +55,20 @@ function shippingCost(subtotalConDescuento){
 
 /* ---------- departamentos / municipios (DANE) ---------- */
 function fillDeptList(){
-  const dl = $("#deptList");
-  dl.innerHTML = Object.keys(COLOMBIA).map(d => `<option value="${d}">`).join("");
+  const sel = $("#departamento");
+  sel.innerHTML = ['<option value="">Selecciona tu departamento…</option>']
+    .concat(Object.keys(COLOMBIA).map(d => `<option value="${d}">${d}</option>`))
+    .join("");
 }
 function fillMuniList(dept, metroOnly){
-  const dl = $("#muniList");
-  const muniInput = $("#municipio");
+  const sel = $("#municipio");
   let list = (dept && COLOMBIA[dept]) ? COLOMBIA[dept] : [];
   if(metroOnly) list = list.filter(m => METRO_CITIES.some(c => norm(c)===norm(m)));
-  dl.innerHTML = list.map(m => `<option value="${m}">`).join("");
-  muniInput.disabled = !list.length;
-  muniInput.placeholder = list.length ? "Escribe o selecciona..." : "Elige el departamento primero";
+  const ph = list.length ? "Selecciona tu municipio…" : "Elige el departamento primero";
+  sel.innerHTML = ['<option value="">'+ph+'</option>']
+    .concat(list.map(m => `<option value="${m}">${m}</option>`))
+    .join("");
+  sel.disabled = !list.length;
 }
 function onDeptChange(){
   const dept = findDept($("#departamento").value);
@@ -82,14 +85,14 @@ function applyMethod(method){
   if(method === "metro"){
     // El área metropolitana pertenece al Atlántico
     $("#departamento").value = METRO_DEPT;
-    $("#departamento").readOnly = true;
+    $("#departamento").disabled = true;   // <select> no admite readOnly → se bloquea con disabled
     fillMuniList(METRO_DEPT, true);
     if(!findMuni(METRO_DEPT, $("#municipio").value) || !isMetro(METRO_DEPT, $("#municipio").value)){
       $("#municipio").value = "Barranquilla";
     }
     $("#muniHint").textContent = "Barranquilla, Soledad, Malambo, Galapa o Puerto Colombia.";
   } else {
-    $("#departamento").readOnly = false;
+    $("#departamento").disabled = false;
     $("#muniHint").textContent = "";
     fillMuniList(findDept($("#departamento").value), false);
   }
@@ -350,7 +353,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initCoupon();
 
   $("#departamento").addEventListener("change", onDeptChange);
-  $("#departamento").addEventListener("blur", onDeptChange);
   $("#municipio").addEventListener("change", () => {
     const dept = findDept($("#departamento").value);
     const muni = findMuni(dept, $("#municipio").value);

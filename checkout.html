@@ -69,8 +69,15 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
   width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:var(--radius);
   font-family:inherit;font-size:.95rem;color:var(--ink);background:var(--white);transition:.3s;
 }
-.fgroup input:focus,.fgroup textarea:focus{outline:none;border-color:var(--gold);background:#FFFDF8}
-.fgroup input.invalid{border-color:var(--rose-deep);background:rgba(206,166,155,.07)}
+.fgroup input:focus,.fgroup textarea:focus,.fgroup select:focus{outline:none;border-color:var(--gold);background:#FFFDF8}
+.fgroup input.invalid,.fgroup select.invalid{border-color:var(--rose-deep);background:rgba(206,166,155,.07)}
+.fgroup select{
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  padding-right:40px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%2385756A' stroke-width='2'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;
+}
+.fgroup select:disabled{background-color:var(--ivory);color:var(--ink-soft);cursor:not-allowed;opacity:.9}
 .fgroup .hint{font-size:.74rem;color:var(--ink-soft);margin-top:5px}
 .fgroup textarea{resize:vertical;min-height:74px}
 .fcheck{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--ink-soft);margin-top:10px;cursor:pointer}
@@ -268,13 +275,15 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
         <div class="frow">
           <div class="fgroup">
             <label for="departamento">Departamento *</label>
-            <input type="text" id="departamento" list="deptList" placeholder="Escribe o selecciona..." autocomplete="off">
-            <datalist id="deptList"></datalist>
+            <select id="departamento">
+              <option value="">Selecciona tu departamento…</option>
+            </select>
           </div>
           <div class="fgroup">
             <label for="municipio">Municipio / Ciudad *</label>
-            <input type="text" id="municipio" list="muniList" placeholder="Elige el departamento primero" autocomplete="off" disabled>
-            <datalist id="muniList"></datalist>
+            <select id="municipio" disabled>
+              <option value="">Elige el departamento primero</option>
+            </select>
             <p class="hint" id="muniHint"></p>
           </div>
         </div>
