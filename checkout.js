@@ -40,17 +40,12 @@ function findMuni(dept, value){
   return COLOMBIA[dept].find(m => norm(m) === v) || null;
 }
 
-/* ---------- costo de envío ---------- */
-function isMetro(dept, muni){
-  return dept === METRO_DEPT && !!muni && METRO_CITIES.some(c => norm(c) === norm(muni));
-}
+/* ---------- costo de envío ----------
+   Área metropolitana de Barranquilla: SIEMPRE $8.000 (nunca gratis).
+   Envío nacional: gratis desde $200.000, si no, $15.000. */
 function shippingCost(subtotalConDescuento){
-  if(subtotalConDescuento >= FREE_SHIPPING_FROM) return 0;
-  const dept = findDept($("#departamento").value);
-  const muni = findMuni(dept, $("#municipio").value);
-  // La tarifa metro aplica si el método es metro O si la dirección está en el área metropolitana
-  if(ck.method === "metro" || isMetro(dept, muni)) return SHIP_METRO;
-  return SHIP_NACIONAL;
+  if(ck.method === "metro") return SHIP_METRO;
+  return subtotalConDescuento >= FREE_SHIPPING_FROM ? 0 : SHIP_NACIONAL;
 }
 
 /* ---------- departamentos / municipios (DANE) ---------- */
@@ -146,7 +141,7 @@ function renderSummary(){
   $("#sumTotal").textContent = money(subDesc + ship);
 
   // precios en las tarjetas de método
-  $("#metroPrice").textContent = subDesc >= FREE_SHIPPING_FROM ? "Gratis" : money(SHIP_METRO);
+  $("#metroPrice").textContent = money(SHIP_METRO); // siempre $8.000, nunca gratis
   $("#nacionalPrice").textContent = subDesc >= FREE_SHIPPING_FROM ? "Gratis" : money(SHIP_NACIONAL);
 }
 

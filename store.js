@@ -217,7 +217,7 @@ function showToast(msg){
   if(m) m.textContent = msg;
   t.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>t.classList.remove("show"), 2600);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 3500);
 }
 
 /* ============================================================
@@ -230,6 +230,7 @@ function initStore(){
   const cl=$("#closeCart");   if(cl) cl.onclick = closeDrawer;
   const ov=$("#overlay");     if(ov) ov.onclick = closeDrawer;
   const cb=$("#checkoutBtn"); if(cb) cb.onclick = checkout;
+  const tcl=$("#toastCartLink"); if(tcl) tcl.onclick = ()=>{ $("#toast").classList.remove("show"); openDrawer(); };
   document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeDrawer(); const g=$("#guideModal"); if(g) g.classList.remove("open"); } });
 
   // Guía de tallas — delegación: funciona aunque el contenido se re-renderice
