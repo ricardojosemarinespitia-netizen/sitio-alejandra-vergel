@@ -67,7 +67,8 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
   border-bottom:1px solid var(--line);
 }
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;height:72px}
-.brand{display:flex;flex-direction:column;line-height:1;align-items:flex-start;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:12px;line-height:1;flex-shrink:0}
+.brand-txt{display:flex;flex-direction:column;align-items:flex-start}
 .brand .name{font-family:var(--serif);font-size:1.45rem;letter-spacing:.06em;color:var(--noir)}
 .brand .tag{font-size:.54rem;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
 .nav-actions{display:flex;align-items:center;gap:10px}
@@ -226,8 +227,8 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 .modal-guide-close:hover{background:var(--rose-deep);color:#fff;transform:rotate(90deg)}
 
 /* ---------- Toast ---------- */
-.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,140%);background:var(--noir);color:#fff;padding:15px 24px;border-radius:999px;font-size:.82rem;z-index:120;display:flex;align-items:center;gap:10px;box-shadow:0 12px 40px -8px rgba(43,33,27,.4);transition:.45s cubic-bezier(.2,.7,.3,1);max-width:90vw}
-.toast.show{transform:translate(-50%,0)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,calc(100% + 60px));background:var(--noir);color:#fff;padding:15px 24px;border-radius:999px;font-size:.82rem;z-index:120;display:flex;align-items:center;gap:10px;box-shadow:0 12px 40px -8px rgba(43,33,27,.4);transition:.45s cubic-bezier(.2,.7,.3,1);max-width:90vw;visibility:hidden;pointer-events:none}
+.toast.show{transform:translate(-50%,0);visibility:visible;pointer-events:auto}
 .toast svg{width:18px;height:18px;color:var(--gold-soft);flex-shrink:0}
 .toast a{color:var(--gold-soft);text-decoration:underline;font-weight:600;margin-left:4px;white-space:nowrap;cursor:pointer}
 .toast a:hover{opacity:.8}
@@ -265,7 +266,11 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 <header class="nav">
   <div class="container nav-inner">
     <a href="index.html" class="brand">
-      <img src="img/brand/logo-full.png" alt="Alejandra Vergel · Joyas de Autor" style="height:42px;width:auto">
+      <img src="img/brand/logo-mark.png" alt="" style="height:34px;width:auto">
+      <span class="brand-txt">
+        <span class="name">Alejandra Vergel</span>
+        <span class="tag">Joyas de Autor</span>
+      </span>
     </a>
     <div class="nav-actions">
       <a href="index.html#catalogo" class="back-link">

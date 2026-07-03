@@ -27,6 +27,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:500}
 
 .nav{position:sticky;top:0;z-index:10;background:rgba(255,253,250,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav-inner{width:min(1180px,92%);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;align-items:center;gap:12px;line-height:1}
+.brand-txt{display:flex;flex-direction:column;align-items:flex-start}
+.brand .name{font-family:var(--serif);font-size:1.45rem;letter-spacing:.06em;color:var(--noir)}
+.brand .tag{font-size:.54rem;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
 .back-link{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);transition:.3s}
 .back-link:hover{color:var(--noir)}
 
@@ -61,7 +65,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:500}
 <header class="nav">
   <div class="nav-inner">
     <a href="index.html" class="brand">
-      <img src="img/brand/logo-full.png" alt="Alejandra Vergel · Joyas de Autor" style="height:42px;width:auto">
+      <img src="img/brand/logo-mark.png" alt="" style="height:34px;width:auto">
+      <span class="brand-txt">
+        <span class="name">Alejandra Vergel</span>
+        <span class="tag">Joyas de Autor</span>
+      </span>
     </a>
     <a href="index.html#catalogo" class="back-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
