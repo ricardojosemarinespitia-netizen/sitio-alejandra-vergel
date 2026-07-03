@@ -60,10 +60,10 @@ function fillDeptList(){
     .concat(Object.keys(COLOMBIA).map(d => `<option value="${d}">${d}</option>`))
     .join("");
 }
-function fillMuniList(dept, metroOnly){
+function fillMuniList(dept){
+  // SIEMPRE muestra TODOS los municipios del departamento elegido (sin filtros).
   const sel = $("#municipio");
-  let list = (dept && COLOMBIA[dept]) ? COLOMBIA[dept] : [];
-  if(metroOnly) list = list.filter(m => METRO_CITIES.some(c => norm(c)===norm(m)));
+  const list = (dept && COLOMBIA[dept]) ? COLOMBIA[dept] : [];
   const ph = list.length ? "Selecciona tu municipio…" : "Elige el departamento primero";
   sel.innerHTML = ['<option value="">'+ph+'</option>']
     .concat(list.map(m => `<option value="${m}">${m}</option>`))
@@ -71,31 +71,18 @@ function fillMuniList(dept, metroOnly){
   sel.disabled = !list.length;
 }
 function onDeptChange(){
+  // Al elegir un departamento, se cargan sus municipios. El departamento NUNCA se bloquea.
   const dept = findDept($("#departamento").value);
-  const metroOnly = ck.method === "metro";
-  if(dept) $("#departamento").value = dept; // normaliza mayúsculas/acentos
   $("#municipio").value = "";
-  fillMuniList(dept, metroOnly && dept === METRO_DEPT);
+  fillMuniList(dept);
   renderSummary();
 }
 function applyMethod(method){
+  // Los radios metro/nacional SOLO definen la tarifa de envío.
+  // Nunca bloquean ni fuerzan el departamento/municipio: el usuario elige libremente.
   ck.method = method;
   $("#optMetro").classList.toggle("selected", method==="metro");
   $("#optNacional").classList.toggle("selected", method==="nacional");
-  if(method === "metro"){
-    // El área metropolitana pertenece al Atlántico
-    $("#departamento").value = METRO_DEPT;
-    $("#departamento").disabled = true;   // <select> no admite readOnly → se bloquea con disabled
-    fillMuniList(METRO_DEPT, true);
-    if(!findMuni(METRO_DEPT, $("#municipio").value) || !isMetro(METRO_DEPT, $("#municipio").value)){
-      $("#municipio").value = "Barranquilla";
-    }
-    $("#muniHint").textContent = "Barranquilla, Soledad, Malambo, Galapa o Puerto Colombia.";
-  } else {
-    $("#departamento").disabled = false;
-    $("#muniHint").textContent = "";
-    fillMuniList(findDept($("#departamento").value), false);
-  }
   renderSummary();
 }
 
