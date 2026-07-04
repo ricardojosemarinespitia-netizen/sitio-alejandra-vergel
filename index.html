@@ -253,6 +253,8 @@ section{padding:112px 0}
 
 /* MOBILE */
 @media(max-width:680px){
+  /* vh/lvh (viewport grande): la foto llega hasta el fondo aunque Safari muestre sus barras */
+  .hero{height:100vh;height:100lvh}
   .hp-medio1,.hp-medio2{display:none}
   .hp-central{left:0;width:100%}
   .hero-lines,.hero-divider{display:none}
@@ -469,10 +471,10 @@ section{padding:112px 0}
 }
 .about-caption::before{content:"";display:block;width:44px;height:1px;background:var(--gold);margin-bottom:12px}
 @media(max-width:640px){
-  .about-art{padding:16px 26px 78px 16px}
-  .about-art::before{right:42px;bottom:100px}
-  .about-photo-over{width:50%;padding:7px;bottom:34px}
-  .about-caption{left:16px;max-width:56%}
+  .about-art{padding:16px 26px 150px 16px}
+  .about-art::before{right:42px;bottom:166px}
+  .about-photo-over{width:50%;padding:7px;bottom:84px}
+  .about-caption{left:16px;right:16px;bottom:8px;max-width:none}
 }
 .about-txt .eyebrow{color:var(--rose-deep)}
 .about-txt h2{font-size:clamp(2rem,4.5vw,3rem);margin:14px 0 18px;color:var(--noir)}
@@ -884,10 +886,10 @@ section{padding:112px 0}
       </div>
     </article>
     <article class="edit-card" data-tipo="aretes">
-      <img src="img/aretes/laguna-1.jpg" alt="Aretes Laguna con topacio azul">
+      <img src="img/aretes/elia-hoops-1.jpg" alt="Aretes Elia Hoops en filigrana">
       <div class="edit-txt">
-        <span class="eyebrow2">Bestsellers</span>
-        <h3>Aretes</h3>
+        <span class="eyebrow2">Aretes · Bestsellers</span>
+        <h3>Elia Hoops</h3>
         <p>Desde minimalistas hasta statement, para cada ocasión.</p>
         <button class="edit-btn" type="button">Descubrir</button>
       </div>
