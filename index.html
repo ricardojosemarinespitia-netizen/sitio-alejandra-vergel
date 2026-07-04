@@ -629,8 +629,12 @@ section{padding:112px 0}
 }
 .toast.show{transform:translate(-50%,0);visibility:visible;pointer-events:auto}
 .toast svg{width:18px;height:18px;color:var(--gold-soft);flex-shrink:0}
-.toast a{color:var(--gold-soft);text-decoration:underline;font-weight:600;margin-left:4px;white-space:nowrap;cursor:pointer}
-.toast a:hover{opacity:.8}
+.toast a{
+  color:var(--noir);background:var(--gold-soft);text-decoration:none;font-weight:600;
+  margin-left:6px;white-space:nowrap;cursor:pointer;font-size:.76rem;letter-spacing:.04em;
+  padding:7px 14px;border-radius:999px;transition:.25s;flex-shrink:0;
+}
+.toast a:hover{background:#fff}
 
 /* ---------- WhatsApp flotante ---------- */
 .wa-float{position:fixed;bottom:26px;right:26px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 4px 18px -4px rgba(37,211,102,.45),0 2px 6px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);text-decoration:none}
