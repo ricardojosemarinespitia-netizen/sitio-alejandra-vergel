@@ -445,21 +445,34 @@ section{padding:112px 0}
    ============================================================ */
 .about{background:var(--ivory)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
-/* Collage editorial: el oficio + las generaciones */
-.about-art{position:relative;padding:0 34px 64px 0}
-.about-photo-main{
-  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin:0;
+/* Collage editorial: el oficio + las generaciones (alta joyería) */
+.about-art{position:relative;padding:26px 40px 84px 26px}
+.about-art::before{
+  content:"";position:absolute;top:0;left:0;right:66px;bottom:110px;
+  border:1px solid var(--gold-soft);border-radius:var(--radius);pointer-events:none;
 }
-.about-photo-main img{width:100%;height:auto;display:block}
+.about-photo-main{
+  position:relative;border-radius:var(--radius);overflow:hidden;margin:0;
+  box-shadow:0 34px 80px -34px rgba(43,33,27,.5);
+}
+.about-photo-main img{width:100%;height:auto;display:block;transition:transform 1.4s cubic-bezier(.2,.7,.3,1)}
+.about-art:hover .about-photo-main img{transform:scale(1.035)}
 .about-photo-over{
-  position:absolute;right:0;bottom:0;width:42%;margin:0;
-  border:6px solid var(--vainilla);border-radius:var(--radius);
-  overflow:hidden;box-shadow:var(--shadow-sm);
+  position:absolute;right:0;bottom:30px;width:43%;margin:0;
+  background:var(--white);padding:10px;border-radius:var(--radius);
+  box-shadow:0 26px 60px -26px rgba(43,33,27,.45);
 }
 .about-photo-over img{width:100%;height:auto;display:block}
 .about-caption{
-  position:absolute;left:0;bottom:10px;font-family:var(--serif);font-style:italic;
-  font-size:.98rem;color:var(--ink-soft);max-width:52%;line-height:1.45;
+  position:absolute;left:26px;bottom:4px;font-family:var(--serif);font-style:italic;
+  font-size:.95rem;color:var(--ink-soft);max-width:48%;line-height:1.55;letter-spacing:.01em;
+}
+.about-caption::before{content:"";display:block;width:44px;height:1px;background:var(--gold);margin-bottom:12px}
+@media(max-width:640px){
+  .about-art{padding:16px 26px 78px 16px}
+  .about-art::before{right:42px;bottom:100px}
+  .about-photo-over{width:50%;padding:7px;bottom:34px}
+  .about-caption{left:16px;max-width:56%}
 }
 .about-txt .eyebrow{color:var(--rose-deep)}
 .about-txt h2{font-size:clamp(2rem,4.5vw,3rem);margin:14px 0 18px;color:var(--noir)}
