@@ -878,7 +878,7 @@ section{padding:112px 0}
 <section class="editorial" aria-label="Colecciones">
   <div class="edit-grid">
     <article class="edit-card" data-tipo="anillos">
-      <img src="img/context/portada-anillos.jpg" alt="Anillo con topacio azul en oro" data-start="50% 50%" data-focus="22% 6%">
+      <img src="img/context/portada-anillos.jpg" alt="Anillo con topacio azul en oro" data-start="50% 50%" data-focus="18% 8%" data-zoom="0.32">
       <div class="edit-txt">
         <span class="eyebrow2">Nueva Colección</span>
         <h3>Anillos</h3>
@@ -889,7 +889,7 @@ section{padding:112px 0}
     <article class="edit-card" data-tipo="collares">
       <picture>
         <source media="(max-width:1024px)" srcset="img/collares/prisma-rectangular-1.jpg">
-        <img src="img/collares/azur-gota-1.jpg" alt="Collares Azur Gota y Prisma en plata ley 925" data-start="50% 50%" data-focus="45% 62%">
+        <img src="img/collares/azur-gota-1.jpg" alt="Collares Azur Gota y Prisma en plata ley 925" data-start="50% 50%" data-focus="50% 50%" data-zoom="0.10" data-rotate="-10">
       </picture>
       <div class="edit-txt">
         <span class="eyebrow2">Colección Permanente</span>
@@ -899,7 +899,7 @@ section{padding:112px 0}
       </div>
     </article>
     <article class="edit-card" data-tipo="aretes">
-      <img src="img/context/portada-aretes.jpg" alt="Arete entorchado en plata sobre modelo" data-start="50% 50%" data-focus="46% 32%">
+      <img src="img/context/portada-aretes.jpg" alt="Arete entorchado en plata sobre modelo" data-start="50% 56%" data-focus="50% 44%" data-zoom="0.22">
       <div class="edit-txt">
         <span class="eyebrow2">Nueva Colección</span>
         <h3>Aretes</h3>
@@ -908,7 +908,7 @@ section{padding:112px 0}
       </div>
     </article>
     <article class="edit-card" data-tipo="pulseras">
-      <img src="img/context/portada-pulseras.jpg" alt="Pulsera en filigrana dorada con amatistas" data-start="50% 50%" data-focus="50% 98%">
+      <img src="img/context/portada-pulseras.jpg" alt="Pulsera en filigrana dorada con amatistas" data-start="50% 50%" data-focus="50% 98%" data-zoom="0.28">
       <div class="edit-txt">
         <span class="eyebrow2">Nueva Colección</span>
         <h3>Pulseras</h3>
@@ -1587,9 +1587,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
         const e = t * t * (3 - 2 * t); // suavizado ease-in-out
         const [sx, sy] = parse(img.dataset.start || "50 50");
         const [fx, fy] = parse(img.dataset.focus);
+        // Zoom por tarjeta (data-zoom) · giro radial por tarjeta (data-rotate):
+        // entra girada sobre su propio eje y se endereza al llegar al centro.
+        const zoomMax = parseFloat(img.dataset.zoom || "0.14");
+        const rotMax = parseFloat(img.dataset.rotate || "0");
+        let scale = 1 + zoomMax * e;
+        let rotate = "";
+        if(rotMax){
+          const ang = rotMax * (1 - e);
+          const a = Math.abs(ang) * Math.PI / 180;
+          // escala mínima para que la foto girada siga cubriendo la tarjeta sin bordes
+          const cover = Math.max(
+            (r.width * Math.cos(a) + r.height * Math.sin(a)) / r.width,
+            (r.height * Math.cos(a) + r.width * Math.sin(a)) / r.height
+          );
+          scale = Math.max(scale, cover * 1.03);
+          rotate = " rotate(" + ang.toFixed(2) + "deg)";
+        }
         img.style.transition = "none";
         img.style.objectPosition = (sx + (fx - sx) * e) + "% " + (sy + (fy - sy) * e) + "%";
-        img.style.transform = "scale(" + (1 + 0.14 * e) + ")";
+        img.style.transform = "scale(" + scale.toFixed(3) + ")" + rotate;
       });
     }
     function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
