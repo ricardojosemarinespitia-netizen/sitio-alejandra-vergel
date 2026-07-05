@@ -1,5 +1,5 @@
 /* ============================================================
-   ALEJANDRA VERGEL · club.js
+   ALEJANDRA VERGEL · club.js v2
    Sistema de suscriptores + validación de códigos de descuento
    ============================================================ */
 
