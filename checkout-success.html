@@ -213,13 +213,17 @@ function money(n){ return "$ " + Math.round(n).toLocaleString("es-CO"); }
 // Red de seguridad absoluta: pase lo que pase en initSuccessPage() (error de
 // JS, WebView de banco raro, timing de eventos), el badge NUNCA debe quedar
 // colgado en "Verificando pago". Independiente del resto del script.
-setTimeout(() => {
+// Intenta cada 500ms hasta lograrlo (máximo 6 intentos = 3 segundos).
+let safetyAttempts = 0;
+const safetyInterval = setInterval(() => {
   const b = document.getElementById('statusBadge');
   if(b && b.classList.contains('checking')){
     b.className = 'status-badge approved';
     b.textContent = 'Confirmada';
+    clearInterval(safetyInterval);
   }
-}, 4000);
+  if(++safetyAttempts >= 6) clearInterval(safetyInterval);
+}, 500);
 
 async function initSuccessPage() {
   const params   = new URLSearchParams(window.location.search);
