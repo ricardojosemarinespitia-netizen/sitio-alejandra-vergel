@@ -25,7 +25,7 @@ const PRODUCTS = [
   /* ---------------- FILIGRANA ---------------- */
   {
     id:"aura", sku:"ANI-AURA", cat:"filigrana", name:"Aura",
-    price:350000, originalPrice:473000,
+    price:1000, originalPrice:473000, /* PRECIO TEMPORAL DE PRUEBA — restaurar a 350000 */
     materials:"Plata ley 925 con baño de oro · Cuarzo ahumado natural",
     gemName:"Cuarzo ahumado", colors:["Plata con baño de oro"], sizes:[5,6,7,8,9,10],
     desc:"Pieza de autor tejida a mano en filigrana por maestros artesanos colombianos. En el centro, un elegante cuarzo ahumado de tonalidades profundas aporta carácter y un brillo sutil. Cada anillo se elabora bajo pedido, convirtiéndose en una pieza única.",
@@ -75,7 +75,7 @@ const PRODUCTS = [
     gemName:"Esmeralda", colors:["Plata con baño de oro","Plata 925"], sizes:[5,6,7,8,9,10],
     desc:"Elaborado en Colombia mediante la técnica de filigrana. Su protagonista es una esmeralda natural de corte ovalado, semi en bruto y semi pulida, que resalta la belleza orgánica y auténtica de la piedra, haciendo de cada pieza una joya irrepetible.",
     metal:"gold", gem:"#1F8A70",
-    images:["img/anillos/selva-1.png","img/anillos/selva-2.png"]
+    images:["img/anillos/selva-1.jpg","img/anillos/selva-2.jpg"]
   },
 
   /* ---------------- PIEDRAS DE COLOR ---------------- */
@@ -104,7 +104,7 @@ const PRODUCTS = [
     gemName:"Amatista", colors:["Plata con baño de oro"], sizes:[5,6,7,8,9,10],
     desc:"Diseño entorchado en delicados hilos de plata que resalta el trabajo manual de la filigrana contemporánea. En el centro, una piedra talla marquesa aporta carácter y distinción, convirtiéndose en el punto focal del diseño. Personalizable con la piedra que desees.",
     metal:"gold", gem:"#9B6FB3",
-    images:["img/anillos/marquis-1.png"]
+    images:["img/anillos/marquis-1.jpg"]
   },
   {
     id:"aqua", sku:"ANI-AQUA", cat:"color", name:"Aqua",
@@ -113,7 +113,7 @@ const PRODUCTS = [
     gemName:"Topacio azul", colors:["Plata 925"], sizes:[5,6,7,8,9,10],
     desc:"Diseñada para resaltar la luminosidad de las piedras. Su gema central es un topacio azul natural, rodeado por delicadas moisanitas que aportan brillo y sofisticación, en una composición equilibrada, elegante y atemporal. Personalizable con la gema central de tu elección.",
     metal:"silver", gem:"#3FA9D4",
-    images:["img/anillos/aqua-1.png"]
+    images:["img/anillos/aqua-1.jpg"]
   },
   {
     id:"aquamarine", sku:"ANI-AQUAM", cat:"color", name:"Aquamarine",
@@ -122,7 +122,7 @@ const PRODUCTS = [
     gemName:"Aquamarina", colors:["Plata 925"], sizes:[5,6,7,8,9,10],
     desc:"Comparte el diseño estructural del anillo Aqua, centrado en una gema de aquamarina acompañada por delicadas moisanitas que aportan brillo y sofisticación. Una joya luminosa, fresca y atemporal, elaborada a mano por artesanos colombianos.",
     metal:"silver", gem:"#7FD4D0",
-    images:["img/anillos/aquamarine-1.png"]
+    images:["img/anillos/aquamarine-1.jpg"]
   },
   {
     id:"cora", sku:"ANI-CORA", cat:"color", name:"Cora",
@@ -149,7 +149,7 @@ const PRODUCTS = [
     gemName:"Topacio azul", colors:["Plata con baño de oro"], sizes:[5,6,7,8,9,10],
     desc:"Diseño elegante y contemporáneo que resalta una gema central de topacio azul natural, seleccionada para aportar luminosidad, profundidad y sofisticación. Combina tradición y diseño moderno; personalizable con la gema de tu elección.",
     metal:"gold", gem:"#3FA9D4",
-    images:["img/anillos/asura-1.png","img/anillos/asura-2.png"]
+    images:["img/anillos/asura-1.jpg","img/anillos/asura-2.jpg"]
   },
   {
     id:"cielo", sku:"ANI-CIELO", cat:"color", name:"Cielo",
@@ -158,7 +158,7 @@ const PRODUCTS = [
     gemName:"Topacio azul", colors:["Plata 925"], sizes:[5,6,7,8,9,10],
     desc:"Diseñada para capturar la esencia de la luz y la profundidad de los tonos azules. Su topacio azul, cuidadosamente engastado, resalta su brillo y claridad, evocando la serenidad del cielo en cada detalle. Personalizable con la gema de tu elección.",
     metal:"silver", gem:"#3FA9D4",
-    images:["img/anillos/cielo-1.jpg","img/anillos/cielo-2.png"]
+    images:["img/anillos/cielo-1.jpg","img/anillos/cielo-2.jpg"]
   },
   {
     id:"lady", sku:"ANI-LADY", cat:"color", name:"Lady",
@@ -176,7 +176,7 @@ const PRODUCTS = [
     gemName:"Topacio azul y citrino", colors:["Plata con baño de oro"], sizes:[5,6,7,8,9,10],
     desc:"Aro entorchado hecho completamente a mano. Su diseño combina topacio azul cuadrado natural y citrino cuadrado natural, creando un contraste luminoso entre tonos fríos y cálidos. Personalizable con la elección de las gemas.",
     metal:"gold", gem:"#3FA9D4",
-    images:["img/anillos/trenza-1.png"]
+    images:["img/anillos/trenza-1.jpg"]
   },
   {
     id:"aire", sku:"ANI-AIRE", cat:"color", name:"Aire",
@@ -221,7 +221,7 @@ const PRODUCTS = [
     gemName:"Topacio rosa", colors:["Plata con baño de oro","Plata 925"], sizes:[5,6,7,8,9,10],
     desc:"Inspirado en la belleza de la naturaleza. Su delicado diseño de hojitas y ramitas envuelve una hermosa piedra central de topacio rosa, creando una pieza romántica, femenina y llena de encanto. Para quienes aman los diseños orgánicos con personalidad.",
     metal:"rose", gem:"#E86FA0",
-    images:["img/anillos/jardin-rosado-1.png"]
+    images:["img/anillos/jardin-rosado-1.jpg"]
   },
   {
     id:"cielo-cuadrado", sku:"ANI-CIELOC", cat:"color", name:"Cielo Cuadrado",
@@ -241,7 +241,7 @@ const PRODUCTS = [
     gemName:"Moisanita", colors:["Plata 925","Personalizable en oro"], sizes:[5,6,7,8,9,10],
     desc:"Diseño clásico creado como opción elegante para compromiso o para celebrar vínculos significativos. Protagonizado por una moisanita central de brillo excepcional que aporta elegancia, pureza y durabilidad. Personalizable en gema y material.",
     metal:"silver", gem:"#FFFFFF",
-    images:["img/anillos/eterno-1.png"]
+    images:["img/anillos/eterno-1.jpg"]
   },
   {
     id:"luz", sku:"ANI-LUZ", cat:"compromiso", name:"Luz",
@@ -250,7 +250,7 @@ const PRODUCTS = [
     gemName:"Moisanita", colors:["Plata 925","Personalizable en oro"], sizes:[5,6,7,8,9,10],
     desc:"Diseño clásico y elegante, alternativa atemporal para compromiso. Se distingue por una moisanita central en corte ovalado, de brillo excepcional, que aporta pureza y una presencia sutil pero impactante. Personalizable en gema y material.",
     metal:"silver", gem:"#FFFFFF",
-    images:["img/anillos/luz-ovalada-1.png"]
+    images:["img/anillos/luz-ovalada-1.jpg"]
   },
   {
     id:"luz-eterna", sku:"ANI-LUZE", cat:"compromiso", name:"Luz Eterna",
@@ -259,7 +259,7 @@ const PRODUCTS = [
     gemName:"Moisanita", colors:["Plata 925","Plata con baño de oro","Oro a solicitud"], sizes:[5,6,7,8,9,10],
     desc:"Colección de solitarios de diseño clásico, protagonizados por moisanitas de alta brillantez que capturan la luz de manera excepcional. Ideal como anillo de compromiso o joya delicada para uso diario. Desde $250.000 hasta $500.000 según piedra y diseño.",
     metal:"gold", gem:"#FFFFFF",
-    images:["img/anillos/luz-eterna-1.png","img/anillos/luz-eterna-2.png"]
+    images:["img/anillos/luz-eterna-1.jpg","img/anillos/luz-eterna-2.jpg"]
   },
 
   /* ---------------- SETS ---------------- */
@@ -279,7 +279,7 @@ const PRODUCTS = [
     gemName:"Aguamarina", colors:["Plata con baño de oro","Plata 925"], sizes:[5,6,7,8,9,10],
     desc:"Set de dos anillos que combina elegancia y textura: una argolla texturizada junto a un anillo protagonista con aguamarina natural. La piedra evoca la calma del mar, mientras la argolla añade carácter y modernidad al conjunto.",
     metal:"gold", gem:"#7FD4D0",
-    images:["img/anillos/olas-oceano-1.png"]
+    images:["img/anillos/olas-oceano-1.jpg"]
   },
   {
     id:"esencia-prisma", sku:"ANI-ESENCIA", cat:"sets", name:"Esencia Prisma · Set",
@@ -288,7 +288,7 @@ const PRODUCTS = [
     gemName:"Aguamarina / Amatista", colors:["Plata con baño de oro","Plata 925"], sizes:[5,6,7,8,9,10],
     desc:"Colección de anillos de diseño contemporáneo con piedras naturales en corte rectangular. Incluye una versión con aguamarina natural y otra con amatista natural, en montajes minimalistas que resaltan la belleza de cada piedra. Precio por anillo.",
     metal:"gold", gem:"#7FBFD4",
-    images:["img/anillos/esencia-prisma-1.png","img/anillos/esencia-prisma-2.png"]
+    images:["img/anillos/esencia-prisma-1.jpg","img/anillos/esencia-prisma-2.jpg"]
   },
 
   /* ============================================================
@@ -382,7 +382,7 @@ const PRODUCTS = [
     gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Inspirados en la elegancia de la flor nacional de Colombia. Elaborados artesanalmente en plata ley 925 mediante la técnica de la filigrana, reflejan la belleza de la naturaleza y el valor del trabajo hecho a mano. Sobre pedido (15 a 25 días hábiles).",
     metal:"gold", gem:"#C9A24B",
-    images:["img/aretes/orquidea-dorada-1.png"]
+    images:["img/aretes/orquidea-dorada-1.jpg"]
   },
   {
     id:"ar-orquidea-real", sku:"ARE-ORQR", cat:"statement", name:"Aretes Orquídea Real",
@@ -391,7 +391,7 @@ const PRODUCTS = [
     gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Interpretación elegante de la flor símbolo de Colombia. Destacan por su diseño sofisticado y el extraordinario detalle de su elaboración. Cada par es tejido completamente a mano, convirtiéndose en una pieza única de alta joyería artesanal. Sobre pedido (15 a 25 días hábiles).",
     metal:"gold", gem:"#C9A24B",
-    images:["img/aretes/orquidea-real-1.png"]
+    images:["img/aretes/orquidea-real-1.jpg"]
   },
   {
     id:"ar-trilogia", sku:"ARE-TRIL", cat:"statement", name:"Aretes Trilogía",
@@ -400,7 +400,7 @@ const PRODUCTS = [
     gemName:"Topacio rosado y granate", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Combinan la delicadeza de la filigrana colombiana con la belleza de los topacios rosados y los granates naturales. Su composición crea un contraste elegante que aporta color, luminosidad y sofisticación. Piedras personalizables. Sobre pedido (15 a 25 días hábiles).",
     metal:"rose", gem:"#E86FA0",
-    images:["img/aretes/trilogia-1.png"]
+    images:["img/aretes/trilogia-1.jpg"]
   },
   {
     id:"ar-trilogia-azul", sku:"ARE-TRILA", cat:"statement", name:"Aretes Trilogía Azul",
@@ -696,7 +696,7 @@ const PRODUCTS = [
     gemName:"Esmeralda", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Versión delicada y elegante de un clásico. Elaboradas en plata ley 925, incorporan esmeraldas de laboratorio que aportan un intenso color verde y un brillo sofisticado. Piedra personalizable. Sobre pedido (15 a 25 días hábiles).",
     metal:"silver", gem:"#1F8A70",
-    images:["img/aretes/mini-emerald-1.png"]
+    images:["img/aretes/mini-emerald-1.jpg"]
   },
   {
     id:"ar-nacar", sku:"ARE-NACAR", cat:"studs", name:"Aretes Nácar",
@@ -723,7 +723,7 @@ const PRODUCTS = [
     gemName:"Topacio rosado", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Incorporan delicados topacios rosados que aportan un toque femenino, elegante y luminoso. Su diseño clásico permite lucirlos tanto en ocasiones especiales como en el día a día. Personalizables. Sobre pedido (15 a 25 días hábiles).",
     metal:"silver", gem:"#E86FA0",
-    images:["img/aretes/rosalia-1.png"]
+    images:["img/aretes/rosalia-1.jpg"]
   },
   {
     id:"ar-sky", sku:"ARE-SKY", cat:"studs", name:"Aretes Sky",
@@ -768,7 +768,7 @@ const PRODUCTS = [
     gemName:"Esmeralda y moissanita", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Combinan la intensidad del verde de las esmeraldas de laboratorio con el brillo de las moissanitas, logrando una pieza elegante, contemporánea y llena de luz. Personalizables con distintas piedras. Sobre pedido (15 a 25 días hábiles).",
     metal:"silver", gem:"#1F8A70",
-    images:["img/aretes/vera-1.png"]
+    images:["img/aretes/vera-1.jpg"]
   },
 
   /* ============================================================
@@ -1011,6 +1011,109 @@ const PRODUCTS = [
     desc:"Homenaje a la tradición de la filigrana colombiana: un delicado tejido en hilos de plata ley 925 que envuelve el cuello con elegancia y sofisticación. Una joya atemporal que celebra la artesanía hecha a mano. Sobre pedido (15 a 25 días hábiles).",
     metal:"gold", gem:"#E7D3A1",
     images:["img/collares/origen-1.jpg"]
+  },
+
+  /* ============================================================
+     PULSERAS
+     ============================================================ */
+  {
+    id:"pu-aura", sku:"PUL-AURA", cat:"pulseras", name:"Pulsera Aura",
+    price:170000, originalPrice:227000,
+    materials:"Plata ley 925 · Lisa o con moissanitas",
+    gemName:"Moissanita (opcional)", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya de autor que destaca por la delicadeza de su diseño y la elegancia de sus líneas minimalistas. Su silueta fina y atemporal la convierte en el complemento perfecto para cualquier ocasión. Disponible en versión clásica ($170.000) o con múltiples moissanitas que realzan su luminosidad ($190.000). Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#FFFFFF",
+    images:["img/pulseras/aura-1.jpg"]
+  },
+  {
+    id:"pu-cereza", sku:"PUL-CEREZA", cat:"pulseras", name:"Pulsera Cereza",
+    price:170000, originalPrice:227000,
+    materials:"Plata ley 925 · Rubí con halo de brillantes",
+    gemName:"Rubí", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya delicada que resalta el intenso color cereza de su piedra central, rodeada por un delicado halo de brillantes que realzan su luminosidad. Elaborada en plata ley 925, su diseño fino y elegante la convierte en el complemento ideal para cualquier ocasión. Piedra personalizable. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#A6192E",
+    images:["img/pulseras/cereza-1.jpg"]
+  },
+  {
+    id:"pu-dueto", sku:"PUL-DUETO", cat:"pulseras", name:"Pulsera Dueto",
+    price:290000, originalPrice:386000,
+    materials:"Plata ley 925 · Placa grabable o eslabones con moissanitas",
+    gemName:"Moissanita (versión eslabones)", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Creada para celebrar los vínculos más importantes. Su delicada placa puede personalizarse con el nombre, inicial o palabra que desees, convirtiéndola en un regalo lleno de significado. Disponible también en versión de eslabones con moissanitas ($390.000). Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#FFFFFF",
+    images:["img/pulseras/dueto-1.jpg"]
+  },
+  {
+    id:"pu-esfera", sku:"PUL-ESFERA", cat:"pulseras", name:"Pulsera Esfera",
+    price:190000, originalPrice:253000,
+    materials:"Plata ley 925 · Filigrana tejida a mano",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Pieza de autor elaborada artesanalmente por maestros filigraneros colombianos. Su protagonista es una delicada esfera tejida a mano en finos hilos de plata ley 925, reflejando la belleza y el legado de la filigrana tradicional colombiana. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/pulseras/esfera-1.jpg"]
+  },
+  {
+    id:"pu-grana", sku:"PUL-GRANA", cat:"pulseras", name:"Pulsera Grana",
+    price:199000, originalPrice:265000,
+    materials:"Plata ley 925 · Técnica artesanal de granulado",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya de autor elaborada artesanalmente mediante la tradicional técnica del granulado, en la que pequeñas esferas de plata son trabajadas cuidadosamente a mano para crear una textura elegante y sofisticada. Una pieza atemporal y llena de carácter. Sobre pedido (15 a 25 días hábiles).",
+    metal:"silver", gem:"#EDEFF1",
+    images:["img/pulseras/grana-1.jpg","img/pulseras/grana-2.jpg","img/pulseras/grana-3.jpg","img/pulseras/grana-4.jpg","img/pulseras/grana-5.jpg"]
+  },
+  {
+    id:"pu-lavanda", sku:"PUL-LAVANDA", cat:"pulseras", name:"Pulsera Lavanda",
+    price:190000, originalPrice:253000,
+    materials:"Plata ley 925 · Amatista rectangular y moissanita",
+    gemName:"Amatista y moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Combina la intensidad del color de una amatista rectangular con el brillo excepcional de una moissanita, creando una joya delicada y sofisticada que resalta por su armonía y elegancia. Personalizable con diferentes piedras. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#9B6FB3",
+    images:["img/pulseras/lavanda-1.jpg"]
+  },
+  {
+    id:"pu-malva", sku:"PUL-MALVA", cat:"pulseras", name:"Pulsera Malva",
+    price:170000, originalPrice:227000,
+    materials:"Plata ley 925 · Amatistas ovaladas",
+    gemName:"Amatista", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya delicada elaborada en plata ley 925 que destaca por la belleza de sus amatistas ovaladas. Su diseño fino y femenino aporta un toque de color y sofisticación, convirtiéndola en el complemento ideal para cualquier ocasión. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#9B6FB3",
+    images:["img/pulseras/malva-1.jpg"]
+  },
+  {
+    id:"pu-rocio", sku:"PUL-ROCIO", cat:"pulseras", name:"Pulsera Rocío",
+    price:190000, originalPrice:253000,
+    materials:"Plata ley 925 · Dos moissanitas en gota",
+    gemName:"Moissanita", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Inspirada en la belleza de las gotas de agua. Su diseño reúne dos moissanitas en forma de gota que reflejan la luz con un brillo excepcional, creando una pieza elegante, femenina y atemporal. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#FFFFFF",
+    images:["img/pulseras/rocio-1.jpg"]
+  },
+  {
+    id:"pu-serena", sku:"PUL-SERENA", cat:"pulseras", name:"Pulsera Serena",
+    price:190000, originalPrice:253000,
+    materials:"Plata ley 925 · Moissanitas de colores",
+    gemName:"Moissanita de color", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Colección de joyas delicadas que celebra el color y la luz a través de moissanitas en diferentes tonalidades. Su diseño fino y elegante la convierte en una pieza versátil, perfecta para usar sola o combinar con otras pulseras. Personalizable con el color de piedra de tu preferencia. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C56FA0",
+    images:["img/pulseras/serena-1.jpg"]
+  },
+  {
+    id:"pu-signature", sku:"PUL-SIGN", cat:"pulseras", name:"Pulsera Signature",
+    price:240000, originalPrice:320000,
+    materials:"Plata ley 925 · Inicial personalizada",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Joya personalizada creada para llevar contigo una inicial con un significado especial. Su diseño delicado y atemporal convierte cada pieza en un símbolo de identidad, amor y recuerdos inolvidables. Elaborada artesanalmente por joyeros colombianos. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#C9A24B",
+    images:["img/pulseras/signature-1.jpg"]
+  },
+  {
+    id:"pu-tennis", sku:"PUL-TENNIS", cat:"pulseras", name:"Pulsera Tenis Personalizada",
+    price:295000, originalPrice:393000,
+    materials:"Plata ley 925 · Dos placas grabadas con iniciales",
+    gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
+    desc:"Reinventa un clásico de la joyería con un toque único y personal. Su elegante diseño incorpora dos placas grabadas con las iniciales de tu elección, convirtiéndola en una joya llena de significado, perfecta para celebrar momentos especiales o regalar a quienes más quieres. Sobre pedido (15 a 25 días hábiles).",
+    metal:"gold", gem:"#FFFFFF",
+    images:["img/pulseras/tennis-1.jpg"]
   }
 ];
 

@@ -124,7 +124,9 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 /* Info */
 .pd-cat{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .pd-name{font-size:clamp(2.1rem,5vw,3rem);color:var(--noir);margin:8px 0 6px;line-height:1.05}
-.pd-mat{color:var(--ink-soft);font-size:.95rem;margin-bottom:18px}
+.pd-mat{color:var(--ink-soft);font-size:.95rem;margin-bottom:6px}
+.pd-sku{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:18px}
+.pd-sku span{color:var(--noir);font-weight:500}
 .pd-price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:22px}
 .pd-price{font-family:var(--serif);font-size:2.3rem;color:var(--noir)}
 .pd-price-old{font-size:1.15rem;color:var(--ink-soft);text-decoration:line-through;opacity:.75}
@@ -383,6 +385,7 @@ function renderDetail(){
         <span class="pd-cat">${CATS[p.cat].label}</span>
         <h1 class="pd-name">${p.name}</h1>
         <p class="pd-mat">${p.materials}</p>
+        ${p.sku ? `<p class="pd-sku">Referencia: <span>${p.sku}</span></p>` : ""}
         <div class="pd-price-row">
           ${p.originalPrice ? `<span class="pd-price-old">${money(p.originalPrice)}</span>` : ""}
           <span class="pd-price">${money(p.price)}</span>

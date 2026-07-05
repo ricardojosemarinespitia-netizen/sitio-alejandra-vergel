@@ -19,6 +19,34 @@ const CONFIG = {
   brand: "Alejandra Vergel"
 };
 
+/* ---------- EmailJS (correos transaccionales) ----------
+   Template Club:   bienvenida con código 15% (Cc a Alejandra)
+   Template Compra: confirmación de pedido (Cc a Alejandra) */
+const EMAILJS_PUBLIC_KEY = "FJTqsKFpGZTR_76vP";
+const EMAILJS_SERVICE_ID = "service_uf7imru";
+const EMAILJS_TPL_CLUB   = "template_233sstn";
+const EMAILJS_TPL_COMPRA = "template_9mtgc6g";
+
+async function sendEmailJS(templateId, params){
+  try{
+    const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service_id: EMAILJS_SERVICE_ID,
+        template_id: templateId,
+        user_id: EMAILJS_PUBLIC_KEY,
+        template_params: params
+      })
+    });
+    if(!res.ok) throw new Error(await res.text());
+    return true;
+  }catch(err){
+    console.error("[EmailJS]", err);
+    return false;
+  }
+}
+
 /* ---------- Selectores ---------- */
 const $  = (s, c=document) => c.querySelector(s);
 const $$ = (s, c=document) => [...c.querySelectorAll(s)];
@@ -38,13 +66,15 @@ const CATS = {
   candongas:  { label:"Candongas" },
   studs:      { label:"Mini Studs" },
   dijes:      { label:"Cadenas y Dijes" },
-  gargantillas:{ label:"Gargantillas" }
+  gargantillas:{ label:"Gargantillas" },
+  pulseras:   { label:"Pulseras" }
 };
 
 /* Categorías que pertenecen a anillos (para el filtro agrupado) */
 const RING_CATS = ["filigrana","color","compromiso","sets"];
 const EARRING_CATS = ["statement","candongas","studs"];
 const NECKLACE_CATS = ["dijes","gargantillas"];
+const BRACELET_CATS = ["pulseras"];
 
 /* Navegación del catálogo en dos niveles (estilo Cartier / Tiffany):
    nivel 1 = tipo de joya · nivel 2 = colección / subcategoría */
@@ -67,7 +97,8 @@ const TYPES = [
       { key:"todos",        label:"Todos" },
       { key:"dijes",        label:"Cadenas y Dijes" },
       { key:"gargantillas", label:"Gargantillas" }
-  ]}
+  ]},
+  { key:"pulseras", label:"Pulseras", subs:[] }
 ];
 
 /* ---------- URL del detalle (con anticaché) ---------- */
@@ -117,7 +148,7 @@ function addToCart(p, color, qty){
   const cart = getCart();
   const ex = cart.find(i=>i.key===key);
   if(ex) ex.qty += qty;
-  else cart.push({ key, id:p.id, name:p.name, color, qty, price:p.price, cat:p.cat, metal:p.metal, gem:p.gem, images:p.images, imgPos:p.imgPos, imgZoom:p.imgZoom });
+  else cart.push({ key, id:p.id, sku:p.sku, name:p.name, color, qty, price:p.price, cat:p.cat, metal:p.metal, gem:p.gem, images:p.images, imgPos:p.imgPos, imgZoom:p.imgZoom });
   saveCart(cart);
   showToast(`${p.name} · agregado`);
 }
@@ -164,7 +195,7 @@ function renderCart(){
       <div class="thumb">${imgs.length ? `<img src="${imgs[0]}" alt="${i.name}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` : jewelSVG(p)}</div>
       <div class="info">
         <div class="nm">${i.name}</div>
-        <div class="vr">${i.color}</div>
+        <div class="vr">${(i.sku || (prod && prod.sku)) ? `Ref. ${i.sku || prod.sku} · ` : ""}${i.color}</div>
         <div class="pr">${money(i.price)}</div>
         <div class="qty">
           <button data-dec="${i.key}" aria-label="Restar">−</button>

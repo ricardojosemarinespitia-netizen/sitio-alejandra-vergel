@@ -109,7 +109,7 @@ function renderSummary(){
       <div class="thumb">${summaryMedia(i)}</div>
       <div class="inf">
         <div class="nm">${i.name}</div>
-        <div class="vr">${i.color || ""}</div>
+        <div class="vr">${i.sku ? `Ref. ${i.sku} · ` : ""}${i.color || ""}</div>
         <div class="pr">${money(i.price * i.qty)}</div>
         <div class="sum-qty">
           <button type="button" data-dec="${i.key}" aria-label="Restar">−</button>
@@ -177,7 +177,7 @@ function validateForm(){
 /* ---------- WhatsApp de respaldo ---------- */
 function checkoutViaWhatsApp(o){
   const cart = getCart();
-  const lines = cart.map(i => `• ${i.qty}× ${i.name}${i.color ? ' ('+i.color+')' : ''} — ${money(i.price*i.qty)}`).join('%0A');
+  const lines = cart.map(i => `• ${i.qty}× ${i.name}${i.sku ? ' ['+i.sku+']' : ''}${i.color ? ' ('+i.color+')' : ''} — ${money(i.price*i.qty)}`).join('%0A');
   const msg =
     `¡Hola Alejandra Vergel! Quiero finalizar mi compra:%0A%0A${lines}` +
     (o.discount ? `%0ADescuento Club: ${o.discount}%25` : '') +
@@ -225,6 +225,19 @@ async function submitCheckout(){
     couponCode: ck.couponCode,
     discount: ck.discount,
     subtotal, shipping: ship, total
+  };
+
+  // Datos listos para el correo de confirmación (checkout-success.html)
+  order.emailParams = {
+    nombre: order.firstName + " " + order.lastName,
+    productos: cart.map(i => `${i.qty}× ${i.name}${i.sku ? " · Ref. " + i.sku : ""}${i.color ? " · " + i.color : ""} — ${money(i.price*i.qty)}`).join("\n"),
+    subtotal: money(subtotal),
+    descuento: ck.discount > 0 ? `− ${money(discountVal)} (${ck.discount}%)` : "—",
+    envio: ship === 0 ? "Gratis" : money(ship),
+    total: money(total),
+    fecha: new Date().toLocaleDateString("es-CO", { day:"numeric", month:"long", year:"numeric" }),
+    direccion: [order.address, order.address2, order.municipio, order.departamento].filter(Boolean).join(", "),
+    metodo_entrega: ck.method === "metro" ? "Área metropolitana de Barranquilla" : "Envío nacional"
   };
 
   sessionStorage.setItem("av_email", order.email);

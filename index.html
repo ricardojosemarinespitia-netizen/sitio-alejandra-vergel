@@ -871,7 +871,7 @@ section{padding:112px 0}
 <section class="editorial" aria-label="Colecciones">
   <div class="edit-grid">
     <article class="edit-card" data-tipo="anillos">
-      <img src="img/anillos/marea-1.png" alt="Anillo Marea en oro con topacios azules">
+      <img src="img/context/portada-anillos.jpg" alt="Anillo con topacio azul en oro" style="object-position:50% 0%">
       <div class="edit-txt">
         <span class="eyebrow2">Nueva Colección</span>
         <h3>Anillos</h3>
@@ -880,7 +880,10 @@ section{padding:112px 0}
       </div>
     </article>
     <article class="edit-card" data-tipo="collares">
-      <img src="img/collares/origen-1.jpg" alt="Gargantilla Origen en filigrana dorada">
+      <picture>
+        <source media="(max-width:1024px)" srcset="img/collares/prisma-rectangular-1.jpg">
+        <img src="img/collares/azur-gota-1.jpg" alt="Collares Azur Gota y Prisma en plata ley 925">
+      </picture>
       <div class="edit-txt">
         <span class="eyebrow2">Colección Permanente</span>
         <h3>Collares</h3>
@@ -889,11 +892,20 @@ section{padding:112px 0}
       </div>
     </article>
     <article class="edit-card" data-tipo="aretes">
-      <img src="img/aretes/elia-hoops-1.jpg" alt="Aretes Elia Hoops en filigrana">
+      <img src="img/context/portada-aretes.jpg" alt="Arete entorchado en plata sobre modelo">
       <div class="edit-txt">
         <span class="eyebrow2">Nueva Colección</span>
         <h3>Aretes</h3>
         <p>Desde minimalistas hasta statement, para cada ocasión.</p>
+        <button class="edit-btn" type="button">Descubrir</button>
+      </div>
+    </article>
+    <article class="edit-card" data-tipo="pulseras">
+      <img src="img/context/portada-pulseras.jpg" alt="Pulsera en filigrana dorada con amatistas" style="object-position:50% 100%">
+      <div class="edit-txt">
+        <span class="eyebrow2">Nueva Colección</span>
+        <h3>Pulseras</h3>
+        <p>Diseños delicados en plata ley 925, hechos a mano.</p>
         <button class="edit-btn" type="button">Descubrir</button>
       </div>
     </article>
@@ -1202,6 +1214,7 @@ function applyFilters(){
   if(state.tipo==="anillos") list = list.filter(p=>RING_CATS.includes(p.cat));
   else if(state.tipo==="aretes") list = list.filter(p=>EARRING_CATS.includes(p.cat));
   else if(state.tipo==="collares") list = list.filter(p=>NECKLACE_CATS.includes(p.cat));
+  else if(state.tipo==="pulseras") list = list.filter(p=>BRACELET_CATS.includes(p.cat));
   if(state.sub && state.sub!=="todos") list = list.filter(p=>p.cat===state.sub);
   if(state.q){
     const q = state.q.toLowerCase();

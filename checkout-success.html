@@ -148,10 +148,42 @@ document.addEventListener("DOMContentLoaded", () => {
   if (email) document.getElementById('emailInfo').textContent = email;
   if (total) document.getElementById('totalPaid').textContent = total;
 
+  // Correo de confirmación de compra (al cliente + Cc a Alejandra)
+  try {
+    const orderRaw = sessionStorage.getItem('av_order');
+    const yaEnviado = sessionStorage.getItem('av_email_sent');
+    if (ref && orderRaw && yaEnviado !== ref) {
+      const order = JSON.parse(orderRaw);
+      if (order.emailParams && order.email) {
+        fetch("https://api.emailjs.com/api/v1.0/email/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            service_id: "service_uf7imru",
+            template_id: "template_9mtgc6g",
+            user_id: "FJTqsKFpGZTR_76vP",
+            template_params: Object.assign({}, order.emailParams, {
+              referencia: ref,
+              to_email: order.email,
+              mensaje: "",
+              name: "Alejandra Vergel · Joyas de Autor",
+              email: order.email
+            })
+          })
+        }).catch(err => console.error("[EmailJS]", err));
+        sessionStorage.setItem('av_email_sent', ref);
+      }
+    }
+  } catch(e){ console.error(e); }
+
+  // Vaciar carrito: la compra ya fue pagada
+  if (ref) localStorage.removeItem('av_cart');
+
   // Limpiar sessionStorage
   sessionStorage.removeItem('av_email');
   sessionStorage.removeItem('av_total');
   sessionStorage.removeItem('av_reference');
+  sessionStorage.removeItem('av_order');
 });
 </script>
 </body>

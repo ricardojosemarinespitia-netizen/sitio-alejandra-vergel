@@ -39,6 +39,18 @@ async function registerClub(name, email) {
       localStorage.setItem("av_club_email", email);
       localStorage.setItem("av_club_discount", "15");
 
+      // Correo de bienvenida (al suscriptor + Cc a Alejandra, configurado en EmailJS)
+      if (typeof sendEmailJS === "function") {
+        sendEmailJS(EMAILJS_TPL_CLUB, {
+          to_email: email,
+          nombre: name,
+          codigo_descuento: result.code,
+          mensaje: "Guarda este código: lo aplicas al finalizar tu compra y es válido para tu primera joya.",
+          name: "Alejandra Vergel · Joyas de Autor",
+          email: email
+        });
+      }
+
       showToast(`¡Bienvenido! Tu código: ${result.code}`);
       return true;
     } else {
