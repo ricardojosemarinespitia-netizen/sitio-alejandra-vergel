@@ -43,8 +43,10 @@ function findMuni(dept, value){
 
 /* ---------- costo de envío ----------
    Área metropolitana de Barranquilla: SIEMPRE $8.000 (nunca gratis).
-   Envío nacional: gratis desde $200.000, si no, $15.000. */
+   Envío nacional: gratis desde $200.000, si no, $15.000.
+   Envío gratis: promoción temporal, $0 sin condición (quitar cuando termine). */
 function shippingCost(subtotalConDescuento){
+  if(ck.method === "gratis") return 0;
   if(ck.method === "metro") return SHIP_METRO;
   return subtotalConDescuento >= FREE_SHIPPING_FROM ? 0 : SHIP_NACIONAL;
 }
@@ -79,6 +81,7 @@ function applyMethod(method){
   ck.method = method;
   $("#optMetro").classList.toggle("selected", method==="metro");
   $("#optNacional").classList.toggle("selected", method==="nacional");
+  const optGratis = $("#optGratis"); if(optGratis) optGratis.classList.toggle("selected", method==="gratis");
   renderSummary();
 }
 
@@ -205,7 +208,7 @@ async function guardarPedido(order){
         envio: order.shipping,
         total: order.total,
         metodoPago: "Wompi",
-        metodoEntrega: order.method === "metro" ? "Área metropolitana de Barranquilla" : "Envío nacional",
+        metodoEntrega: order.method === "metro" ? "Área metropolitana de Barranquilla" : (order.method === "gratis" ? "Envío gratis (promoción temporal)" : "Envío nacional"),
         ciudad: order.municipio || "",
         notas: order.notes || ""
       })
@@ -297,7 +300,7 @@ async function submitCheckout(){
     total: money(total),
     fecha: new Date().toLocaleDateString("es-CO", { day:"numeric", month:"long", year:"numeric" }),
     direccion: [order.address, order.address2, order.municipio, order.departamento].filter(Boolean).join(", "),
-    metodo_entrega: ck.method === "metro" ? "Área metropolitana de Barranquilla" : "Envío nacional"
+    metodo_entrega: ck.method === "metro" ? "Área metropolitana de Barranquilla" : (ck.method === "gratis" ? "Envío gratis (promoción temporal)" : "Envío nacional")
   };
 
   sessionStorage.setItem("av_email", order.email);
