@@ -315,10 +315,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
       <div class="fcard">
         <h2>Código de descuento</h2>
         <p class="sub">¿Eres del Club? Ingresa tu código para 15% de descuento.</p>
-        <div class="fgroup">
-          <input type="text" id="couponCode" placeholder="AV15-XXXXXXX">
+        <div style="display:flex;gap:10px;align-items:stretch">
+          <div class="fgroup" style="flex:1;margin-bottom:0">
+            <input type="text" id="couponCode" placeholder="AV15-XXXXXXX" autocomplete="off" style="text-transform:uppercase">
+          </div>
+          <button type="button" id="applyCouponBtn" style="padding:0 20px;background:var(--noir);color:#fff;border-radius:var(--radius);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;white-space:nowrap;transition:.3s;flex-shrink:0">Aplicar</button>
         </div>
-        <div id="discountInfo">✓ Descuento <span id="discountAmount">15%</span> aplicado</div>
+        <div id="couponMsg" style="margin-top:10px;font-size:.86rem;display:none"></div>
       </div>
 
       <button type="submit" class="btn-submit" id="payBtn">Continuar al pago</button>

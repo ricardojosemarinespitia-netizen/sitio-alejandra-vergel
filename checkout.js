@@ -383,27 +383,48 @@ async function submitCheckout(){
 }
 
 /* ---------- cupón Club ---------- */
+function setCouponMsg(ok, text){
+  const el = $("#couponMsg");
+  if(!el) return;
+  el.style.display = "block";
+  el.style.color = ok ? "var(--sage)" : "var(--rose-deep)";
+  el.style.fontWeight = "500";
+  el.textContent = text;
+}
+
 function initCoupon(){
   const couponInput = $("#couponCode");
+  const applyBtn = $("#applyCouponBtn");
   if(!couponInput) return;
-  couponInput.addEventListener("blur", async () => {
-    const code = couponInput.value.trim();
-    if(!code){ ck.discount = 0; ck.couponCode = ""; renderSummary(); return; }
+
+  async function apply(){
+    const code = couponInput.value.trim().toUpperCase();
+    if(!code){
+      ck.discount = 0; ck.couponCode = "";
+      setCouponMsg(false, "Ingresa un código primero.");
+      renderSummary(); return;
+    }
+    if(applyBtn){ applyBtn.disabled = true; applyBtn.textContent = "..."; }
     const result = await validateCoupon(code);
+    if(applyBtn){ applyBtn.disabled = false; applyBtn.textContent = "Aplicar"; }
     if(result.valid){
       ck.discount = result.discount;
       ck.couponCode = code;
-      $("#discountInfo").style.display = "block";
-      $("#discountAmount").textContent = result.discount + "%";
-      showToast("✓ Código válido: " + result.discount + "% de descuento");
+      couponInput.disabled = true;
+      setCouponMsg(true, "✓ Código válido — " + result.discount + "% de descuento aplicado al subtotal.");
     } else {
       ck.discount = 0; ck.couponCode = "";
-      $("#discountInfo").style.display = "none";
-      showToast("✗ " + (result.error || "Código no válido"));
-      couponInput.value = "";
+      const err = result.error || "Código no válido";
+      const msg = err === "Código ya fue usado"
+        ? "✗ Este código ya fue utilizado en una compra anterior."
+        : "✗ Código no válido. Verifica que sea tu código personal AV15-XXXXXXX.";
+      setCouponMsg(false, msg);
     }
     renderSummary();
-  });
+  }
+
+  if(applyBtn) applyBtn.addEventListener("click", apply);
+  couponInput.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); apply(); } });
 }
 
 /* ---------- éxito (lo usa checkout-success.html) ---------- */
