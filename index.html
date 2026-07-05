@@ -281,6 +281,12 @@ section{padding:112px 0}
 .edit-txt p{font-size:.9rem;color:rgba(255,255,255,.85);font-weight:300;margin-bottom:22px;max-width:360px;line-height:1.6}
 .edit-btn{display:inline-block;border:1.5px solid rgba(255,255,255,.7);color:#fff;padding:12px 30px;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;background:transparent;cursor:pointer;transition:.3s;font-family:var(--sans)}
 .edit-card:hover .edit-btn,.edit-btn:hover{background:#fff;color:var(--noir);border-color:#fff}
+/* Portátil: enfoque fijo a la pieza */
+@media(min-width:1025px){
+  .edit-card[data-tipo="anillos"] img{object-position:25% 8%}
+  .edit-card[data-tipo="aretes"] img{object-position:46% 32%}
+  .edit-card[data-tipo="pulseras"] img{object-position:50% 100%}
+}
 @media(max-width:920px){
   .edit-card{height:80vh;height:80svh;min-height:460px}
   .edit-txt{padding:40px}
@@ -797,8 +803,9 @@ section{padding:112px 0}
   .modal-info{padding:28px 22px}
   .modal-actions{flex-wrap:wrap}
   .modal-actions .btn{flex:1 1 100%}
-  .toast{left:16px;right:16px;transform:translate(0,calc(100% + 60px));max-width:none;border-radius:16px}
-  .toast.show{transform:translate(0,0)}
+  .toast{left:50%;right:auto;width:max-content;max-width:calc(100vw - 32px);transform:translate(-50%,calc(100% + 60px));border-radius:999px;padding:11px 16px;font-size:.78rem;gap:8px}
+  .toast.show{transform:translate(-50%,0)}
+  .toast a{padding:6px 12px;font-size:.72rem;margin-left:2px}
 }
 @media(max-width:360px){
   .grid{grid-template-columns:1fr}
@@ -871,7 +878,7 @@ section{padding:112px 0}
 <section class="editorial" aria-label="Colecciones">
   <div class="edit-grid">
     <article class="edit-card" data-tipo="anillos">
-      <img src="img/context/portada-anillos.jpg" alt="Anillo con topacio azul en oro" style="object-position:50% 0%">
+      <img src="img/context/portada-anillos.jpg" alt="Anillo con topacio azul en oro" data-start="50% 50%" data-focus="22% 6%">
       <div class="edit-txt">
         <span class="eyebrow2">Nueva Colección</span>
         <h3>Anillos</h3>
@@ -882,7 +889,7 @@ section{padding:112px 0}
     <article class="edit-card" data-tipo="collares">
       <picture>
         <source media="(max-width:1024px)" srcset="img/collares/prisma-rectangular-1.jpg">
-        <img src="img/collares/azur-gota-1.jpg" alt="Collares Azur Gota y Prisma en plata ley 925">
+        <img src="img/collares/azur-gota-1.jpg" alt="Collares Azur Gota y Prisma en plata ley 925" data-start="50% 50%" data-focus="45% 62%">
       </picture>
       <div class="edit-txt">
         <span class="eyebrow2">Colección Permanente</span>
@@ -892,7 +899,7 @@ section{padding:112px 0}
       </div>
     </article>
     <article class="edit-card" data-tipo="aretes">
-      <img src="img/context/portada-aretes.jpg" alt="Arete entorchado en plata sobre modelo">
+      <img src="img/context/portada-aretes.jpg" alt="Arete entorchado en plata sobre modelo" data-start="50% 50%" data-focus="46% 32%">
       <div class="edit-txt">
         <span class="eyebrow2">Nueva Colección</span>
         <h3>Aretes</h3>
@@ -901,7 +908,7 @@ section{padding:112px 0}
       </div>
     </article>
     <article class="edit-card" data-tipo="pulseras">
-      <img src="img/context/portada-pulseras.jpg" alt="Pulsera en filigrana dorada con amatistas" style="object-position:50% 100%">
+      <img src="img/context/portada-pulseras.jpg" alt="Pulsera en filigrana dorada con amatistas" data-start="50% 50%" data-focus="50% 98%">
       <div class="edit-txt">
         <span class="eyebrow2">Nueva Colección</span>
         <h3>Pulseras</h3>
@@ -1554,6 +1561,47 @@ document.addEventListener("DOMContentLoaded", ()=>{
     renderGrid();
     $("#catalogo").scrollIntoView({behavior:"smooth"});
   }));
+  initEditorialFocus();
+
+  /* Efecto premium en móvil/tablet: al deslizar, la foto viaja con un
+     zoom suave hacia la joya (anillo arriba, pulsera abajo, etc.).
+     En portátil el enfoque es fijo vía CSS. */
+  function initEditorialFocus(){
+    const mq = window.matchMedia("(max-width:1024px)");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const imgs = $$(".edit-card img").filter(i => i.dataset.focus);
+    if(!imgs.length) return;
+    const parse = s => s.replace(/%/g,"").trim().split(/\s+/).map(Number);
+    let ticking = false;
+
+    function frame(){
+      ticking = false;
+      if(!mq.matches || reduce.matches) return;
+      const vh = window.innerHeight;
+      imgs.forEach(img=>{
+        const r = img.closest(".edit-card").getBoundingClientRect();
+        if(r.bottom < -80 || r.top > vh + 80) return;
+        // t=0 cuando la tarjeta entra · t=1 cuando su centro toca el centro del viewport
+        let t = (vh / 2 - r.top) / (r.height / 2);
+        t = Math.max(0, Math.min(1, t));
+        const e = t * t * (3 - 2 * t); // suavizado ease-in-out
+        const [sx, sy] = parse(img.dataset.start || "50 50");
+        const [fx, fy] = parse(img.dataset.focus);
+        img.style.transition = "none";
+        img.style.objectPosition = (sx + (fx - sx) * e) + "% " + (sy + (fy - sy) * e) + "%";
+        img.style.transform = "scale(" + (1 + 0.14 * e) + ")";
+      });
+    }
+    function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
+
+    mq.addEventListener("change", ()=>{
+      if(!mq.matches) imgs.forEach(img=>{ img.style.transition = ""; img.style.objectPosition = ""; img.style.transform = ""; });
+      else onScroll();
+    });
+    window.addEventListener("scroll", onScroll, {passive:true});
+    window.addEventListener("resize", onScroll);
+    onScroll();
+  }
 
   // formularios
   $("#contactForm").addEventListener("submit", handleContact);
