@@ -206,6 +206,7 @@ h1{
 <script src="store.js"></script>
 <script src="club.js?v=4"></script>
 <script src="checkout.js?v=4"></script>
+<script src="perfil.js?v=2"></script>
 <script>
 function money(n){ return "$ " + Math.round(n).toLocaleString("es-CO"); }
 
@@ -323,6 +324,25 @@ async function initSuccessPage() {
   if(order && !rechazado){
     if(order.ref || ref) order.ref = order.ref || ref;
     try{ await guardarPedido(order); }catch(e){ console.error("[guardarPedido]", e); }
+
+    // Guardar pedido en historial del perfil (aparece en "Mis pedidos")
+    try{
+      if(window.AVPerfil && order.cart){
+        const orderRef = order.ref || ref;
+        const alreadySaved = sessionStorage.getItem('av_order_saved_' + orderRef);
+        if(!alreadySaved){
+          const estado = status === "APPROVED" ? "APROBADO" : status === "PENDING" ? "PENDIENTE" : "APROBADO";
+          AVPerfil.addOrder({
+            ref:    orderRef,
+            fecha:  new Date().toISOString(),
+            estado: estado,
+            items:  order.cart.map(i => ({ qty: i.qty || 1, name: i.name })),
+            total:  order.total || 0
+          });
+          sessionStorage.setItem('av_order_saved_' + orderRef, '1');
+        }
+      }
+    }catch(e){ console.error("[addOrder]", e); }
   }
 
   // Correo de confirmación al cliente
