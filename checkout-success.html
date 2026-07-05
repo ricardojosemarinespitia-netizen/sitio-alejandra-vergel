@@ -266,20 +266,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('totalsSection').style.display = "";
   }
 
-  // Verificar estado real del pago en Wompi — CON TIMEOUT para no colgar la página.
-  // Si Wompi no responde a tiempo, seguimos igual: registramos la venta y enviamos
-  // correo (el webhook de Wompi es la fuente autoritativa y evita duplicados).
+  // Verificar estado real del pago en Wompi — TIMEOUT de 3s MAX.
+  // Si Wompi no responde a tiempo o falla, seguimos igual: registramos la venta
+  // y enviamos correo (el webhook de Wompi es la fuente autoritativa).
   const badge = document.getElementById('statusBadge');
   let status  = null;
+
   if(wompiId){
-    try{
-      const ctrl = new AbortController();
-      const to   = setTimeout(() => ctrl.abort(), 6000);
-      const r = await fetch("https://production.wompi.co/v1/transactions/" + encodeURIComponent(wompiId), { signal: ctrl.signal });
-      clearTimeout(to);
-      const j = await r.json();
-      status  = j && j.data && j.data.status;
-    }catch(e){ console.error("[Wompi API]", e); }
+    // Wrapper con timeout garantizado
+    status = await Promise.race([
+      (async () => {
+        try {
+          const r = await fetch("https://production.wompi.co/v1/transactions/" + encodeURIComponent(wompiId));
+          const j = await r.json();
+          return j?.data?.status || null;
+        } catch(e) {
+          console.error("[Wompi API]", e);
+          return null;
+        }
+      })(),
+      new Promise(resolve => setTimeout(() => resolve(null), 3000))
+    ]);
   }
 
   if(status === "APPROVED"){
@@ -292,7 +299,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     badge.className = "status-badge pending";
     badge.textContent = "Pago rechazado";
   } else {
-    // No se pudo verificar (sin id, timeout o red) — mostramos confirmada igual.
+    // Timeout, error red, o Wompi offline — mostrar confirmada igual.
+    // El webhook es la fuente de verdad y registrará el pago si Wompi lo aprobó.
     badge.className = "status-badge approved";
     badge.textContent = "Confirmada";
   }
