@@ -101,8 +101,11 @@ const TYPES = [
   { key:"pulseras", label:"Pulseras", subs:[] }
 ];
 
-/* ---------- URL del detalle (con anticaché) ---------- */
-const productUrl = id => `product.html?id=${encodeURIComponent(id)}&t=${Date.now()}`;
+/* ---------- URL del detalle ----------
+   Sin timestamp: una URL estable permite que Safari/iOS restaure el
+   scroll al volver atrás (con &t= cambiante, cada visita se veía como
+   una página nueva y el navegador no podía recordar la posición). */
+const productUrl = id => `product.html?id=${encodeURIComponent(id)}`;
 
 /* ============================================================
    Ilustración SVG de joya (placeholder reemplazable por foto)

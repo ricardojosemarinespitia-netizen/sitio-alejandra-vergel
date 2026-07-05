@@ -32,8 +32,8 @@ PALETA DE COLORES.png
 Tabla-Códigos-Dane.pdf
 COLLARES-20260703T023630Z-3-001.zip
 
-# Material fuente pulseras/portadas
-PORTADA*.jpg
-PORTADA*.jpeg
+# Material fuente pulseras/portadas (solo en la raíz, no dentro de img/)
+/PORTADA*.jpg
+/PORTADA*.jpeg
 *.docx
 _pulseras_tmp/
