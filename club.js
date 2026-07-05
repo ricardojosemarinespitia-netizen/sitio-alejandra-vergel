@@ -3,7 +3,7 @@
    Sistema de suscriptores + validación de códigos de descuento
    ============================================================ */
 
-const CLUB_API = "https://script.google.com/macros/s/AKfycbxx7D_m8Ywi1uRW_4Q181b2YL9AGhxuVFPL4cBAqJfRaGLEJJ2PYGu2pEgJSF89lcom/exec";
+const CLUB_API = "https://script.google.com/macros/s/AKfycbxdQ-GpE4_c0R0TQi_xoQ-8t1EwXpaFXAv6Qkznc2_OtepnP7kaOp_0F4dyj4OHQuvU/exec";
 
 let clubState = {
   code: localStorage.getItem("av_club_code") || null,
