@@ -317,6 +317,10 @@ async function submitCheckout(){
   sessionStorage.setItem("av_total", money(total));
   sessionStorage.setItem("av_discount", ck.discount);
   sessionStorage.setItem("av_order", JSON.stringify(order));
+  // Espejo en localStorage: sessionStorage se pierde al volver del redirect
+  // externo de Wompi (sobre todo en móvil). localStorage sí sobrevive y permite
+  // que checkout-success recupere el pedido para registrar venta + enviar correo.
+  localStorage.setItem("av_order", JSON.stringify(order));
 
   // Si aceptó novedades, la sumamos al Club (sin bloquear el pago)
   if(order.newsOpt && typeof registerClub === "function"){
@@ -364,6 +368,7 @@ async function submitCheckout(){
     order.ref = result.reference;
     sessionStorage.setItem('av_reference', result.reference);
     sessionStorage.setItem("av_order", JSON.stringify(order));
+    localStorage.setItem("av_order", JSON.stringify(order));
 
     // Guardar el pedido como PENDIENTE en el servidor (Escenario B: el cliente
     // no vuelve al sitio). Fire-and-forget: si la función no está desplegada,

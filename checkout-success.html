@@ -204,8 +204,8 @@ h1{
 <script src="products.js"></script>
 <script src="colombia.js"></script>
 <script src="store.js"></script>
-<script src="club.js"></script>
-<script src="checkout.js"></script>
+<script src="club.js?v=3"></script>
+<script src="checkout.js?v=3"></script>
 <script>
 function money(n){ return "$ " + Math.round(n).toLocaleString("es-CO"); }
 
@@ -216,7 +216,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if(ref) document.getElementById('refNumber').textContent = "Ref: " + ref;
 
-  const orderRaw = sessionStorage.getItem('av_order');
+  // sessionStorage se pierde al volver del redirect externo de Wompi (móvil sobre
+  // todo). Recuperamos el pedido desde localStorage como respaldo.
+  const orderRaw = sessionStorage.getItem('av_order') || localStorage.getItem('av_order');
   const order    = (() => { try { return orderRaw ? JSON.parse(orderRaw) : null; } catch(e){ return null; } })();
 
   // Nombre del cliente
@@ -264,12 +266,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('totalsSection').style.display = "";
   }
 
-  // Verificar estado real del pago en Wompi
+  // Verificar estado real del pago en Wompi — CON TIMEOUT para no colgar la página.
+  // Si Wompi no responde a tiempo, seguimos igual: registramos la venta y enviamos
+  // correo (el webhook de Wompi es la fuente autoritativa y evita duplicados).
   const badge = document.getElementById('statusBadge');
   let status  = null;
   if(wompiId){
     try{
-      const r = await fetch("https://production.wompi.co/v1/transactions/" + encodeURIComponent(wompiId));
+      const ctrl = new AbortController();
+      const to   = setTimeout(() => ctrl.abort(), 6000);
+      const r = await fetch("https://production.wompi.co/v1/transactions/" + encodeURIComponent(wompiId), { signal: ctrl.signal });
+      clearTimeout(to);
       const j = await r.json();
       status  = j && j.data && j.data.status;
     }catch(e){ console.error("[Wompi API]", e); }
@@ -281,17 +288,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else if(status === "PENDING"){
     badge.className = "status-badge pending";
     badge.textContent = "Pago en proceso (PSE)";
-  } else if(!wompiId){
-    // Sin ?id= en la URL — mostrar según sessionStorage si existe
+  } else if(status === "DECLINED" || status === "VOIDED" || status === "ERROR"){
+    badge.className = "status-badge pending";
+    badge.textContent = "Pago rechazado";
+  } else {
+    // No se pudo verificar (sin id, timeout o red) — mostramos confirmada igual.
     badge.className = "status-badge approved";
     badge.textContent = "Confirmada";
-  } else {
-    badge.className = "status-badge checking";
-    badge.textContent = "En revisión";
   }
 
-  // Registrar venta en Google Sheets (Scenario A: cliente regresa)
-  if(order && (status === "APPROVED" || status === "PENDING" || !wompiId)){
+  // Registrar venta en Google Sheets (Scenario A: cliente regresa).
+  // Se registra SIEMPRE que tengamos un pedido y el pago NO haya sido rechazado.
+  // guardarPedido es idempotente (sessionStorage av_done_<ref>).
+  const rechazado = (status === "DECLINED" || status === "VOIDED" || status === "ERROR");
+  if(order && !rechazado){
     if(order.ref || ref) order.ref = order.ref || ref;
     try{ await guardarPedido(order); }catch(e){ console.error("[guardarPedido]", e); }
   }
@@ -329,6 +339,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   sessionStorage.removeItem('av_total');
   sessionStorage.removeItem('av_reference');
   sessionStorage.removeItem('av_order');
+  localStorage.removeItem('av_order');
 });
 </script>
 </body>
