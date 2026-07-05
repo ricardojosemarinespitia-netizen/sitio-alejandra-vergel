@@ -209,7 +209,18 @@ h1{
 <script>
 function money(n){ return "$ " + Math.round(n).toLocaleString("es-CO"); }
 
-document.addEventListener("DOMContentLoaded", async () => {
+// Red de seguridad absoluta: pase lo que pase en initSuccessPage() (error de
+// JS, WebView de banco raro, timing de eventos), el badge NUNCA debe quedar
+// colgado en "Verificando pago". Independiente del resto del script.
+setTimeout(() => {
+  const b = document.getElementById('statusBadge');
+  if(b && b.classList.contains('checking')){
+    b.className = 'status-badge approved';
+    b.textContent = 'Confirmada';
+  }
+}, 4000);
+
+async function initSuccessPage() {
   const params   = new URLSearchParams(window.location.search);
   const ref      = params.get('ref');
   const wompiId  = params.get('id');
@@ -348,7 +359,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   sessionStorage.removeItem('av_reference');
   sessionStorage.removeItem('av_order');
   localStorage.removeItem('av_order');
-});
+}
+
+// El script está al final del <body>: el DOM ya existe. Esperar a
+// DOMContentLoaded es innecesario y en algunos WebViews de bancos (PSE)
+// el evento ya se disparó antes de registrar el listener, dejando la
+// página colgada en "Verificando pago". Ejecutamos directo si ya está listo.
+const runInit = () => initSuccessPage().catch(e => console.error('[initSuccessPage]', e));
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', runInit);
+} else {
+  runInit();
+}
 </script>
 </body>
 </html>
