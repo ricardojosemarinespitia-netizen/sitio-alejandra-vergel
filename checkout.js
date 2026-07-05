@@ -320,7 +320,7 @@ async function submitCheckout(){
 
   // Si aceptó novedades, la sumamos al Club (sin bloquear el pago)
   if(order.newsOpt && typeof registerClub === "function"){
-    try { registerClub(order.firstName, order.email); } catch(e){}
+    try { registerClub(order.firstName, order.email, "email"); } catch(e){}
   }
 
   const btn = $("#payBtn");

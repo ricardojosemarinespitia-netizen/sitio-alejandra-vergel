@@ -1337,7 +1337,7 @@ async function handleNews(e){
   btn.disabled = true;
   btn.textContent = "Uniéndote...";
 
-  const ok = await registerClub(name, email);
+  const ok = await registerClub(name, email, "email");
 
   btn.disabled = false;
   btn.textContent = "Unirme al Club";
@@ -1433,7 +1433,7 @@ async function handleGoogleCredential(response){
 
     setClubMessage("Conectando con Google...");
 
-    const ok = await registerClub(name, email);
+    const ok = await registerClub(name, email, "google");
 
     localStorage.setItem("av_club_picture", data.picture || "");
     if (window.AVPerfil) {
@@ -1485,7 +1485,7 @@ async function handleClubModal(e){
   if(!reEmail.test(email)){ cm.style.color="var(--cartier)"; cm.textContent="Ingresa un correo válido."; return; }
 
   btn.disabled = true; btn.textContent = "Uniéndote...";
-  const ok = await registerClub(name, email);
+  const ok = await registerClub(name, email, "email");
   btn.disabled = false; btn.textContent = "Unirme al Club";
 
   if(window.AVPerfil){

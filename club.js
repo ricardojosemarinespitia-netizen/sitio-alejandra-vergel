@@ -14,7 +14,7 @@ let clubState = {
 /* ============================================================
    REGISTRAR EN CLUB
    ============================================================ */
-async function registerClub(name, email) {
+async function registerClub(name, email, metodo) {
   if (!name || !email) {
     showToast("Por favor completa nombre y email");
     return false;
@@ -25,8 +25,11 @@ async function registerClub(name, email) {
     return false;
   }
 
+  // Origen del registro: "google" (Google Sign-In) o "email" (formulario manual)
+  const metodoFinal = metodo === "google" ? "google" : "email";
+
   try {
-    const response = await fetch(`${CLUB_API}?action=registerSubscriber&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`);
+    const response = await fetch(`${CLUB_API}?action=registerSubscriber&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&metodo=${encodeURIComponent(metodoFinal)}`);
     const result = await response.json();
 
     if (result.success) {
