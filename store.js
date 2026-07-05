@@ -76,6 +76,17 @@ const EARRING_CATS = ["statement","candongas","studs"];
 const NECKLACE_CATS = ["dijes","gargantillas"];
 const BRACELET_CATS = ["pulseras"];
 
+/* Etiqueta del TIPO de joya (Anillos, Aretes, Collares, Pulseras) a partir
+   de la categoría/colección del producto. Se usa en las tarjetas del catálogo
+   para que todas muestren el tipo de forma consistente (no la colección). */
+function typeLabel(cat){
+  if(RING_CATS.includes(cat)) return "Anillos";
+  if(EARRING_CATS.includes(cat)) return "Aretes";
+  if(NECKLACE_CATS.includes(cat)) return "Collares";
+  if(BRACELET_CATS.includes(cat)) return "Pulseras";
+  return (CATS[cat] && CATS[cat].label) || "";
+}
+
 /* Navegación del catálogo en dos niveles (estilo Cartier / Tiffany):
    nivel 1 = tipo de joya · nivel 2 = colección / subcategoría */
 const TYPES = [

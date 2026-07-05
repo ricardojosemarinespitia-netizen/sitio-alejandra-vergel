@@ -1258,7 +1258,7 @@ function renderGrid(keepShown){
       </div>
       <div class="card-body">
         <div class="card-cat-row">
-          <span class="card-cat">${CATS[p.cat].label}</span>${discountPct(p) ? `<span class="card-badge">−${discountPct(p)}%</span>` : ""}
+          <span class="card-cat">${typeLabel(p.cat)}</span>${discountPct(p) ? `<span class="card-badge">−${discountPct(p)}%</span>` : ""}
         </div>
         <h3 class="card-name">${p.name}</h3>
         <p class="card-mat">${p.materials}</p>

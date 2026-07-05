@@ -448,13 +448,14 @@ function renderDetail(){
 }
 
 function renderRelated(current){
-  // misma categoría primero; completa hasta 4
-  let rel = PRODUCTS.filter(p => p.cat===current.cat && p.id!==current.id);
-  if(rel.length < 4){
-    const extra = PRODUCTS.filter(p => p.cat!==current.cat && p.id!==current.id);
-    rel = rel.concat(extra);
+  // Sugerencias: joyas al AZAR de cualquier tipo (no solo la misma categoría).
+  // Se barajan en cada visita para que cambien y muestren toda la colección.
+  const pool = PRODUCTS.filter(p => p.id!==current.id);
+  for(let i=pool.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  rel = rel.slice(0,4);
+  const rel = pool.slice(0,4);
   if(!rel.length){ $("#relatedSection").style.display="none"; return; }
 
   $("#relatedSection").style.display="block";

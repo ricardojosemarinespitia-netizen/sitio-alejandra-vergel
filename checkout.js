@@ -185,16 +185,20 @@ function validateForm(){
      usando el pedido que guardamos aquí con save-pending. */
 async function guardarPedido(order){
   if(!order || !order.ref) return;
-  const done = sessionStorage.getItem("av_done_" + order.ref);
-  if(done) return;
-  sessionStorage.setItem("av_done_" + order.ref, "1");
+  // Idempotencia: solo bloquea si YA se registró con éxito antes.
+  if(sessionStorage.getItem("av_done_" + order.ref)) return;
 
-  const productos = (order.cart || []).map(i => `${i.qty}× ${i.name}${i.color ? " (" + i.color + ")" : ""}`).join("\n");
-  const cantidad = (order.cart || []).reduce((s,i)=>s+i.qty, 0);
+  const cart = order.cart || [];
+  const productos = cart.map(i => `${i.qty}× ${i.name}${i.color ? " (" + i.color + ")" : ""}`).join("\n");
+  const cantidad = cart.reduce((s,i)=>s+i.qty, 0);
+  // Precio unitario: si el pedido es de UN solo producto (independiente de la
+  // cantidad), enviamos su precio real; con varios productos distintos va 0.
+  const precioUnit = cart.length === 1 ? cart[0].price : 0;
 
   try{
     await fetch(CLUB_API, {
       method: "POST",
+      mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({
         ref: order.ref,
@@ -203,6 +207,7 @@ async function guardarPedido(order){
         telefono: order.phone,
         productos,
         cantidad,
+        precioUnit,
         subtotal: order.subtotal,
         descuento: order.discount ? Math.round(order.subtotal * order.discount / 100) : 0,
         envio: order.shipping,
@@ -215,10 +220,15 @@ async function guardarPedido(order){
     });
   }catch(e){ console.error("[guardarPedido] Ventas API:", e); }
 
+  // Marcamos como registrado SOLO después de intentar el POST de la venta,
+  // para que un fallo temprano (antes de este punto) permita reintentar al recargar.
+  sessionStorage.setItem("av_done_" + order.ref, "1");
+
   if(order.couponCode){
     try{
       await fetch(CLUB_API, {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({ action: "markUsed", code: order.couponCode, ref: order.ref, email: order.email })
       });
