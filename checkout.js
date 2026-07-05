@@ -371,15 +371,17 @@ async function submitCheckout(){
     localStorage.setItem("av_order", JSON.stringify(order));
 
     // Guardar el pedido como PENDIENTE en el servidor (Escenario B: el cliente
-    // no vuelve al sitio). Fire-and-forget: si la función no está desplegada,
-    // no afecta el flujo normal de pago.
+    // no vuelve al sitio). CRÍTICO: se espera (await) a que termine antes de
+    // redirigir — si no se espera, el navegador cancela el fetch al navegar
+    // fuera de la página (window.location.href) y el pedido nunca se guarda,
+    // dejando al webhook sin nada que procesar cuando Wompi confirma el pago.
     try{
-      fetch(SAVE_PENDING_API, {
+      await fetch(SAVE_PENDING_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(order)
       });
-    }catch(e){}
+    }catch(e){ console.error("[save-pending]", e); }
 
     const wompiUrl = WOMPI_CHECKOUT_URL
       + '?public-key=' + encodeURIComponent(result.publicKey)
