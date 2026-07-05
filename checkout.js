@@ -10,6 +10,7 @@
 
 const FUNCTIONS_BASE = "https://radiant-lamington-bd56f7.netlify.app"; // Wompi integration
 const WOMPI_API = (FUNCTIONS_BASE || '') + '/.netlify/functions/wompi-pay';
+const SAVE_PENDING_API = (FUNCTIONS_BASE || '') + '/.netlify/functions/save-pending';
 const WOMPI_CHECKOUT_URL = 'https://checkout.wompi.co/p/';
 const WA_NUMBER = (typeof CONFIG !== 'undefined' && CONFIG.whatsapp) ? CONFIG.whatsapp : '573228505472';
 
@@ -174,6 +175,64 @@ function validateForm(){
   return ok;
 }
 
+/* ---------- registrar venta en Google Sheets + marcar código usado ----------
+   Se llama en dos momentos posibles (idempotente vía sessionStorage):
+   · Escenario A: el cliente vuelve del pago y esta pestaña lo detecta (checkout-success.html)
+   · Escenario B: el cliente no vuelve → lo procesa el webhook de Wompi en Netlify
+     usando el pedido que guardamos aquí con save-pending. */
+async function guardarPedido(order){
+  if(!order || !order.ref) return;
+  const done = sessionStorage.getItem("av_done_" + order.ref);
+  if(done) return;
+  sessionStorage.setItem("av_done_" + order.ref, "1");
+
+  const productos = (order.cart || []).map(i => `${i.qty}× ${i.name}${i.color ? " (" + i.color + ")" : ""}`).join("\n");
+  const cantidad = (order.cart || []).reduce((s,i)=>s+i.qty, 0);
+
+  try{
+    await fetch(CLUB_API, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        ref: order.ref,
+        nombre: order.firstName ? (order.firstName + " " + order.lastName) : "—",
+        email: order.email,
+        telefono: order.phone,
+        productos,
+        cantidad,
+        subtotal: order.subtotal,
+        descuento: order.discount ? Math.round(order.subtotal * order.discount / 100) : 0,
+        envio: order.shipping,
+        total: order.total,
+        metodoPago: "Wompi",
+        metodoEntrega: order.method === "metro" ? "Área metropolitana de Barranquilla" : "Envío nacional",
+        ciudad: order.municipio || "",
+        notas: order.notes || ""
+      })
+    });
+  }catch(e){ console.error("[guardarPedido] Ventas API:", e); }
+
+  if(order.couponCode){
+    try{
+      await fetch(CLUB_API, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ action: "markUsed", code: order.couponCode, ref: order.ref, email: order.email })
+      });
+    }catch(e){ console.error("[guardarPedido] markUsed:", e); }
+  }
+
+  // Avisar al servidor que este pedido YA se procesó aquí, para que el webhook
+  // de Wompi (Escenario B) no lo registre por segunda vez.
+  try{
+    fetch(SAVE_PENDING_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ref: order.ref, _status: "done" })
+    });
+  }catch(e){}
+}
+
 /* ---------- WhatsApp de respaldo ---------- */
 function checkoutViaWhatsApp(o){
   const cart = getCart();
@@ -224,6 +283,7 @@ async function submitCheckout(){
     method: ck.method,
     couponCode: ck.couponCode,
     discount: ck.discount,
+    cart,
     subtotal, shipping: ship, total
   };
 
@@ -288,7 +348,21 @@ async function submitCheckout(){
     const result = await response.json();
     if(!result.success) throw new Error(result.error || 'pago no generado');
 
+    order.ref = result.reference;
     sessionStorage.setItem('av_reference', result.reference);
+    sessionStorage.setItem("av_order", JSON.stringify(order));
+
+    // Guardar el pedido como PENDIENTE en el servidor (Escenario B: el cliente
+    // no vuelve al sitio). Fire-and-forget: si la función no está desplegada,
+    // no afecta el flujo normal de pago.
+    try{
+      fetch(SAVE_PENDING_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order)
+      });
+    }catch(e){}
+
     const wompiUrl = WOMPI_CHECKOUT_URL
       + '?public-key=' + encodeURIComponent(result.publicKey)
       + '&currency=COP'

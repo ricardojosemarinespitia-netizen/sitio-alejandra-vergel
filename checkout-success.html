@@ -131,11 +131,17 @@ p{
   <a href="index.html" class="btn">Volver al catálogo</a>
 </div>
 
+<script src="products.js"></script>
+<script src="colombia.js"></script>
+<script src="store.js"></script>
+<script src="club.js"></script>
+<script src="checkout.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Leer referencia de URL
+document.addEventListener("DOMContentLoaded", async () => {
+  // Leer referencia y el id de transacción que Wompi añade al redirigir
   const params = new URLSearchParams(window.location.search);
   const ref = params.get('ref');
+  const wompiId = params.get('id');
 
   if (ref) {
     document.getElementById('refNumber').textContent = `Referencia: ${ref}`;
@@ -148,12 +154,32 @@ document.addEventListener("DOMContentLoaded", () => {
   if (email) document.getElementById('emailInfo').textContent = email;
   if (total) document.getElementById('totalPaid').textContent = total;
 
+  const orderRaw = sessionStorage.getItem('av_order');
+  const order = (() => { try { return orderRaw ? JSON.parse(orderRaw) : null; } catch(e){ return null; } })();
+
+  // Verificar el estado REAL del pago contra la API pública de Wompi antes de
+  // registrar nada. Evita que alguien registre una venta visitando esta URL
+  // a mano sin haber pagado.
+  let status = null;
+  if (wompiId) {
+    try {
+      const r = await fetch("https://production.wompi.co/v1/transactions/" + encodeURIComponent(wompiId));
+      const j = await r.json();
+      status = j && j.data && j.data.status;
+    } catch(e){ console.error("[Wompi API]", e); }
+  }
+
+  // APPROVED = aprobado · PENDING = PSE/Bancolombia en proceso (la venta ya es
+  // real). En ambos casos registramos en Sheets y marcamos el código usado.
+  if (order && (status === "APPROVED" || status === "PENDING")) {
+    try { await guardarPedido(order); } catch(e){ console.error("[guardarPedido]", e); }
+    document.getElementById('statusInfo').textContent = status === "APPROVED" ? "Confirmada" : "En proceso (PSE)";
+  }
+
   // Correo de confirmación de compra (al cliente + Cc a Alejandra)
   try {
-    const orderRaw = sessionStorage.getItem('av_order');
     const yaEnviado = sessionStorage.getItem('av_email_sent');
-    if (ref && orderRaw && yaEnviado !== ref) {
-      const order = JSON.parse(orderRaw);
+    if (ref && order && yaEnviado !== ref) {
       if (order.emailParams && order.email) {
         fetch("https://api.emailjs.com/api/v1.0/email/send", {
           method: "POST",
