@@ -25,7 +25,7 @@ const PRODUCTS = [
   /* ---------------- FILIGRANA ---------------- */
   {
     id:"aura", sku:"ANI-AURA", cat:"filigrana", name:"Aura",
-    price:1700, originalPrice:473000, /* PRECIO TEMPORAL DE PRUEBA */
+    price:1800, originalPrice:473000, /* PRECIO TEMPORAL DE PRUEBA */
     materials:"Plata ley 925 con baño de oro · Cuarzo ahumado natural",
     gemName:"Cuarzo ahumado", colors:["Plata con baño de oro"], sizes:[5,6,7,8,9,10],
     desc:"Pieza de autor tejida a mano en filigrana por maestros artesanos colombianos. En el centro, un elegante cuarzo ahumado de tonalidades profundas aporta carácter y un brillo sutil. Cada anillo se elabora bajo pedido, convirtiéndose en una pieza única.",
