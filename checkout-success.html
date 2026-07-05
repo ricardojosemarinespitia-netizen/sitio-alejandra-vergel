@@ -13,9 +13,11 @@
   --white:#FFFFFF;
   --noir:#14110F;
   --ink:#2A2622;
+  --ink-soft:#6B6460;
   --tiffany:#0ABAB5;
   --gold:#C9A24B;
   --line:#E6DFD4;
+  --sage:#5C7A5C;
   --serif:"Cormorant Garamond", serif;
   --sans:"Jost", sans-serif;
 }
@@ -32,74 +34,143 @@ body{
   background:var(--white);
   border:1px solid var(--line);
   border-radius:4px;
-  padding:60px 40px;
+  padding:50px 40px;
   text-align:center;
-  max-width:500px;
-  box-shadow:0 10px 30px -16px rgba(20,17,15,.30);
+  max-width:540px;
+  width:100%;
+  box-shadow:0 10px 30px -16px rgba(20,17,15,.25);
 }
 
 .success-icon{
-  width:80px;height:80px;margin:0 auto 30px;
+  width:72px;height:72px;margin:0 auto 24px;
   background:var(--tiffany);border-radius:50%;
   display:grid;place-items:center;color:#fff;
-  font-size:48px;
+  font-size:40px;
 }
 
 h1{
   font-family:var(--serif);
-  font-size:2.2rem;
-  margin-bottom:16px;
+  font-size:2rem;
+  margin-bottom:6px;
   color:var(--noir);
 }
 
+.customer-name{
+  font-size:1.05rem;
+  color:var(--ink-soft);
+  margin-bottom:18px;
+  font-style:italic;
+}
+
 .ref-number{
-  font-size:.9rem;
-  letter-spacing:.1em;
+  font-size:.78rem;
+  letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--ink-soft);
-  margin-bottom:30px;
+  margin-bottom:28px;
+}
+
+.msg{
+  font-size:.95rem;
+  line-height:1.7;
+  color:var(--ink-soft);
+  margin-bottom:0;
+}
+
+/* Productos */
+.section{
+  margin-top:32px;
+  padding-top:28px;
+  border-top:1px solid var(--line);
+  text-align:left;
+}
+
+.section-title{
+  font-size:.7rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin-bottom:16px;
   font-weight:600;
 }
 
-p{
-  font-size:1rem;
-  line-height:1.7;
-  color:var(--ink-soft);
-  margin-bottom:30px;
+.product-row{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  gap:12px;
+  font-size:.9rem;
 }
+.product-row:last-child{border-bottom:none}
+
+.product-name{
+  color:var(--noir);
+  font-weight:500;
+  flex:1;
+}
+.product-sub{
+  font-size:.78rem;
+  color:var(--ink-soft);
+  margin-top:2px;
+}
+.product-price{
+  color:var(--noir);
+  font-weight:600;
+  white-space:nowrap;
+}
+
+/* Totales */
+.totals{
+  margin-top:0;
+}
+.total-row{
+  display:flex;justify-content:space-between;
+  padding:9px 0;
+  font-size:.88rem;
+  border-bottom:1px solid var(--line);
+}
+.total-row:last-child{border-bottom:none}
+.total-label{color:var(--ink-soft)}
+.total-value{font-weight:600;color:var(--noir)}
+.total-value.discount{color:var(--sage)}
+.total-value.grand{font-size:1.05rem;color:var(--tiffany)}
+.total-label.grand{font-weight:600;color:var(--noir);font-size:.95rem}
+
+/* Estado */
+.status-badge{
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+.status-badge.approved{background:#E8F5E9;color:#2E7D32}
+.status-badge.pending{background:#FFF8E1;color:#F57F17}
+.status-badge.checking{background:#F5F5F5;color:#777}
 
 .btn{
   display:inline-block;
-  padding:14px 32px;
+  margin-top:32px;
+  padding:14px 36px;
   background:var(--noir);
   color:#fff;
   text-decoration:none;
-  font-size:.85rem;
+  font-size:.8rem;
   letter-spacing:.15em;
   text-transform:uppercase;
   font-weight:600;
   border-radius:4px;
   transition:.3s;
-  margin-top:20px;
 }
-
 .btn:hover{background:var(--tiffany)}
 
-.details{
-  margin-top:40px;
-  padding-top:30px;
-  border-top:1px solid var(--line);
-  text-align:left;
+@media(max-width:480px){
+  .success-card{padding:36px 22px}
+  h1{font-size:1.7rem}
 }
-
-.detail-row{
-  display:flex;justify-content:space-between;
-  padding:10px 0;
-  font-size:.9rem;
-}
-
-.label{color:var(--ink-soft)}
-.value{font-weight:600;color:var(--noir)}
 </style>
 </head>
 <body>
@@ -107,25 +178,24 @@ p{
 <div class="success-card">
   <div class="success-icon">✓</div>
 
-  <h1>¡Compra Confirmada!</h1>
+  <h1>¡Compra confirmada!</h1>
+  <div class="customer-name" id="customerName" style="display:none"></div>
+  <div class="ref-number" id="refNumber"></div>
 
-  <div class="ref-number" id="refNumber">Referencia: —</div>
+  <div class="status-badge checking" id="statusBadge">Verificando pago…</div>
 
-  <p>Tu pago ha sido procesado exitosamente. En breve recibirás un correo de confirmación con los detalles de tu orden.</p>
+  <p class="msg">Recibirás un correo de confirmación con los detalles de tu pedido.</p>
 
-  <div class="details">
-    <div class="detail-row">
-      <span class="label">Total pagado:</span>
-      <span class="value" id="totalPaid">$ 0</span>
-    </div>
-    <div class="detail-row">
-      <span class="label">Email:</span>
-      <span class="value" id="emailInfo">—</span>
-    </div>
-    <div class="detail-row">
-      <span class="label">Estado:</span>
-      <span class="value" id="statusInfo">Confirmada</span>
-    </div>
+  <!-- Productos -->
+  <div class="section" id="productsSection" style="display:none">
+    <div class="section-title">Productos</div>
+    <div id="productsList"></div>
+  </div>
+
+  <!-- Totales -->
+  <div class="section totals" id="totalsSection" style="display:none">
+    <div class="section-title">Resumen de pago</div>
+    <div id="totalsList"></div>
   </div>
 
   <a href="index.html" class="btn">Volver al catálogo</a>
@@ -137,50 +207,101 @@ p{
 <script src="club.js"></script>
 <script src="checkout.js"></script>
 <script>
+function money(n){ return "$ " + Math.round(n).toLocaleString("es-CO"); }
+
 document.addEventListener("DOMContentLoaded", async () => {
-  // Leer referencia y el id de transacción que Wompi añade al redirigir
-  const params = new URLSearchParams(window.location.search);
-  const ref = params.get('ref');
-  const wompiId = params.get('id');
+  const params   = new URLSearchParams(window.location.search);
+  const ref      = params.get('ref');
+  const wompiId  = params.get('id');
 
-  if (ref) {
-    document.getElementById('refNumber').textContent = `Referencia: ${ref}`;
-  }
-
-  // Leer datos de sessionStorage (guardados en checkout.js)
-  const email = sessionStorage.getItem('av_email');
-  const total = sessionStorage.getItem('av_total');
-
-  if (email) document.getElementById('emailInfo').textContent = email;
-  if (total) document.getElementById('totalPaid').textContent = total;
+  if(ref) document.getElementById('refNumber').textContent = "Ref: " + ref;
 
   const orderRaw = sessionStorage.getItem('av_order');
-  const order = (() => { try { return orderRaw ? JSON.parse(orderRaw) : null; } catch(e){ return null; } })();
+  const order    = (() => { try { return orderRaw ? JSON.parse(orderRaw) : null; } catch(e){ return null; } })();
 
-  // Verificar el estado REAL del pago contra la API pública de Wompi antes de
-  // registrar nada. Evita que alguien registre una venta visitando esta URL
-  // a mano sin haber pagado.
-  let status = null;
-  if (wompiId) {
-    try {
+  // Nombre del cliente
+  if(order && order.firstName){
+    const el = document.getElementById('customerName');
+    el.textContent = "Hola, " + order.firstName + " " + (order.lastName || "");
+    el.style.display = "";
+  }
+
+  // Mostrar productos
+  if(order && order.cart && order.cart.length){
+    const list = document.getElementById('productsList');
+    order.cart.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'product-row';
+      row.innerHTML = `
+        <div>
+          <div class="product-name">${item.qty > 1 ? item.qty + "× " : ""}${item.name}</div>
+          ${item.color ? `<div class="product-sub">${item.color}</div>` : ""}
+          ${item.size  ? `<div class="product-sub">Talla ${item.size}</div>`  : ""}
+        </div>
+        <div class="product-price">${money(item.price * item.qty)}</div>`;
+      list.appendChild(row);
+    });
+    document.getElementById('productsSection').style.display = "";
+  }
+
+  // Mostrar totales
+  if(order && (order.subtotal !== undefined || order.total !== undefined)){
+    const list     = document.getElementById('totalsList');
+    const subtotal = order.subtotal || order.total || 0;
+    const descPct  = order.discount || 0;
+    const descMonto = descPct ? Math.round(subtotal * descPct / 100) : 0;
+    const subtotalConDesc = subtotal - descMonto;
+    const envio    = order.shipping !== undefined ? order.shipping : 0;
+    const total    = order.total !== undefined ? order.total : (subtotalConDesc + envio);
+
+    const rows = [];
+    rows.push(`<div class="total-row"><span class="total-label">Subtotal</span><span class="total-value">${money(subtotal)}</span></div>`);
+    if(descMonto > 0)
+      rows.push(`<div class="total-row"><span class="total-label">Descuento Club (${descPct}%)</span><span class="total-value discount">− ${money(descMonto)}</span></div>`);
+    rows.push(`<div class="total-row"><span class="total-label">Envío</span><span class="total-value">${envio === 0 ? "Gratis" : money(envio)}</span></div>`);
+    rows.push(`<div class="total-row"><span class="total-label grand">Total pagado</span><span class="total-value grand">${money(total)}</span></div>`);
+    list.innerHTML = rows.join("");
+    document.getElementById('totalsSection').style.display = "";
+  }
+
+  // Verificar estado real del pago en Wompi
+  const badge = document.getElementById('statusBadge');
+  let status  = null;
+  if(wompiId){
+    try{
       const r = await fetch("https://production.wompi.co/v1/transactions/" + encodeURIComponent(wompiId));
       const j = await r.json();
-      status = j && j.data && j.data.status;
-    } catch(e){ console.error("[Wompi API]", e); }
+      status  = j && j.data && j.data.status;
+    }catch(e){ console.error("[Wompi API]", e); }
   }
 
-  // APPROVED = aprobado · PENDING = PSE/Bancolombia en proceso (la venta ya es
-  // real). En ambos casos registramos en Sheets y marcamos el código usado.
-  if (order && (status === "APPROVED" || status === "PENDING")) {
-    try { await guardarPedido(order); } catch(e){ console.error("[guardarPedido]", e); }
-    document.getElementById('statusInfo').textContent = status === "APPROVED" ? "Confirmada" : "En proceso (PSE)";
+  if(status === "APPROVED"){
+    badge.className = "status-badge approved";
+    badge.textContent = "Pago aprobado";
+  } else if(status === "PENDING"){
+    badge.className = "status-badge pending";
+    badge.textContent = "Pago en proceso (PSE)";
+  } else if(!wompiId){
+    // Sin ?id= en la URL — mostrar según sessionStorage si existe
+    badge.className = "status-badge approved";
+    badge.textContent = "Confirmada";
+  } else {
+    badge.className = "status-badge checking";
+    badge.textContent = "En revisión";
   }
 
-  // Correo de confirmación de compra (al cliente + Cc a Alejandra)
-  try {
+  // Registrar venta en Google Sheets (Scenario A: cliente regresa)
+  if(order && (status === "APPROVED" || status === "PENDING" || !wompiId)){
+    if(order.ref || ref) order.ref = order.ref || ref;
+    try{ await guardarPedido(order); }catch(e){ console.error("[guardarPedido]", e); }
+  }
+
+  // Correo de confirmación al cliente
+  try{
     const yaEnviado = sessionStorage.getItem('av_email_sent');
-    if (ref && order && yaEnviado !== ref) {
-      if (order.emailParams && order.email) {
+    const orderRef  = (order && order.ref) || ref;
+    if(orderRef && order && yaEnviado !== orderRef){
+      if(order.emailParams && order.email){
         fetch("https://api.emailjs.com/api/v1.0/email/send", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -189,23 +310,21 @@ document.addEventListener("DOMContentLoaded", async () => {
             template_id: "template_9mtgc6g",
             user_id: "FJTqsKFpGZTR_76vP",
             template_params: Object.assign({}, order.emailParams, {
-              referencia: ref,
-              to_email: order.email,
-              mensaje: "",
-              name: "Alejandra Vergel · Joyas de Autor",
-              email: order.email
+              referencia: orderRef,
+              to_email:   order.email,
+              mensaje:    "",
+              name:       "Alejandra Vergel · Joyas de Autor",
+              email:      order.email
             })
           })
         }).catch(err => console.error("[EmailJS]", err));
-        sessionStorage.setItem('av_email_sent', ref);
+        sessionStorage.setItem('av_email_sent', orderRef);
       }
     }
-  } catch(e){ console.error(e); }
+  }catch(e){ console.error(e); }
 
-  // Vaciar carrito: la compra ya fue pagada
-  if (ref) localStorage.removeItem('av_cart');
-
-  // Limpiar sessionStorage
+  // Vaciar carrito y limpiar sesión
+  if(ref || (order && order.ref)) localStorage.removeItem('av_cart');
   sessionStorage.removeItem('av_email');
   sessionStorage.removeItem('av_total');
   sessionStorage.removeItem('av_reference');
