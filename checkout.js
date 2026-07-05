@@ -294,6 +294,7 @@ async function submitCheckout(){
       + '&currency=COP'
       + '&amount-in-cents=' + result.amountInCents
       + '&reference=' + encodeURIComponent(result.reference)
+      + (result.signature ? '&signature:integrity=' + encodeURIComponent(result.signature) : '')
       + '&redirect-url=' + encodeURIComponent(result.redirectUrl);
     window.location.href = wompiUrl;
   } catch (error) {
