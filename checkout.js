@@ -43,10 +43,8 @@ function findMuni(dept, value){
 
 /* ---------- costo de envío ----------
    Área metropolitana de Barranquilla: SIEMPRE $8.000 (nunca gratis).
-   Envío nacional: gratis desde $200.000, si no, $15.000.
-   Envío gratis: promoción temporal, $0 sin condición (quitar cuando termine). */
+   Envío nacional: gratis desde $200.000, si no, $15.000. */
 function shippingCost(subtotalConDescuento){
-  if(ck.method === "gratis") return 0;
   if(ck.method === "metro") return SHIP_METRO;
   return subtotalConDescuento >= FREE_SHIPPING_FROM ? 0 : SHIP_NACIONAL;
 }
@@ -81,7 +79,6 @@ function applyMethod(method){
   ck.method = method;
   $("#optMetro").classList.toggle("selected", method==="metro");
   $("#optNacional").classList.toggle("selected", method==="nacional");
-  const optGratis = $("#optGratis"); if(optGratis) optGratis.classList.toggle("selected", method==="gratis");
   renderSummary();
 }
 
