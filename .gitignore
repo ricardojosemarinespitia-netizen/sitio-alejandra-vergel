@@ -24,8 +24,10 @@ logs/
 .env.*.local
 
 # Material fuente (fotos originales, .docx, .tif) — no se publica
+/ANILLOS/
 /ARETES/
 /FOTOS_INFO_COMPLEMENTARIA/
+/PIEDRAS/
 *.zip
 LOGO AV Joyas de autor.pdf
 PALETA DE COLORES.png
