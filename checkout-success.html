@@ -182,7 +182,7 @@ h1{
   <div class="customer-name" id="customerName" style="display:none"></div>
   <div class="ref-number" id="refNumber"></div>
 
-  <div class="status-badge checking" id="statusBadge">Verificando pago…</div>
+  <div class="status-badge approved" id="statusBadge">Confirmada</div>
 
   <p class="msg">Recibirás un correo de confirmación con los detalles de tu pedido.</p>
 
@@ -201,200 +201,102 @@ h1{
   <a href="index.html" class="btn">Volver al catálogo</a>
 </div>
 
-<script src="products.js"></script>
-<script src="colombia.js"></script>
-<script src="store.js"></script>
-<script src="club.js?v=4"></script>
-<script src="checkout.js?v=4"></script>
-<script src="perfil.js?v=2"></script>
+<!-- Esta página es SOLO cosmética + guarda el pedido en el perfil local.
+     El registro en Google Sheets y el correo de confirmación los hace el
+     WEBHOOK de Wompi en el servidor (av-functions), sin depender del
+     navegador. Por eso aquí NO se cargan checkout.js / store.js / etc.:
+     así ningún script externo lento puede congelar la página. Lo único
+     que se necesita es perfil.js para "Mis pedidos". -->
+<script src="perfil.js?v=3"></script>
 <script>
-function money(n){ return "$ " + Math.round(n).toLocaleString("es-CO"); }
+(function(){
+  function money(n){ return "$ " + Math.round(n).toLocaleString("es-CO"); }
+  function $(id){ return document.getElementById(id); }
 
-// Red de seguridad absoluta: pase lo que pase en initSuccessPage() (error de
-// JS, WebView de banco raro, timing de eventos), el badge NUNCA debe quedar
-// colgado en "Verificando pago". Independiente del resto del script.
-// Intenta cada 500ms hasta lograrlo (máximo 6 intentos = 3 segundos).
-let safetyAttempts = 0;
-const safetyInterval = setInterval(() => {
-  const b = document.getElementById('statusBadge');
-  if(b && b.classList.contains('checking')){
-    b.className = 'status-badge approved';
-    b.textContent = 'Confirmada';
-    clearInterval(safetyInterval);
-  }
-  if(++safetyAttempts >= 6) clearInterval(safetyInterval);
-}, 500);
-
-async function initSuccessPage() {
-  const params   = new URLSearchParams(window.location.search);
-  const ref      = params.get('ref');
-  const wompiId  = params.get('id');
-
-  if(ref) document.getElementById('refNumber').textContent = "Ref: " + ref;
-
-  // sessionStorage se pierde al volver del redirect externo de Wompi (móvil sobre
-  // todo). Recuperamos el pedido desde localStorage como respaldo.
-  const orderRaw = sessionStorage.getItem('av_order') || localStorage.getItem('av_order');
-  const order    = (() => { try { return orderRaw ? JSON.parse(orderRaw) : null; } catch(e){ return null; } })();
-
-  // Nombre del cliente
-  if(order && order.firstName){
-    const el = document.getElementById('customerName');
-    el.textContent = "Hola, " + order.firstName + " " + (order.lastName || "");
-    el.style.display = "";
-  }
-
-  // Mostrar productos
-  if(order && order.cart && order.cart.length){
-    const list = document.getElementById('productsList');
-    order.cart.forEach(item => {
-      const row = document.createElement('div');
-      row.className = 'product-row';
-      row.innerHTML = `
-        <div>
-          <div class="product-name">${item.qty > 1 ? item.qty + "× " : ""}${item.name}</div>
-          ${item.color ? `<div class="product-sub">${item.color}</div>` : ""}
-          ${item.size  ? `<div class="product-sub">Talla ${item.size}</div>`  : ""}
-        </div>
-        <div class="product-price">${money(item.price * item.qty)}</div>`;
-      list.appendChild(row);
-    });
-    document.getElementById('productsSection').style.display = "";
-  }
-
-  // Mostrar totales
-  if(order && (order.subtotal !== undefined || order.total !== undefined)){
-    const list     = document.getElementById('totalsList');
-    const subtotal = order.subtotal || order.total || 0;
-    const descPct  = order.discount || 0;
-    const descMonto = descPct ? Math.round(subtotal * descPct / 100) : 0;
-    const subtotalConDesc = subtotal - descMonto;
-    const envio    = order.shipping !== undefined ? order.shipping : 0;
-    const total    = order.total !== undefined ? order.total : (subtotalConDesc + envio);
-
-    const rows = [];
-    rows.push(`<div class="total-row"><span class="total-label">Subtotal</span><span class="total-value">${money(subtotal)}</span></div>`);
-    if(descMonto > 0)
-      rows.push(`<div class="total-row"><span class="total-label">Descuento Club (${descPct}%)</span><span class="total-value discount">− ${money(descMonto)}</span></div>`);
-    rows.push(`<div class="total-row"><span class="total-label">Envío</span><span class="total-value">${envio === 0 ? "Gratis" : money(envio)}</span></div>`);
-    rows.push(`<div class="total-row"><span class="total-label grand">Total pagado</span><span class="total-value grand">${money(total)}</span></div>`);
-    list.innerHTML = rows.join("");
-    document.getElementById('totalsSection').style.display = "";
-  }
-
-  // Verificar estado real del pago en Wompi — TIMEOUT de 3s MAX.
-  // Si Wompi no responde a tiempo o falla, seguimos igual: registramos la venta
-  // y enviamos correo (el webhook de Wompi es la fuente autoritativa).
-  const badge = document.getElementById('statusBadge');
-  let status  = null;
-
-  if(wompiId){
-    // Wrapper con timeout garantizado
-    status = await Promise.race([
-      (async () => {
-        try {
-          const r = await fetch("https://production.wompi.co/v1/transactions/" + encodeURIComponent(wompiId));
-          const j = await r.json();
-          return j?.data?.status || null;
-        } catch(e) {
-          console.error("[Wompi API]", e);
-          return null;
-        }
-      })(),
-      new Promise(resolve => setTimeout(() => resolve(null), 3000))
-    ]);
-  }
-
-  if(status === "APPROVED"){
-    badge.className = "status-badge approved";
-    badge.textContent = "Pago aprobado";
-  } else if(status === "PENDING"){
-    badge.className = "status-badge pending";
-    badge.textContent = "Pago en proceso (PSE)";
-  } else if(status === "DECLINED" || status === "VOIDED" || status === "ERROR"){
-    badge.className = "status-badge pending";
-    badge.textContent = "Pago rechazado";
-  } else {
-    // Timeout, error red, o Wompi offline — mostrar confirmada igual.
-    // El webhook es la fuente de verdad y registrará el pago si Wompi lo aprobó.
-    badge.className = "status-badge approved";
-    badge.textContent = "Confirmada";
-  }
-
-  // Registrar venta en Google Sheets (Scenario A: cliente regresa).
-  // Se registra SIEMPRE que tengamos un pedido y el pago NO haya sido rechazado.
-  // guardarPedido es idempotente (sessionStorage av_done_<ref>).
-  const rechazado = (status === "DECLINED" || status === "VOIDED" || status === "ERROR");
-  if(order && !rechazado){
-    if(order.ref || ref) order.ref = order.ref || ref;
-    try{ await guardarPedido(order); }catch(e){ console.error("[guardarPedido]", e); }
-
-    // Guardar pedido en historial del perfil (aparece en "Mis pedidos")
+  function render(){
     try{
-      if(window.AVPerfil && order.cart){
-        const orderRef = order.ref || ref;
-        const alreadySaved = sessionStorage.getItem('av_order_saved_' + orderRef);
-        if(!alreadySaved){
-          const estado = status === "APPROVED" ? "APROBADO" : status === "PENDING" ? "PENDIENTE" : "APROBADO";
-          AVPerfil.addOrder({
-            ref:    orderRef,
-            fecha:  new Date().toISOString(),
-            estado: estado,
-            items:  order.cart.map(i => ({ qty: i.qty || 1, name: i.name })),
-            total:  order.total || 0
-          });
-          sessionStorage.setItem('av_order_saved_' + orderRef, '1');
-        }
+      const params = new URLSearchParams(window.location.search);
+      const ref    = params.get('ref');
+      if(ref && $('refNumber')) $('refNumber').textContent = "Ref: " + ref;
+
+      // sessionStorage se pierde al volver del redirect externo de Wompi
+      // (móvil sobre todo). Recuperamos el pedido desde localStorage.
+      const orderRaw = sessionStorage.getItem('av_order') || localStorage.getItem('av_order');
+      let order = null;
+      try{ order = orderRaw ? JSON.parse(orderRaw) : null; }catch(e){ order = null; }
+
+      // Nombre del cliente
+      if(order && order.firstName && $('customerName')){
+        $('customerName').textContent = "Hola, " + order.firstName + " " + (order.lastName || "");
+        $('customerName').style.display = "";
       }
-    }catch(e){ console.error("[addOrder]", e); }
+
+      // Productos
+      if(order && order.cart && order.cart.length && $('productsList')){
+        order.cart.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'product-row';
+          row.innerHTML =
+            '<div><div class="product-name">' + (item.qty > 1 ? item.qty + "× " : "") + item.name + '</div>' +
+            (item.color ? '<div class="product-sub">' + item.color + '</div>' : "") +
+            (item.size  ? '<div class="product-sub">Talla ' + item.size + '</div>' : "") +
+            '</div><div class="product-price">' + money(item.price * item.qty) + '</div>';
+          $('productsList').appendChild(row);
+        });
+        $('productsSection').style.display = "";
+      }
+
+      // Totales
+      if(order && (order.subtotal !== undefined || order.total !== undefined) && $('totalsList')){
+        const subtotal = order.subtotal || order.total || 0;
+        const descPct  = order.discount || 0;
+        const descMonto = descPct ? Math.round(subtotal * descPct / 100) : 0;
+        const subtotalConDesc = subtotal - descMonto;
+        const envio = order.shipping !== undefined ? order.shipping : 0;
+        const total = order.total !== undefined ? order.total : (subtotalConDesc + envio);
+        const rows = [];
+        rows.push('<div class="total-row"><span class="total-label">Subtotal</span><span class="total-value">' + money(subtotal) + '</span></div>');
+        if(descMonto > 0)
+          rows.push('<div class="total-row"><span class="total-label">Descuento Club (' + descPct + '%)</span><span class="total-value discount">− ' + money(descMonto) + '</span></div>');
+        rows.push('<div class="total-row"><span class="total-label">Envío</span><span class="total-value">' + (envio === 0 ? "Gratis" : money(envio)) + '</span></div>');
+        rows.push('<div class="total-row"><span class="total-label grand">Total pagado</span><span class="total-value grand">' + money(total) + '</span></div>');
+        $('totalsList').innerHTML = rows.join("");
+        $('totalsSection').style.display = "";
+      }
+
+      // Guardar en el historial del perfil (aparece en "Mis pedidos").
+      // Idempotente por referencia.
+      try{
+        const orderRef = (order && order.ref) || ref;
+        if(window.AVPerfil && order && order.cart && orderRef){
+          if(sessionStorage.getItem('av_order_saved_' + orderRef) !== '1'){
+            AVPerfil.addOrder({
+              ref:    orderRef,
+              fecha:  new Date().toISOString(),
+              estado: "APROBADO",
+              items:  order.cart.map(i => ({ qty: i.qty || 1, name: i.name })),
+              total:  order.total || 0
+            });
+            sessionStorage.setItem('av_order_saved_' + orderRef, '1');
+          }
+        }
+      }catch(e){ console.error("[addOrder]", e); }
+
+      // Limpiar carrito y sesión
+      if(ref || (order && order.ref)) localStorage.removeItem('av_cart');
+      sessionStorage.removeItem('av_email');
+      sessionStorage.removeItem('av_total');
+      sessionStorage.removeItem('av_reference');
+      sessionStorage.removeItem('av_order');
+      localStorage.removeItem('av_order');
+    }catch(e){ console.error("[checkout-success]", e); }
   }
 
-  // Correo de confirmación al cliente
-  try{
-    const yaEnviado = sessionStorage.getItem('av_email_sent');
-    const orderRef  = (order && order.ref) || ref;
-    if(orderRef && order && yaEnviado !== orderRef){
-      if(order.emailParams && order.email){
-        fetch("https://api.emailjs.com/api/v1.0/email/send", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            service_id: "service_uf7imru",
-            template_id: "template_9mtgc6g",
-            user_id: "-leYVHCIiwaEdQCFt",
-            template_params: Object.assign({}, order.emailParams, {
-              referencia: orderRef,
-              to_email:   order.email,
-              mensaje:    "",
-              name:       "Alejandra Vergel · Joyas de Autor",
-              email:      order.email
-            })
-          })
-        }).catch(err => console.error("[EmailJS]", err));
-        sessionStorage.setItem('av_email_sent', orderRef);
-      }
-    }
-  }catch(e){ console.error(e); }
-
-  // Vaciar carrito y limpiar sesión
-  if(ref || (order && order.ref)) localStorage.removeItem('av_cart');
-  sessionStorage.removeItem('av_email');
-  sessionStorage.removeItem('av_total');
-  sessionStorage.removeItem('av_reference');
-  sessionStorage.removeItem('av_order');
-  localStorage.removeItem('av_order');
-}
-
-// El script está al final del <body>: el DOM ya existe. Esperar a
-// DOMContentLoaded es innecesario y en algunos WebViews de bancos (PSE)
-// el evento ya se disparó antes de registrar el listener, dejando la
-// página colgada en "Verificando pago". Ejecutamos directo si ya está listo.
-const runInit = () => initSuccessPage().catch(e => console.error('[initSuccessPage]', e));
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', runInit);
-} else {
-  runInit();
-}
+  if(document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', render);
+  else
+    render();
+})();
 </script>
 </body>
 </html>
