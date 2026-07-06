@@ -22,7 +22,7 @@ const CONFIG = {
 /* ---------- EmailJS (correos transaccionales) ----------
    Template Club:   bienvenida con código 15% (Cc a Alejandra)
    Template Compra: confirmación de pedido (Cc a Alejandra) */
-const EMAILJS_PUBLIC_KEY = "FJTqsKFpGZTR_76vP";
+const EMAILJS_PUBLIC_KEY = "-leYVHCIiwaEdQCFt";
 const EMAILJS_SERVICE_ID = "service_uf7imru";
 const EMAILJS_TPL_CLUB   = "template_233sstn";
 const EMAILJS_TPL_COMPRA = "template_9mtgc6g";
