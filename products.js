@@ -22,6 +22,16 @@
    ============================================================ */
 
 const PRODUCTS = [
+  /* ---------------- PRUEBA DE COMPRA (BORRAR ANTES DE LANZAR) ---------------- */
+  {
+    id:"test-compra", sku:"ANI-TEST-001", cat:"filigrana", name:"Sesión de Prueba",
+    price:2000, originalPrice:null,
+    materials:"Producto de prueba · No real",
+    gemName:"Prueba", colors:["Prueba"], sizes:[7],
+    desc:"Este es un producto de prueba para verificar el flujo de compra. No tiene valor comercial.",
+    metal:"silver", gem:"#CCCCCC",
+    images:["data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='800' viewBox='0 0 600 800'%3E%3Crect width='600' height='800' fill='%23F0EDE8'/%3E%3Cellipse cx='300' cy='260' rx='90' ry='110' fill='%23D4CFC8'/%3E%3Crect x='160' y='390' width='280' height='320' rx='30' fill='%23D4CFC8'/%3E%3Ccircle cx='300' cy='480' r='40' fill='%23C9A24B' opacity='0.7'/%3E%3Ctext x='300' y='750' text-anchor='middle' font-family='serif' font-size='22' fill='%23888' letter-spacing='2'%3EPRUEBA DE COMPRA%3C/text%3E%3C/svg%3E"]
+  },
   /* ---------------- FILIGRANA ---------------- */
   {
     id:"aura", sku:"ANI-AURA", cat:"filigrana", name:"Aura",
