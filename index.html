@@ -259,10 +259,17 @@ section{padding:112px 0}
   .hero-lines,.hero-divider{display:none}
   .hp-central-overlay{justify-content:flex-end;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
 }
-/* Tablet: los paneles laterales quedan angostos y aprietan el texto central */
-@media(min-width:681px) and (max-width:920px){
+/* Tablet en horizontal: los paneles laterales quedan angostos y aprietan el texto central */
+@media(min-width:681px) and (max-width:920px) and (orientation:landscape){
   .hp-medio1,.hp-medio2{width:18%}
   .hp-central{left:18%;width:64%}
+}
+/* iPad en vertical (portrait): los 3 paneles quedan apretados y se ve mal.
+   Se muestra solo la foto central de Alejandra, igual que en celular. */
+@media(min-width:681px) and (max-width:1024px) and (orientation:portrait){
+  .hp-medio1,.hp-medio2{display:none}
+  .hp-central{left:0;width:100%}
+  .hero-lines,.hero-divider{display:none}
 }
 
 
