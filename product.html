@@ -140,6 +140,10 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 .opt:hover{border-color:var(--gold)}
 .opt.active{background:var(--noir);color:#fff;border-color:var(--noir)}
 .opt-size{min-width:46px;justify-content:center}
+.engrave-input{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:var(--radius);font-family:var(--sans);font-size:.92rem;color:var(--ink);background:#fff;margin-bottom:6px;transition:.3s}
+.engrave-input:focus{outline:none;border-color:var(--gold)}
+.engrave-input.err{border-color:var(--cartier)}
+.engrave-hint{font-size:.72rem;color:var(--ink-soft);margin-bottom:20px}
 
 .pd-actions{display:flex;gap:12px;align-items:center;margin:8px 0 14px;flex-wrap:wrap}
 .pd-qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:30px;background:#fff;flex-shrink:0}
@@ -340,7 +344,7 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
 /* ============================================================
    PÁGINA DE DETALLE — lee ?id= de la URL y renderiza
    ============================================================ */
-let detailState = { id:null, color:null, size:null, qty:1, img:0 };
+let detailState = { id:null, color:null, size:null, qty:1, img:0, engraveText:"" };
 
 function getParam(name){
   return new URLSearchParams(window.location.search).get(name);
@@ -408,6 +412,10 @@ function renderDetail(){
           ${p.sizes.map(s=>`<button class="opt opt-size ${String(s)===String(detailState.size)?"active":""}" data-size="${s}">${s}</button>`).join("")}
         </div>` : `<div style="margin-bottom:20px"><button type="button" class="guide-link" data-guide-open>¿No conoces tu talla? Ver guía de tallas</button></div>`}
 
+        ${p.engrave ? `<div class="opt-label">Mensaje a grabar</div>
+        <input type="text" id="engraveInput" class="engrave-input" maxlength="20" placeholder="Ej: Gigi, M+A, 07.03.24" value="${(detailState.engraveText||"").replace(/"/g,"&quot;")}">
+        <p class="engrave-hint">Máximo 20 caracteres · así se grabará exactamente</p>` : ""}
+
         <div class="pd-actions">
           <div class="pd-qty">
             <button id="pdDec" aria-label="Restar">−</button>
@@ -435,10 +443,22 @@ function renderDetail(){
   $$("[data-size]").forEach(b=>b.onclick=()=>{ detailState.size=b.dataset.size; renderDetail(); });
   $("#pdDec").onclick=()=>{ detailState.qty=Math.max(1,detailState.qty-1); $("#pdQty").textContent=detailState.qty; };
   $("#pdInc").onclick=()=>{ detailState.qty++; $("#pdQty").textContent=detailState.qty; };
+  if($("#engraveInput")) $("#engraveInput").oninput = e=>{ detailState.engraveText = e.target.value; e.target.classList.remove("err"); };
 
-  const variant = () => detailState.size ? `${detailState.color} · Talla ${detailState.size}` : detailState.color;
-  $("#pdAdd").onclick=()=>{ addToCart(p, variant(), detailState.qty); openDrawer(); };
+  const variant = () => {
+    let v = detailState.size ? `${detailState.color} · Talla ${detailState.size}` : detailState.color;
+    if(p.engrave) v += ` · Grabado: "${detailState.engraveText.trim()}"`;
+    return v;
+  };
+  const validEngrave = () => {
+    if(!p.engrave) return true;
+    const val = (detailState.engraveText||"").trim();
+    if(!val){ const inp=$("#engraveInput"); inp.classList.add("err"); inp.focus(); showToast("Escribe el mensaje a grabar"); return false; }
+    return true;
+  };
+  $("#pdAdd").onclick=()=>{ if(!validEngrave()) return; addToCart(p, variant(), detailState.qty); openDrawer(); };
   $("#pdWa").onclick=()=>{
+    if(!validEngrave()) return;
     // Agregar al carrito y luego ir a checkout
     addToCart(p, variant(), detailState.qty);
     setTimeout(()=>{ window.location.href='/checkout.html'; }, 300);

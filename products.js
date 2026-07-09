@@ -785,7 +785,7 @@ const PRODUCTS = [
   },
   {
     id:"co-mini-charms", sku:"COL-MCHARM", cat:"dijes", name:"Collar Mini Charms",
-    price:190000, originalPrice:255000,
+    price:190000, originalPrice:255000, engrave:true,
     materials:"Plata ley 925 · Circones multicolor",
     gemName:"Circones multicolor", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Joya delicada y versátil: una cadena en plata ley 925 acompañada por pequeños corazones adornados con circones de diferentes colores. Alegre, elegante y perfecta para llevar todos los días, sola o combinada con otras cadenas. Sobre pedido (15 a 25 días hábiles).",
@@ -803,7 +803,7 @@ const PRODUCTS = [
   },
   {
     id:"co-amuleto", sku:"COL-AMUL", cat:"dijes", name:"Amuleto · Set de 3 dijes",
-    price:450000, originalPrice:599000,
+    price:450000, originalPrice:599000, engrave:true,
     materials:"Plata ley 925 · Dijes grabables con inicial o nombre",
     gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Colección de tres delicados dijes personalizados: cada uno puede grabarse con la inicial o el nombre que desees, convirtiéndose en un símbolo único de amor e identidad. Incluye cadena en plata ley 925. Sobre pedido (15 a 25 días hábiles).",
@@ -812,7 +812,7 @@ const PRODUCTS = [
   },
   {
     id:"co-amuleto-corazon", sku:"COL-AMULC", cat:"dijes", name:"Amuleto Corazón",
-    price:250000, originalPrice:333000,
+    price:250000, originalPrice:333000, engrave:true,
     materials:"Plata ley 925 · Dije corazón grabable",
     gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Joya personalizada creada para conservar cerca aquello que más amas. Su delicado corazón puede grabarse con una inicial, un nombre o una palabra especial, convirtiéndose en un recuerdo lleno de significado. Incluye cadena. Sobre pedido (15 a 25 días hábiles).",
@@ -1036,7 +1036,7 @@ const PRODUCTS = [
   },
   {
     id:"pu-dueto", sku:"PUL-DUETO", cat:"pulseras", name:"Pulsera Dueto",
-    price:290000, originalPrice:386000,
+    price:290000, originalPrice:386000, engrave:true,
     materials:"Plata ley 925 · Placa grabable o eslabones con moissanitas",
     gemName:"Moissanita (versión eslabones)", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Creada para celebrar los vínculos más importantes. Su delicada placa puede personalizarse con el nombre, inicial o palabra que desees, convirtiéndola en un regalo lleno de significado. Disponible también en versión de eslabones con moissanitas ($390.000). Sobre pedido (15 a 25 días hábiles).",
@@ -1099,7 +1099,7 @@ const PRODUCTS = [
   },
   {
     id:"pu-signature", sku:"PUL-SIGN", cat:"pulseras", name:"Pulsera Signature",
-    price:240000, originalPrice:320000,
+    price:240000, originalPrice:320000, engrave:true,
     materials:"Plata ley 925 · Inicial personalizada",
     gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Joya personalizada creada para llevar contigo una inicial con un significado especial. Su diseño delicado y atemporal convierte cada pieza en un símbolo de identidad, amor y recuerdos inolvidables. Elaborada artesanalmente por joyeros colombianos. Sobre pedido (15 a 25 días hábiles).",
@@ -1108,7 +1108,7 @@ const PRODUCTS = [
   },
   {
     id:"pu-tennis", sku:"PUL-TENNIS", cat:"pulseras", name:"Pulsera Tenis Personalizada",
-    price:295000, originalPrice:393000,
+    price:295000, originalPrice:393000, engrave:true,
     materials:"Plata ley 925 · Dos placas grabadas con iniciales",
     gemName:"Sin piedra", colors:["Plateado","Baño de oro"], sizes:[],
     desc:"Reinventa un clásico de la joyería con un toque único y personal. Su elegante diseño incorpora dos placas grabadas con las iniciales de tu elección, convirtiéndola en una joya llena de significado, perfecta para celebrar momentos especiales o regalar a quienes más quieres. Sobre pedido (15 a 25 días hábiles).",
