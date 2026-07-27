@@ -4,6 +4,11 @@
    ============================================================ */
 
 const CLUB_API = "https://script.google.com/macros/s/AKfycbxdQ-GpE4_c0R0TQi_xoQ-8t1EwXpaFXAv6Qkznc2_OtepnP7kaOp_0F4dyj4OHQuvU/exec";
+// Clave que el Apps Script exige desde el 27-jul-2026 para ESCRIBIR
+// (registrar venta / markUsed). La usa checkout.js. El registro publico de
+// suscriptor (GET registerSubscriber) NO la necesita, sigue siendo publico
+// a proposito: es el flujo de "unirse al Circulo", no mueve dinero.
+const CLUB_VENTAS_KEY = "v4Ip9snCOfP";
 
 let clubState = {
   code: localStorage.getItem("av_club_code") || null,

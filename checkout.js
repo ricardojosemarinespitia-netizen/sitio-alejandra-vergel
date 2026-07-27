@@ -198,6 +198,12 @@ async function guardarPedido(order){
       mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({
+        // Desde el 27-jul-2026 el Apps Script exige esta clave para ESCRIBIR
+        // (antes cualquiera con la URL podia inyectar ventas falsas). Viaja
+        // al navegador por necesidad: sube la barrera de "cualquiera con la
+        // URL" a "alguien que lea el codigo fuente", no es proteccion
+        // criptografica real.
+        key: CLUB_VENTAS_KEY,
         ref: order.ref,
         nombre: order.firstName ? (order.firstName + " " + order.lastName) : "—",
         email: order.email,
@@ -227,7 +233,7 @@ async function guardarPedido(order){
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ action: "markUsed", code: order.couponCode, ref: order.ref, email: order.email })
+        body: JSON.stringify({ key: CLUB_VENTAS_KEY, action: "markUsed", code: order.couponCode, ref: order.ref, email: order.email })
       });
     }catch(e){ console.error("[guardarPedido] markUsed:", e); }
   }
