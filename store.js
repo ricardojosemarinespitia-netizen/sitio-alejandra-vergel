@@ -22,7 +22,11 @@ const CONFIG = {
 /* ---------- EmailJS (correos transaccionales) ----------
    Template Club:   bienvenida con código 15% (Cc a Alejandra)
    Template Compra: confirmación de pedido (Cc a Alejandra) */
-const EMAILJS_PUBLIC_KEY = "-leYVHCIiwaEdQCFt";
+// Rotada el 27-jul-2026: la anterior (-leYVHCIiwaEdQCFt) quedo expuesta
+// mientras el codigo fuente de av-functions se servia como estatico
+// (ver netlify.toml de av-functions, publish="public"). Esta es publica
+// por diseno: EmailJS la usa para identificar la cuenta desde el navegador.
+const EMAILJS_PUBLIC_KEY = "XNm_STrIZpsifJ2ne";
 const EMAILJS_SERVICE_ID = "service_uf7imru";
 const EMAILJS_TPL_CLUB   = "template_233sstn";
 const EMAILJS_TPL_COMPRA = "template_9mtgc6g";
