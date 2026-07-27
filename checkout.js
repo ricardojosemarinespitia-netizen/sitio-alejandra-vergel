@@ -458,6 +458,13 @@ document.addEventListener("DOMContentLoaded", () => {
   fillDeptList();
   applyMethod("metro");
   renderSummary();
+
+  // Con el carrito vacío, renderSummary() ya sustituyó el formulario por el
+  // aviso "Tu carrito está vacío" (borra todo #checkoutRoot). Seguir a partir
+  // de aquí lanzaba "Cannot read properties of null (reading 'addEventListener')"
+  // en initCoupon(), lo que abortaba el resto del arranque de la página.
+  if(!$("#checkoutForm")) return;
+
   initCoupon();
 
   $("#departamento").addEventListener("change", onDeptChange);

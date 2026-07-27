@@ -2,26 +2,20 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<!-- Content-Security-Policy · GitHub Pages no permite cabeceras HTTP propias,
+     asi que la politica viaja en <meta>. Ojo: en <meta> el navegador IGNORA
+     frame-ancestors, report-uri y sandbox (ver _headers para cuando se migre). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://apis.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://lh3.googleusercontent.com https://*.googleusercontent.com https://accounts.google.com https://www.gstatic.com; connect-src 'self' https://api.emailjs.com https://script.google.com https://script.googleusercontent.com https://*.googleusercontent.com https://radiant-lamington-bd56f7.netlify.app https://accounts.google.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://accounts.google.com https://checkout.wompi.co; form-action 'self' https://checkout.wompi.co https://wa.me https://api.whatsapp.com; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Compra Confirmada · Alejandra Vergel</title>
 <link rel="icon" type="image/png" href="img/brand/favicon.png">
 <link rel="apple-touch-icon" href="img/brand/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@400;600&display=swap" rel="stylesheet">
+<!-- Esta pagina corria con la paleta de dos redisenos atras (--noir:#14110F,
+     --tiffany turquesa). Ahora comparte el mismo sistema que el resto del sitio. -->
+<link rel="stylesheet" href="tokens.css">
 <style>
-:root{
-  --ivory:#F7F4EF;
-  --white:#FFFFFF;
-  --noir:#14110F;
-  --ink:#2A2622;
-  --ink-soft:#6B6460;
-  --tiffany:#0ABAB5;
-  --gold:#C9A24B;
-  --line:#E6DFD4;
-  --sage:#5C7A5C;
-  --serif:"Cormorant Garamond", serif;
-  --sans:"Jost", sans-serif;
-}
-
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:var(--sans);
@@ -33,37 +27,41 @@ body{
 .success-card{
   background:var(--white);
   border:1px solid var(--line);
-  border-radius:4px;
+  border-radius:var(--radius);
   padding:50px 40px;
   text-align:center;
   max-width:540px;
   width:100%;
-  box-shadow:0 10px 30px -16px rgba(20,17,15,.25);
+  box-shadow:var(--shadow-sm);
 }
 
+/* El circulo de exito era turquesa #0ABAB5: el check blanco encima daba
+   2.41:1. Con --salvia da 6.26:1 y ademas deja de ser el unico turquesa
+   de todo el sitio. */
 .success-icon{
   width:72px;height:72px;margin:0 auto 24px;
-  background:var(--tiffany);border-radius:50%;
+  background:var(--salvia);border-radius:50%;
   display:grid;place-items:center;color:#fff;
   font-size:40px;
 }
 
 h1{
   font-family:var(--serif);
-  font-size:2rem;
+  font-size:var(--fs-2xl);
+  line-height:var(--lh-apretado);
   margin-bottom:6px;
   color:var(--noir);
 }
 
 .customer-name{
-  font-size:1.05rem;
+  font-size:var(--fs-lg);
   color:var(--ink-soft);
   margin-bottom:18px;
   font-style:italic;
 }
 
 .ref-number{
-  font-size:.78rem;
+  font-size:var(--fs-2xs);
   letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--ink-soft);
@@ -71,8 +69,8 @@ h1{
 }
 
 .msg{
-  font-size:.95rem;
-  line-height:1.7;
+  font-size:var(--fs-md);
+  line-height:var(--lh-suelto);
   color:var(--ink-soft);
   margin-bottom:0;
 }
@@ -86,7 +84,7 @@ h1{
 }
 
 .section-title{
-  font-size:.7rem;
+  font-size:var(--fs-2xs);
   letter-spacing:.15em;
   text-transform:uppercase;
   color:var(--ink-soft);
@@ -99,7 +97,7 @@ h1{
   padding:10px 0;
   border-bottom:1px solid var(--line);
   gap:12px;
-  font-size:.9rem;
+  font-size:var(--fs-sm);
 }
 .product-row:last-child{border-bottom:none}
 
@@ -109,7 +107,7 @@ h1{
   flex:1;
 }
 .product-sub{
-  font-size:.78rem;
+  font-size:var(--fs-2xs);
   color:var(--ink-soft);
   margin-top:2px;
 }
@@ -126,50 +124,54 @@ h1{
 .total-row{
   display:flex;justify-content:space-between;
   padding:9px 0;
-  font-size:.88rem;
+  font-size:var(--fs-sm);
   border-bottom:1px solid var(--line);
 }
 .total-row:last-child{border-bottom:none}
 .total-label{color:var(--ink-soft)}
 .total-value{font-weight:600;color:var(--noir)}
-.total-value.discount{color:var(--sage)}
-.total-value.grand{font-size:1.05rem;color:var(--tiffany)}
-.total-label.grand{font-weight:600;color:var(--noir);font-size:.95rem}
+.total-value.discount{color:var(--salvia)}          /* 6.16:1 (antes 4.71:1) */
+/* El TOTAL era turquesa sobre blanco = 2.41:1: la cifra mas importante de
+   toda la compra, ilegible. Ahora es --noir a 15.48:1 y el peso lo da el
+   tamano, no un color que no se puede leer. */
+.total-value.grand{font-size:var(--fs-lg);color:var(--noir)}
+.total-label.grand{font-weight:600;color:var(--noir);font-size:var(--fs-md)}
 
 /* Estado */
 .status-badge{
   display:inline-block;
   padding:4px 12px;
-  border-radius:20px;
-  font-size:.75rem;
+  border-radius:var(--r-full);
+  font-size:var(--fs-2xs);
   font-weight:600;
   letter-spacing:.08em;
   text-transform:uppercase;
   margin-bottom:28px;
 }
-.status-badge.approved{background:#E8F5E9;color:#2E7D32}
-.status-badge.pending{background:#FFF8E1;color:#F57F17}
-.status-badge.checking{background:#F5F5F5;color:#777}
+.status-badge.approved{background:#E8F5E9;color:#256B29}  /* 5.81:1 (antes 4.56:1) */
+.status-badge.pending{background:#FFF8E1;color:#6E4A00}   /* 7.48:1 (antes #F57F17 = 2.49:1 ✘) */
+.status-badge.checking{background:#F5F5F5;color:#5C5C5C}  /* 6.13:1 (antes #777 = 4.11:1 ✘) */
 
 .btn{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
   margin-top:32px;
   padding:14px 36px;
   background:var(--noir);
   color:#fff;
   text-decoration:none;
-  font-size:.8rem;
+  font-size:var(--fs-2xs);
   letter-spacing:.15em;
   text-transform:uppercase;
   font-weight:600;
-  border-radius:4px;
-  transition:.3s;
+  border-radius:var(--radius);
+  transition:var(--dur-rapido);
+  min-height:48px;
 }
-.btn:hover{background:var(--tiffany)}
+.btn:hover{background:var(--rose-deep)}
 
 @media(max-width:480px){
   .success-card{padding:36px 22px}
-  h1{font-size:1.7rem}
 }
 </style>
 </head>
@@ -299,7 +301,7 @@ h1{
 })();
 </script>
 <!-- WHATSAPP FLOTANTE -->
-<style>.wa-float{position:fixed;bottom:26px;right:26px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 4px 18px -4px rgba(37,211,102,.45),0 2px 6px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);text-decoration:none}.wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(37,211,102,.45);animation:wapulse 2.6s ease-in-out infinite;pointer-events:none}@keyframes wapulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}50%{box-shadow:0 0 0 10px rgba(37,211,102,0)}}.wa-float:hover{transform:scale(1.08) translateY(-2px)}.wa-float svg{width:30px;height:30px;position:relative;z-index:1}@media(max-width:640px){.wa-float{width:52px;height:52px;bottom:18px;right:18px}.wa-float svg{width:27px;height:27px}}</style>
+<!-- .wa-float vive ahora en tokens.css (una sola definicion para las 5 paginas) -->
 <a href="https://wa.me/573228505472?text=%C2%A1Hola%20Alejandra%20Vergel!%20Me%20interesa%20una%20joya." target="_blank" rel="noopener" class="wa-float" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.7 11.7 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.4M12 22c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.9 9.9 0 0 1 2 12c0-5.5 4.5-10 10-10 5.5 0 10 4.5 10 10 0 5.5-4.5 10-10 10m5.5-7.5c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4"/></svg></a>
 </body>
 </html>

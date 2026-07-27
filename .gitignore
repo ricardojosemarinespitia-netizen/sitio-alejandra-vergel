@@ -20,8 +20,31 @@ logs/
 *.sublime-*
 
 # Temporal
+.env
 .env.local
 .env.*.local
+
+# Backend (código de Google Apps Script y otros secretos de servidor).
+# NUNCA se publica: GitHub Pages sirve como estático todo lo que se commitea,
+# y estos archivos contienen las claves de los paneles de admin.
+_backend-no-publicar/
+*.gs
+
+# ============================================================
+#  av-functions/ es OTRO repositorio de git (tiene su propio .git y su
+#  propio remote: github.com/.../-av-functions.git). Se despliega solo,
+#  a Netlify (radiant-lamington-bd56f7), NO con este sitio.
+#
+#  Sin esta línea, un "git add -A" rutinario aquí lo commitea como
+#  gitlink de submódulo sin declarar: se sube una referencia rota que
+#  nadie puede clonar y el código de las funciones no viaja.
+#  Comprobado con: git add --dry-run -A
+#    warning: adding embedded git repository: av-functions
+#
+#  Para publicar las funciones: entrar a sitio-alejandra-vergel/av-functions
+#  y hacer commit + push ALLÍ (rama main).
+# ============================================================
+av-functions/
 
 # Material fuente (fotos originales, .docx, .tif) — no se publica
 /ANILLOS/

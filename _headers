@@ -1,0 +1,30 @@
+# ============================================================
+#  Cabeceras de seguridad · Alejandra Vergel
+# ------------------------------------------------------------
+#  OJO: GitHub Pages (el hosting actual) IGNORA este archivo.
+#  Está aquí listo para el día que el dominio pase por Netlify /
+#  Cloudflare, que sí lo aplican. Mientras tanto, la CSP viaja en
+#  <meta http-equiv="Content-Security-Policy"> dentro de cada HTML.
+#
+#  Lo que SOLO se puede conseguir con cabeceras reales (no con <meta>):
+#    · Strict-Transport-Security (HSTS)  → forzar HTTPS
+#    · X-Frame-Options / frame-ancestors → anti-clickjacking
+#    · X-Content-Type-Options            → anti MIME-sniffing
+#  Ese es el motivo de peso para migrar el hosting.
+# ============================================================
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://apis.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://lh3.googleusercontent.com https://*.googleusercontent.com https://accounts.google.com https://www.gstatic.com; connect-src 'self' https://api.emailjs.com https://script.google.com https://script.googleusercontent.com https://*.googleusercontent.com https://radiant-lamington-bd56f7.netlify.app https://accounts.google.com; frame-src https://accounts.google.com https://checkout.wompi.co; form-action 'self' https://checkout.wompi.co https://wa.me https://api.whatsapp.com; base-uri 'self'; object-src 'none'; frame-ancestors 'self'
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+# El checkout no debe quedar en caché de intermediarios.
+/checkout.html
+  Cache-Control: no-store
+
+/checkout-success.html
+  Cache-Control: no-store
