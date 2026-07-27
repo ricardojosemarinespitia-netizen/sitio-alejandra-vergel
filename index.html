@@ -24,7 +24,12 @@
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* overscroll-behavior-y: dentro del navegador integrado de Instagram/Facebook,
+   el gesto de swipe vertical se lo roba su propia capa de "pull" (para cerrar
+   el navegador o mostrar su UI) en vez de dejarlo hacer scroll a la página,
+   y el resultado se siente como si la página "saltara" a otra parte. contain
+   evita que el gesto se propague fuera del documento. */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior-y:contain}
 body{
   font-family:var(--sans);
   color:var(--ink);

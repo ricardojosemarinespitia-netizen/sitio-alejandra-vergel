@@ -17,11 +17,15 @@
 <link rel="stylesheet" href="tokens.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+/* overscroll-behavior-y: evita que el navegador integrado de Instagram/Facebook
+   se robe el swipe vertical (mismo arreglo que las demas paginas del sitio). */
+html{overscroll-behavior-y:contain}
 body{
   font-family:var(--sans);
   background:var(--ivory);
   color:var(--ink);
   display:grid;place-items:center;min-height:100vh;padding:20px;
+  overscroll-behavior-y:contain;
 }
 
 .success-card{

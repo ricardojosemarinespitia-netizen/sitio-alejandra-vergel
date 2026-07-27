@@ -22,7 +22,9 @@
 <link rel="stylesheet" href="tokens.css">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* overscroll-behavior-y: mismo arreglo que index.html (swipe robado por el
+   navegador integrado de Instagram/Facebook). */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior-y:contain}
 html,body{overflow-x:hidden}
 body{
   font-family:var(--sans);color:var(--ink);background:var(--ivory);line-height:1.6;
