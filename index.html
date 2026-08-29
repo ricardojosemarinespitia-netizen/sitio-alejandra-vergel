@@ -24,7 +24,7 @@ src="https://www.facebook.com/tr?id=1930971454973365&ev=PageView&noscript=1"
      frame-ancestors, report-uri y sandbox (ver _headers para cuando se migre). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net https://accounts.google.com https://apis.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://www.facebook.com https://lh3.googleusercontent.com https://*.googleusercontent.com https://accounts.google.com https://www.gstatic.com; connect-src 'self' https://www.facebook.com https://api.emailjs.com https://script.google.com https://script.googleusercontent.com https://*.googleusercontent.com https://radiant-lamington-bd56f7.netlify.app https://accounts.google.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://accounts.google.com https://checkout.wompi.co; form-action 'self' https://checkout.wompi.co https://wa.me https://api.whatsapp.com; base-uri 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#14110F">
 <meta name="description" content="Alejandra Vergel · Alta joyería. Anillos artesanales en filigrana colombiana y piedras naturales. Piezas únicas hechas a mano.">
@@ -39,6 +39,84 @@ src="https://www.facebook.com/tr?id=1930971454973365&ev=PageView&noscript=1"
      en un :root por archivo, con valores divergentes entre paginas. -->
 <link rel="stylesheet" href="tokens.css">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<!-- ============================================================
+     ALTO DE VIEWPORT CONGELADO  (--vh-lvh / --vh-svh)
+     ------------------------------------------------------------
+     En el navegador integrado de Instagram/Facebook (WKWebView) la
+     barra del navegador aparece y desaparece al deslizar. Cada vez
+     que eso pasa, TODA seccion medida en vh/svh/dvh se recalcula de
+     golpe y el contenido se corre bajo el dedo: ese es el salto.
+
+     El patron "height:90vh;height:90svh" no alcanza: si el WebView
+     es viejo y no soporta svh, cae en vh, que ahi si es dinamico.
+
+     Solucion: medir UNA vez el alto real y congelarlo en variables
+     CSS. Se vuelve a medir SOLO si cambia el ANCHO (rotacion), nunca
+     por el alto — el alto es justo lo que mueve la barra, y asi
+     tampoco reacciona al abrirse el teclado en un campo.
+
+     Se miden dos altos con sondas, para respetar el diseno original:
+       --vh-lvh  viewport grande (barras ocultas)  -> hero
+       --vh-svh  viewport chico  (barras visibles) -> .edit-card
+     En PC las variables se BORRAN, para que el CSS use sus valores
+     nativos (100dvh/100svh) y nada cambie respecto al diseno actual.
+     ============================================================ -->
+<script>
+(function(){
+  var raiz = document.documentElement;
+  var anchoMedido = -1;
+
+  // Mide el alto que el navegador le da a una unidad, con sonda real.
+  // Si la unidad moderna no existe, la declaracion se ignora y queda vh.
+  function sonda(unidadModerna){
+    var d = document.createElement("div");
+    d.style.cssText = "position:fixed;top:0;left:0;width:0;visibility:hidden;" +
+                      "pointer-events:none;height:100vh;height:100" + unidadModerna + ";";
+    (document.body || raiz).appendChild(d);
+    var h = d.getBoundingClientRect().height;
+    d.parentNode.removeChild(d);
+    return h;
+  }
+
+  function medir(){
+    // Solo el ANCHO dispara una nueva medicion (rotacion / cambio de ventana).
+    if (window.innerWidth === anchoMedido) return;
+    anchoMedido = window.innerWidth;
+
+    // En PC no se congela nada: el diseno de escritorio queda intacto.
+    if (window.innerWidth > 1024){
+      raiz.style.removeProperty("--vh-lvh");
+      raiz.style.removeProperty("--vh-svh");
+      return;
+    }
+
+    var ih = window.innerHeight;
+    // max/min corrigen el caso en que el WebView no soporte lvh/svh:
+    // ahi ambas sondas devuelven vh y estos limites eligen el valor sano.
+    var lvh = Math.max(sonda("lvh"), ih);
+    var svh = Math.min(sonda("svh"), ih);
+    raiz.style.setProperty("--vh-lvh", Math.round(lvh) + "px");
+    raiz.style.setProperty("--vh-svh", Math.round(svh) + "px");
+  }
+
+  medir();
+  // Si el <body> aun no existia, la sonda se colgo de <html>; se repite
+  // ya con el documento armado para tomar el valor definitivo.
+  document.addEventListener("DOMContentLoaded", function(){ anchoMedido = -1; medir(); });
+
+  // Varias señales para el mismo chequeo: medir() ya filtra por ancho, asi
+  // que las que llegan por mover la barra o abrir el teclado (solo cambian
+  // el alto) se descartan solas. visualViewport es la mas fiable dentro de
+  // los WebView; pageshow cubre la vuelta desde el cache de atras/adelante.
+  window.addEventListener("resize", medir);
+  window.addEventListener("pageshow", medir);
+  if (window.visualViewport) window.visualViewport.addEventListener("resize", medir);
+  window.addEventListener("orientationchange", function(){
+    anchoMedido = -1;              // la rotacion SI debe volver a medir
+    setTimeout(medir, 250);        // tras asentarse la nueva orientacion
+  });
+})();
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 /* overscroll-behavior-y: dentro del navegador integrado de Instagram/Facebook,
@@ -156,7 +234,9 @@ section{padding:var(--e-seccion) 0}
    ============================================================ */
 .hero{
   position:relative;
-  height:100vh;height:100dvh;min-height:560px;
+  /* Alto congelado en movil (ver script --vh-lvh en <head>).
+     En PC la variable no existe y manda el 100dvh de siempre. */
+  height:100vh;height:100dvh;height:var(--vh-lvh, 100dvh);min-height:560px;
   overflow:hidden;
   background:#0a0806;
 }
@@ -258,8 +338,10 @@ section{padding:var(--e-seccion) 0}
 
 /* MOBILE */
 @media(max-width:680px){
-  /* vh/lvh (viewport grande): la foto llega hasta el fondo aunque Safari muestre sus barras */
-  .hero{height:100vh;height:100lvh}
+  /* vh/lvh (viewport grande): la foto llega hasta el fondo aunque Safari muestre sus barras.
+     --vh-lvh es ese mismo valor pero congelado, para que no se recalcule
+     cuando la barra de Instagram entra o sale durante el scroll. */
+  .hero{height:100vh;height:100lvh;height:var(--vh-lvh, 100lvh)}
   .hp-medio1,.hp-medio2{display:none}
   .hp-central{left:0;width:100%}
   .hero-divider{display:none}
@@ -284,7 +366,7 @@ section{padding:var(--e-seccion) 0}
    ============================================================ */
 .editorial{padding:64px 0 0;background:var(--ivory)}
 .edit-grid{display:grid;grid-template-columns:1fr;gap:64px}
-.edit-card{position:relative;overflow:hidden;cursor:pointer;height:90vh;height:90svh;min-height:520px}
+.edit-card{position:relative;overflow:hidden;cursor:pointer;height:90vh;height:90svh;height:calc(var(--vh-svh, 100svh) * .90);min-height:520px}
 .edit-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.3,1);will-change:transform}
 .edit-card:hover img{transform:scale(1.05)}
 .edit-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,15,10,.78) 0%,rgba(20,15,10,.18) 55%,transparent 100%)}
@@ -301,13 +383,13 @@ section{padding:var(--e-seccion) 0}
   .edit-card[data-tipo="pulseras"] img{object-position:65% 88%}
 }
 @media(max-width:920px){
-  .edit-card{height:80vh;height:80svh;min-height:460px}
+  .edit-card{height:80vh;height:80svh;height:calc(var(--vh-svh, 100svh) * .80);min-height:460px}
   .edit-txt{padding:40px}
 }
 @media(max-width:640px){
   .editorial{padding:40px 0 0}
   .edit-grid{gap:40px}
-  .edit-card{height:100vh;height:100svh;min-height:420px}
+  .edit-card{height:100vh;height:100svh;height:var(--vh-svh, 100svh);min-height:420px}
   .edit-txt{padding:26px}
   .edit-txt p{max-width:300px}
 }
@@ -757,6 +839,52 @@ section{padding:var(--e-seccion) 0}
 }
 @media(max-width:360px){
   .grid{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   SCROLL FLUIDO EN MOVIL — sin backdrop-filter
+   ------------------------------------------------------------
+   backdrop-filter obliga al navegador a capturar lo que hay
+   detras del elemento, desenfocarlo y recomponerlo. Sobre un
+   elemento position:fixed (el nav) ese fondo cambia en CADA
+   frame del scroll, y en el WebView de Instagram eso se siente
+   como tirones.
+
+   Se cambia por fondos mas opacos SOLO en movil/tablet: se ve
+   practicamente igual y el scroll queda liso. En PC (>1024px)
+   el efecto vidrio se conserva intacto.
+   ============================================================ */
+@media(max-width:1024px){
+  .nav{
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+    transition:background .4s,box-shadow .4s;
+  }
+  /* .5 -> .94: sin desenfoque hace falta mas cuerpo para que el
+     texto del nav siga legible sobre la foto del hero. */
+  .nav.scrolled{
+    background:rgba(247,244,239,.94);
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+  }
+  .btn-hero{
+    background:rgba(43,33,27,.34);
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+  }
+  .overlay{
+    background:rgba(20,17,15,.72);
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+  }
+  .modal-club-bg{
+    background:rgba(20,17,15,.78);
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+  }
+  .modal-guide-bg{
+    background:rgba(43,33,27,.78);
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+  }
+  .modal-club-close{
+    background:rgba(255,255,255,.98);
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+  }
 }
 </style>
 </head>
@@ -1545,6 +1673,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
     cacheOrigins();
 
+    // Recuerda a que imagen ya se le fijo el object-position inicial, para no
+    // reescribir esa propiedad en cada frame (provocaria el mismo repintado
+    // que se esta evitando).
+    const moFijado = new Map();
+
     function frame(){
       ticking = false;
       if(reduce.matches) return;
@@ -1587,16 +1720,44 @@ document.addEventListener("DOMContentLoaded", ()=>{
           scale = Math.max(scale, cover * 1.03);
           rotate = " rotate(" + ang.toFixed(2) + "deg)";
         }
+
+        // El encuadre YA NO se anima con object-position: esa propiedad no la
+        // compone la GPU, asi que cambiarla re-rasteriza la foto entera en cada
+        // frame del scroll (era el segundo motivo de tirones en el WebView).
+        // Se fija una sola vez en data-start y el viaje hasta data-focus se
+        // hace con translate(), que si va por GPU.
+        if(moFijado.get(img) !== img.dataset.start){
+          img.style.objectPosition = sx + "% " + sy + "%";
+          moFijado.set(img, img.dataset.start);
+        }
+        // Equivalencia exacta en px: object-fit:cover deja un desborde oculto
+        // y el porcentaje de object-position reparte ese desborde. Mover un
+        // (f-s)% equivale a trasladar ese mismo % del desborde, en negativo.
+        let dx = 0, dy = 0;
+        const nw = img.naturalWidth  || +img.getAttribute("width")  || 0;
+        const nh = img.naturalHeight || +img.getAttribute("height") || 0;
+        if(nw && nh && r.width && r.height){
+          const cover = Math.max(r.width / nw, r.height / nh);
+          dx = -((fx - sx) * e / 100) * (nw * cover - r.width);
+          dy = -((fy - sy) * e / 100) * (nh * cover - r.height);
+        }
+        const mover = (dx || dy)
+          ? " translate(" + dx.toFixed(2) + "px," + dy.toFixed(2) + "px)"
+          : "";
+
         img.style.transition = "none";
         img.style.transformOrigin = "50% 50%";
-        img.style.objectPosition = (sx + (fx - sx) * e) + "% " + (sy + (fy - sy) * e) + "%";
-        img.style.transform = "scale(" + scale.toFixed(3) + ")" + rotate;
+        // Orden: scale y rotate por fuera, translate por DENTRO. Asi el
+        // desplazamiento se escala y gira junto con la foto, igual que
+        // quedaba cuando era object-position dentro de la caja.
+        img.style.transform = "scale(" + scale.toFixed(3) + ")" + rotate + mover;
       });
     }
     function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
 
     mq.addEventListener("change", ()=>{
       imgs.forEach(img=>{ img.style.transition = ""; img.style.objectPosition = ""; img.style.transform = ""; img.style.transformOrigin = ""; });
+      moFijado.clear();   // se borro el object-position: hay que volver a fijarlo
       cacheOrigins();
       onScroll();
     });
