@@ -341,9 +341,14 @@ async function submitCheckout(){
   }
 
   try {
+    // Cierre temporal de la tienda: el servidor solo acepta pagos que traigan
+    // la clave de admin (ver mantenimiento.js). Sin clave, no pasa de aqui.
+    let claveAdmin = '';
+    try { claveAdmin = localStorage.getItem('av_admin') || ''; } catch (e) {}
     const response = await fetch(WOMPI_API, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: Object.assign({ 'Content-Type': 'application/json' },
+        claveAdmin ? { 'X-Av-Admin': claveAdmin } : {}),
       body: JSON.stringify({
         email: order.email,
         name: order.firstName + ' ' + order.lastName,
