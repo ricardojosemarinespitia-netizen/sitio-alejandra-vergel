@@ -15,7 +15,7 @@ const WOMPI_CHECKOUT_URL = 'https://checkout.wompi.co/p/';
 const WA_NUMBER = (typeof CONFIG !== 'undefined' && CONFIG.whatsapp) ? CONFIG.whatsapp : '573228505472';
 
 const FREE_SHIPPING_FROM = 200000;
-const SHIP_METRO = 1000; // PRUEBA temporal (antes 8000) — REVERTIR
+const SHIP_METRO = 8000;
 const SHIP_NACIONAL = 15000;
 const METRO_DEPT = "Atlántico";
 const METRO_CITIES = ["Barranquilla","Soledad","Malambo","Galapa","Puerto Colombia"];

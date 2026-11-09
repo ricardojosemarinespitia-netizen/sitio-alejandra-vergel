@@ -16,7 +16,7 @@
    clienta que pago justo antes del cierre ve su confirmacion.)
    ============================================================ */
 (function () {
-  var MANTENIMIENTO = true;          // <- false para reabrir
+  var MANTENIMIENTO = false;         // <- true para cerrar la tienda al publico
   var CLAVE = 'av_admin';
 
   try {
