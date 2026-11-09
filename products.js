@@ -60,7 +60,7 @@ const PRODUCTS = [
   },
   {
     id:"alba", sku:"ANI-ALBA", cat:"filigrana", name:"Alba",
-    price:350000,
+    price:1000,
     materials:"Plata ley 925 · Alejandrita natural",
     gemName:"Alejandrita", colors:["Plata 925","Plata con baño de oro"], sizes:[5,6,7,8,9,10],
     desc:"Tejida a mano en filigrana, resalta la belleza de una alejandrita natural, gema excepcional reconocida por sus sutiles cambios de tonalidad según la luz. Una joya elegante, sofisticada y llena de significado para quienes valoran las piezas exclusivas.",
